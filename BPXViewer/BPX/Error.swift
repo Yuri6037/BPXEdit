@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum BpxcError: Error {
+public enum BpxcError: Error {
     case invalidPath
     case fileOpen
     case fileCreate
@@ -29,7 +29,7 @@ extension BpxcError {
 
 }
 
-enum CoreError: Error {
+public enum CoreError: Error {
     case checksum
     case io
     case badVersion
@@ -72,7 +72,7 @@ extension CoreError {
     }
 }
 
-enum InflateError: Error {
+public enum InflateError: Error {
     case memory
     case unsupported
     case data
@@ -99,7 +99,7 @@ extension InflateError {
     }
 }
 
-enum DeflateError: Error {
+public enum DeflateError: Error {
     case memory
     case unsupported
     case data
@@ -126,7 +126,7 @@ extension DeflateError {
     }
 }
 
-enum OpenError: Error {
+public enum OpenError: Error {
     case sectionInUse
     case sectionNotLoaded
 }
@@ -144,7 +144,7 @@ extension OpenError {
     }
 }
 
-enum SdError: Error {
+public enum SdError: Error {
     case io
     case truncation
     case badTypeCode

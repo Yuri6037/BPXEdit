@@ -24,10 +24,10 @@ public class Container {
         handles.withUnsafeMutableBufferPointer { buffer in
             bpx_container_list_sections(inner, buffer.baseAddress, Int(header.section_num));
         }
-        for i in 0...Int(header.section_num) {
+        for handle in handles {
             var header = bpx_section_header_t();
-            bpx_section_get_header(inner, handles[i], &header);
-            sections.append(Section(handle: handles[i], header: header, container: inner));
+            bpx_section_get_header(inner, handle, &header);
+            sections.append(Section(handle: handle, header: header, container: inner));
         }
     }
 

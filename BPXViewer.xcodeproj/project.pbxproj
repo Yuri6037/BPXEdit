@@ -7,22 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA0DCF87283D331600904DA1 /* bpxc.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DCF86283D331600904DA1 /* bpxc.xcframework */; };
+		DA0DCF8D283D36B900904DA1 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0DCF8C283D36B900904DA1 /* Container.swift */; };
+		DA0DCF8F283D371600904DA1 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0DCF8E283D371600904DA1 /* Error.swift */; };
+		DA0DCF91283D377C00904DA1 /* Headers in Resources */ = {isa = PBXBuildFile; fileRef = DA0DCF90283D377C00904DA1 /* Headers */; };
 		DA90C917283BB9AD0091DE15 /* BPXViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90C916283BB9AD0091DE15 /* BPXViewerApp.swift */; };
-		DA90C919283BB9AD0091DE15 /* BPXViewerDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90C918283BB9AD0091DE15 /* BPXViewerDocument.swift */; };
+		DA90C919283BB9AD0091DE15 /* BPXDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90C918283BB9AD0091DE15 /* BPXDocument.swift */; };
 		DA90C91B283BB9AD0091DE15 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90C91A283BB9AD0091DE15 /* ContentView.swift */; };
 		DA90C91D283BB9AE0091DE15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA90C91C283BB9AE0091DE15 /* Assets.xcassets */; };
 		DA90C920283BB9AE0091DE15 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA90C91F283BB9AE0091DE15 /* Preview Assets.xcassets */; };
+		DAAAC99E283BD80900D663E8 /* HexView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAAAC99D283BD80900D663E8 /* HexView.xib */; };
+		DAAAC9A0283BD9B000D663E8 /* HexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAAC99F283BD9B000D663E8 /* HexView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DA0DCF86283D331600904DA1 /* bpxc.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = bpxc.xcframework; sourceTree = "<group>"; };
+		DA0DCF8A283D33E500904DA1 /* bpx_bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bpx_bridge.h; sourceTree = "<group>"; };
+		DA0DCF8C283D36B900904DA1 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
+		DA0DCF8E283D371600904DA1 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		DA0DCF90283D377C00904DA1 /* Headers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Headers; path = "bpxc.xcframework/macos-x86_64/Headers"; sourceTree = "<group>"; };
 		DA90C913283BB9AD0091DE15 /* BPXViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BPXViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA90C916283BB9AD0091DE15 /* BPXViewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPXViewerApp.swift; sourceTree = "<group>"; };
-		DA90C918283BB9AD0091DE15 /* BPXViewerDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPXViewerDocument.swift; sourceTree = "<group>"; };
+		DA90C918283BB9AD0091DE15 /* BPXDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPXDocument.swift; sourceTree = "<group>"; };
 		DA90C91A283BB9AD0091DE15 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DA90C91C283BB9AE0091DE15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA90C91F283BB9AE0091DE15 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DA90C921283BB9AE0091DE15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA90C922283BB9AE0091DE15 /* BPXViewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BPXViewer.entitlements; sourceTree = "<group>"; };
+		DAAAC99D283BD80900D663E8 /* HexView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HexView.xib; sourceTree = "<group>"; };
+		DAAAC99F283BD9B000D663E8 /* HexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,17 +43,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA0DCF87283D331600904DA1 /* bpxc.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DA0DCF85283D331600904DA1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DA0DCF86283D331600904DA1 /* bpxc.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DA0DCF8B283D36A400904DA1 /* BPX */ = {
+			isa = PBXGroup;
+			children = (
+				DA0DCF8C283D36B900904DA1 /* Container.swift */,
+				DA0DCF8E283D371600904DA1 /* Error.swift */,
+			);
+			path = BPX;
+			sourceTree = "<group>";
+		};
 		DA90C90A283BB9AD0091DE15 = {
 			isa = PBXGroup;
 			children = (
+				DA0DCF90283D377C00904DA1 /* Headers */,
+				DA0DCF8A283D33E500904DA1 /* bpx_bridge.h */,
 				DA90C915283BB9AD0091DE15 /* BPXViewer */,
 				DA90C914283BB9AD0091DE15 /* Products */,
+				DA0DCF85283D331600904DA1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -55,13 +89,16 @@
 		DA90C915283BB9AD0091DE15 /* BPXViewer */ = {
 			isa = PBXGroup;
 			children = (
+				DA0DCF8B283D36A400904DA1 /* BPX */,
 				DA90C916283BB9AD0091DE15 /* BPXViewerApp.swift */,
-				DA90C918283BB9AD0091DE15 /* BPXViewerDocument.swift */,
+				DA90C918283BB9AD0091DE15 /* BPXDocument.swift */,
 				DA90C91A283BB9AD0091DE15 /* ContentView.swift */,
 				DA90C91C283BB9AE0091DE15 /* Assets.xcassets */,
+				DAAAC99D283BD80900D663E8 /* HexView.xib */,
 				DA90C921283BB9AE0091DE15 /* Info.plist */,
 				DA90C922283BB9AE0091DE15 /* BPXViewer.entitlements */,
 				DA90C91E283BB9AE0091DE15 /* Preview Content */,
+				DAAAC99F283BD9B000D663E8 /* HexView.swift */,
 			);
 			path = BPXViewer;
 			sourceTree = "<group>";
@@ -118,6 +155,8 @@
 				Base,
 			);
 			mainGroup = DA90C90A283BB9AD0091DE15;
+			packageReferences = (
+			);
 			productRefGroup = DA90C914283BB9AD0091DE15 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -133,7 +172,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA90C920283BB9AE0091DE15 /* Preview Assets.xcassets in Resources */,
+				DAAAC99E283BD80900D663E8 /* HexView.xib in Resources */,
 				DA90C91D283BB9AE0091DE15 /* Assets.xcassets in Resources */,
+				DA0DCF91283D377C00904DA1 /* Headers in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,8 +185,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAAAC9A0283BD9B000D663E8 /* HexView.swift in Sources */,
 				DA90C917283BB9AD0091DE15 /* BPXViewerApp.swift in Sources */,
-				DA90C919283BB9AD0091DE15 /* BPXViewerDocument.swift in Sources */,
+				DA0DCF8D283D36B900904DA1 /* Container.swift in Sources */,
+				DA90C919283BB9AD0091DE15 /* BPXDocument.swift in Sources */,
+				DA0DCF8F283D371600904DA1 /* Error.swift in Sources */,
 				DA90C91B283BB9AD0091DE15 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,6 +334,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.gitlab.bp3d.BPXViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = bpx_bridge.h;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -316,6 +361,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.gitlab.bp3d.BPXViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = bpx_bridge.h;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;

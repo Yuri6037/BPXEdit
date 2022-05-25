@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct BPXViewerApp: App {
     var body: some Scene {
-        DocumentGroup(newDocument: BPXViewerDocument()) { file in
+        DocumentGroup(viewing: BPXDocument.self) { file in
             ContentView(document: file.$document)
         }
     }

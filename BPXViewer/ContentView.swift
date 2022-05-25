@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
-    @Binding var document: BPXViewerDocument
+    @Binding var document: BPXDocument
 
     var body: some View {
-        TextEditor(text: $document.text)
+        VStack {
+            HexViewWrapper()
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(document: .constant(BPXViewerDocument()))
+        ContentView(document: .constant(BPXDocument()))
     }
 }

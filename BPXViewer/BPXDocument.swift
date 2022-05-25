@@ -15,7 +15,7 @@ extension UTType {
 }
 
 struct BPXDocument: FileDocument {
-    var container: bpx_container_t?;
+    var container: Container?;
 
     static var readableContentTypes: [UTType] { [.exampleText] }
 
@@ -28,11 +28,7 @@ struct BPXDocument: FileDocument {
         let fileName = NSUUID().uuidString;
         guard let fileUrl = NSURL.fileURL(withPathComponents: [directory, fileName]) else { throw CocoaError(.fileReadNoPermission) };
         FileManager.default.createFile(atPath: fileUrl.path, contents: configuration.file.regularFileContents, attributes: nil);
-        //filePath = fileUrl.path
-        let err = bpx_container_open(fileUrl.path, &container);
-        if err != BPX_ERR_NONE {
-            
-        }
+        container = try Container(open: fileUrl.path);
     }
 
     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {

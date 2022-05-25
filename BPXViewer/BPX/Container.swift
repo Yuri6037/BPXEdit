@@ -31,6 +31,10 @@ public class Container {
         }
     }
 
+    deinit {
+        bpx_container_close(&inner);
+    }
+
     public func getSection(index: UInt32) -> Section {
         return sections[Int(index)];
     }

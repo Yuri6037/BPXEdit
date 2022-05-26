@@ -26,7 +26,7 @@ import SwiftUI
         address.font = font;
         let size = NSAttributedString(string: "FF ", attributes: [NSAttributedString.Key.font: font]).size();
         charWidth = size.width;
-        observer = view.layer?.observe(\.bounds) { object, _ in
+        observer = view.observe(\.frame) { object, _ in
             self.bytesPerLine = self.getMaxBytesPerLine();
             self.render();
         };
@@ -40,9 +40,9 @@ import SwiftUI
             var address = "";
             var hex = "";
             var flag = true;
-            for i in 0...data.count {
+            for i in 0..<data.count {
                 let byte = data[i];
-                hex += String(format: "%02X", byte);
+                hex += String(format: "%02X ", byte);
                 if flag {
                     address += String(format: "0x%08X", i);
                     flag = false;
@@ -92,17 +92,24 @@ import SwiftUI
         return maxChars;
     }
 
-    private func setData(buffer: [uint8]) {
+    public func setData(buffer: [uint8]) {
         data = buffer;
         render();
     }
 }
 
 struct HexViewWrapper: NSViewControllerRepresentable {
+    @Binding var data: [uint8]?;
+
     func makeNSViewController(context: Context) -> HexView {
         return HexView();
     }
 
     func updateNSViewController(_ controller: HexView, context: Context) {
+        if let data = data {
+            controller.setData(buffer: data);
+        } else {
+            controller.setData(buffer: []);
+        }
     }
 }

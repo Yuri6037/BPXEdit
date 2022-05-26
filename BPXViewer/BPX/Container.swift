@@ -35,8 +35,8 @@ public class Container {
         bpx_container_close(&inner);
     }
 
-    public func getSection(index: UInt32) -> Section {
-        return sections[Int(index)];
+    public func getSections() -> [Section] {
+        return sections;
     }
 
     public func getMainHeader() -> bpx_main_header_t {

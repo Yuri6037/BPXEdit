@@ -10,13 +10,26 @@ import SwiftUI
 struct ContentView: View {
     @Binding var document: BPXDocument
     @State var selected = -1;
+    @State var curSectionData: [uint8]?;
+    @Environment(\.dismiss) var dismiss;
 
     var body: some View {
         VStack {
             HStack {
                 VStack {
                     MainHeaderView(header: document.container?.getMainHeader())
-                    Text("Here goes the tool bar")
+                    Button(action: { curSectionData = document.loadSectionAsData(index: selected) }) {
+                        HStack {
+                            Image(systemName: "hexagon")
+                            Text("Hex view")
+                        }
+                    }
+                    Button(action: {}) {
+                        HStack {
+                            Image(systemName: "doc")
+                            Text("Decoded view")
+                        }
+                    }.disabled(true)
                 }
                 List {
                     SelectableItem(key: -1, selected: $selected) {
@@ -31,7 +44,15 @@ struct ContentView: View {
                     }
                 }
             }
-            HexViewWrapper()
+        }
+        .sheet(isPresented: .constant(curSectionData != nil), onDismiss: { curSectionData = nil }) {
+            HexViewWrapper(data: $curSectionData)
+            Button("Close") {
+                dismiss();
+            }
+        }
+        .alert("Error", isPresented: .constant(document.error != nil)) {
+            Text(document.error ?? "")
         }
     }
 }

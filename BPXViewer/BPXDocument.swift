@@ -16,6 +16,7 @@ extension UTType {
 
 struct BPXDocument: FileDocument {
     var container: Container?;
+    var error: String?;
 
     static var readableContentTypes: [UTType] { [.exampleText] }
 
@@ -33,5 +34,18 @@ struct BPXDocument: FileDocument {
 
     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
         throw CocoaError(.fileWriteNoPermission)
+    }
+
+    mutating func loadSectionAsData(index: Int) -> [uint8]? {
+        do {
+            let data = try container?.getSections()[index].load();
+            return data?.loadInMemory();
+        } catch let err as CoreError {
+            error = "An error has occured";
+            return nil;
+        } catch {
+            self.error = "An unknown error has occured";
+            return nil;
+        }
     }
 }

@@ -13,5 +13,12 @@ struct BPXViewerApp: App {
         DocumentGroup(viewing: BPXDocument.self) { file in
             ContentView(document: file.$document)
         }
+        .commands {
+            CommandGroup(after: .newItem) {
+                Divider()
+                Button(action: {}) { Text("Import type description bundle") }
+                Button(action: {}) { Text("Type description bundles") }
+            }
+        }
     }
 }

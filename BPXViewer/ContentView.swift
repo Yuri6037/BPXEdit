@@ -33,7 +33,7 @@ struct ContentView: View {
                     }
                     List {
                         SelectableItem(key: -1, selected: $selected) {
-                            Text("BPX Type Ext")
+                            Text("BPX Type Ext").bold()
                         }
                         if let container = document.container {
                             ForEach(container.getSections()) { section in
@@ -47,10 +47,10 @@ struct ContentView: View {
             }
             .sheet(isPresented: .constant(curSectionData != nil)) {
                 HexViewWrapper(data: $curSectionData)
-                    .frame(width: geo.size.width * 0.6, height: geo.size.height * 0.6)
+                    .frame(width: geo.size.width * 0.7, height: geo.size.height * 0.6).padding()
                 Button("Close") {
                     curSectionData = nil;
-                }
+                }.padding()
             }
             .alert("Error", isPresented: .constant(document.error != nil)) {
                 Text(document.error ?? "")

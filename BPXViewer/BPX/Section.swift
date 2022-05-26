@@ -36,15 +36,17 @@ public class SectionData {
     }
 }
 
-public class Section {
+public class Section : Identifiable {
     public let handle: bpx_handle_t;
+    public let index: Int;
     public let header: bpx_section_header_t;
-    private let container: bpx_container_t?;
+    fileprivate let container: bpx_container_t?;
 
-    init(handle: bpx_handle_t, header: bpx_section_header_t, container: bpx_container_t?) {
+    init(handle: bpx_handle_t, index: Int, header: bpx_section_header_t, container: bpx_container_t?) {
         self.handle = handle;
         self.header = header;
         self.container = container;
+        self.index = index;
     }
 
     public func open() throws -> SectionData {

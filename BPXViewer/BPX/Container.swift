@@ -8,9 +8,9 @@
 import Foundation
 
 public class Container {
-    private var inner: bpx_container_t?;
-    private var header: bpx_main_header_t = bpx_main_header_t();
-    private var sections: [Section];
+    fileprivate var inner: bpx_container_t?;
+    fileprivate var header: bpx_main_header_t = bpx_main_header_t();
+    fileprivate var sections: [Section];
 
     public init(open: String) throws {
         let err = bpx_container_open(open, &inner);
@@ -24,10 +24,10 @@ public class Container {
         handles.withUnsafeMutableBufferPointer { buffer in
             bpx_container_list_sections(inner, buffer.baseAddress, Int(header.section_num));
         }
-        for handle in handles {
+        for (index, handle) in handles.enumerated() {
             var header = bpx_section_header_t();
             bpx_section_get_header(inner, handle, &header);
-            sections.append(Section(handle: handle, header: header, container: inner));
+            sections.append(Section(handle: handle, index: index, header: header, container: inner));
         }
     }
 

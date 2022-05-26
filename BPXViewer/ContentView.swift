@@ -11,48 +11,50 @@ struct ContentView: View {
     @Binding var document: BPXDocument
     @State var selected = -1;
     @State var curSectionData: [uint8]?;
-    @Environment(\.dismiss) var dismiss;
 
     var body: some View {
-        VStack {
-            HStack {
-                VStack {
-                    MainHeaderView(header: document.container?.getMainHeader())
-                    Button(action: { curSectionData = document.loadSectionAsData(index: selected) }) {
-                        HStack {
-                            Image(systemName: "hexagon")
-                            Text("Hex view")
+        GeometryReader { geo in
+            VStack {
+                HStack {
+                    VStack {
+                        MainHeaderView(header: document.container?.getMainHeader())
+                        Button(action: { curSectionData = document.loadSectionAsData(index: selected) }) {
+                            HStack {
+                                Image(systemName: "hexagon")
+                                Text("Hex view")
+                            }
                         }
+                        Button(action: {}) {
+                            HStack {
+                                Image(systemName: "doc")
+                                Text("Decoded view")
+                            }
+                        }.disabled(true)
                     }
-                    Button(action: {}) {
-                        HStack {
-                            Image(systemName: "doc")
-                            Text("Decoded view")
+                    List {
+                        SelectableItem(key: -1, selected: $selected) {
+                            Text("BPX Type Ext")
                         }
-                    }.disabled(true)
-                }
-                List {
-                    SelectableItem(key: -1, selected: $selected) {
-                        Text("BPX Type Ext")
-                    }
-                    if let container = document.container {
-                        ForEach(container.getSections()) { section in
-                            SelectableItem(key: section.index, selected: $selected) {
-                                SectionHeaderView(section: section)
+                        if let container = document.container {
+                            ForEach(container.getSections()) { section in
+                                SelectableItem(key: section.index, selected: $selected) {
+                                    SectionHeaderView(section: section)
+                                }
                             }
                         }
                     }
                 }
             }
-        }
-        .sheet(isPresented: .constant(curSectionData != nil), onDismiss: { curSectionData = nil }) {
-            HexViewWrapper(data: $curSectionData)
-            Button("Close") {
-                dismiss();
+            .sheet(isPresented: .constant(curSectionData != nil)) {
+                HexViewWrapper(data: $curSectionData)
+                    .frame(width: geo.size.width * 0.6, height: geo.size.height * 0.6)
+                Button("Close") {
+                    curSectionData = nil;
+                }
             }
-        }
-        .alert("Error", isPresented: .constant(document.error != nil)) {
-            Text(document.error ?? "")
+            .alert("Error", isPresented: .constant(document.error != nil)) {
+                Text(document.error ?? "")
+            }
         }
     }
 }

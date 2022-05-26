@@ -37,6 +37,13 @@ struct BPXDocument: FileDocument {
     }
 
     mutating func loadSectionAsData(index: Int) -> [uint8]? {
+        if index == -1 {
+            var useless = container?.getMainHeader().type_ext;
+            let buffer = withUnsafeBytes(of: &useless) { (rawptr) in
+                Array(rawptr)
+            };
+            return buffer;
+        }
         do {
             let data = try container?.getSections()[index].load();
             return data?.loadInMemory();

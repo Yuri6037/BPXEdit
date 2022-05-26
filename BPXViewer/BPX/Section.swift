@@ -24,7 +24,7 @@ public class SectionData {
         bpx_section_seek(inner, 0);
         while cursize < size {
             block[cursize...].withUnsafeMutableBufferPointer { buffer in
-                let len = bpx_section_read(inner, buffer.baseAddress, BUF_SIZE);
+                let len = bpx_section_read(inner, buffer.baseAddress, min(size - cursize, BUF_SIZE));
                 cursize += len;
             };
         }

@@ -24,6 +24,10 @@ class ByteBuf {
         }
     }
 
+    func seek(pos: Int) {
+        cursor = pos;
+    }
+
     func readInt8() -> Int8? {
         if !checkValidSize(len: 1) {
             return nil;

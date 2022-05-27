@@ -23,6 +23,8 @@
 		DA99F38D283FE703007BFEC3 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA99F38C283FE703007BFEC3 /* SectionHeaderView.swift */; };
 		DAAAC99E283BD80900D663E8 /* HexView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAAAC99D283BD80900D663E8 /* HexView.xib */; };
 		DAAAC9A0283BD9B000D663E8 /* HexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAAC99F283BD9B000D663E8 /* HexView.swift */; };
+		DAB22D822840D4D7005C8741 /* BundleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB22D812840D4D7005C8741 /* BundleManager.swift */; };
+		DAB22D852840DB7C005C8741 /* TOMLDecoder in Frameworks */ = {isa = PBXBuildFile; productRef = DAB22D842840DB7C005C8741 /* TOMLDecoder */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,7 @@
 		DA99F38C283FE703007BFEC3 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		DAAAC99D283BD80900D663E8 /* HexView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HexView.xib; sourceTree = "<group>"; };
 		DAAAC99F283BD9B000D663E8 /* HexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexView.swift; sourceTree = "<group>"; };
+		DAB22D812840D4D7005C8741 /* BundleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAB22D852840DB7C005C8741 /* TOMLDecoder in Frameworks */,
 				DA0DCFBA283E625400904DA1 /* libz.tbd in Frameworks */,
 				DA0DCF87283D331600904DA1 /* bpxc.xcframework in Frameworks */,
 			);
@@ -109,6 +113,7 @@
 				DA0DCF8B283D36A400904DA1 /* BPX */,
 				DA90C916283BB9AD0091DE15 /* BPXViewerApp.swift */,
 				DA90C918283BB9AD0091DE15 /* BPXDocument.swift */,
+				DAB22D812840D4D7005C8741 /* BundleManager.swift */,
 				DA90C91A283BB9AD0091DE15 /* ContentView.swift */,
 				DA90C91C283BB9AE0091DE15 /* Assets.xcassets */,
 				DAAAC99D283BD80900D663E8 /* HexView.xib */,
@@ -147,6 +152,9 @@
 			dependencies = (
 			);
 			name = BPXViewer;
+			packageProductDependencies = (
+				DAB22D842840DB7C005C8741 /* TOMLDecoder */,
+			);
 			productName = BPXViewer;
 			productReference = DA90C913283BB9AD0091DE15 /* BPXViewer.app */;
 			productType = "com.apple.product-type.application";
@@ -176,6 +184,7 @@
 			);
 			mainGroup = DA90C90A283BB9AD0091DE15;
 			packageReferences = (
+				DAB22D832840DB7C005C8741 /* XCRemoteSwiftPackageReference "TOMLDecoder" */,
 			);
 			productRefGroup = DA90C914283BB9AD0091DE15 /* Products */;
 			projectDirPath = "";
@@ -215,6 +224,7 @@
 				DA99F38D283FE703007BFEC3 /* SectionHeaderView.swift in Sources */,
 				DA0DCF8F283D371600904DA1 /* Error.swift in Sources */,
 				DA90C91B283BB9AD0091DE15 /* ContentView.swift in Sources */,
+				DAB22D822840D4D7005C8741 /* BundleManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +422,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DAB22D832840DB7C005C8741 /* XCRemoteSwiftPackageReference "TOMLDecoder" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dduan/TOMLDecoder.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.2.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DAB22D842840DB7C005C8741 /* TOMLDecoder */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DAB22D832840DB7C005C8741 /* XCRemoteSwiftPackageReference "TOMLDecoder" */;
+			productName = TOMLDecoder;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DA90C90B283BB9AD0091DE15 /* Project object */;
 }

@@ -11,6 +11,17 @@ struct ContentView: View {
     @Binding var document: BPXDocument
     @State var selected = -1;
     @State var curSectionData: [uint8]?;
+    @State var curSectionView: Value?;
+
+    func loadSectionHex() {
+        curSectionData = document.loadSectionAsData(index: selected);
+    }
+
+    func loadSectionView() {
+        let data = document.loadSectionAsData(index: selected);
+        guard let data = data else { return }
+        curSectionView = BundleManager.instance.getBundle()?.typeDescs[selected]?.decode(buffer: data);
+    }
 
     var body: some View {
         GeometryReader { geo in
@@ -18,18 +29,18 @@ struct ContentView: View {
                 HStack {
                     VStack {
                         MainHeaderView(header: document.container?.getMainHeader())
-                        Button(action: { curSectionData = document.loadSectionAsData(index: selected) }) {
+                        Button(action: { loadSectionHex() }) {
                             HStack {
                                 Image(systemName: "hexagon")
                                 Text("Hex view")
                             }
                         }
-                        Button(action: {}) {
+                        Button(action: { loadSectionView() }) {
                             HStack {
                                 Image(systemName: "doc")
                                 Text("Decoded view")
                             }
-                        }.disabled(true)
+                        }.disabled(BundleManager.instance.getBundle()?.typeDescs[selected] != nil)
                     }
                     List {
                         SelectableItem(key: -1, selected: $selected) {
@@ -50,6 +61,13 @@ struct ContentView: View {
                     .frame(width: geo.size.width * 0.7, height: geo.size.height * 0.6).padding()
                 Button("Close") {
                     curSectionData = nil;
+                }.padding()
+            }
+            .sheet(isPresented: .constant(curSectionView != nil)) {
+                DecodedView(value: $curSectionView)
+                    .frame(width: geo.size.width * 0.7, height: geo.size.height * 0.6).padding()
+                Button("Close") {
+                    curSectionView = nil;
                 }.padding()
             }
             .alert("Error", isPresented: .constant(document.error != nil)) {

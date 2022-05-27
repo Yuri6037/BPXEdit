@@ -46,6 +46,35 @@ enum Value {
         case f32(Float32)
         case f64(Float64)
         case string(String)
+
+        func toString() -> String {
+            switch self {
+            case .u8(let v):
+                return v.formatted()
+            case .u16(let v):
+                return v.formatted()
+            case .u32(let v):
+                return v.formatted()
+            case .u64(let v):
+                return v.formatted()
+            case .i8(let v):
+                return v.formatted()
+            case .i16(let v):
+                return v.formatted()
+            case .i32(let v):
+                return v.formatted()
+            case .i64(let v):
+                return v.formatted()
+            case .bool(let v):
+                return v ? "On" : "Off";
+            case .f32(let v):
+                return v.formatted()
+            case .f64(let v):
+                return v.formatted()
+            case .string(let v):
+                return v;
+            }
+        }
     }
 
     case scalar(Scalar)

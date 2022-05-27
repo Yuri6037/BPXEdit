@@ -65,7 +65,7 @@ struct ContentView: View {
             }
             .sheet(isPresented: .constant(curSectionView != nil)) {
                 DecodedView(value: $curSectionView)
-                    .frame(width: geo.size.width * 0.7, height: geo.size.height * 0.6).padding()
+                    .frame(width: geo.size.width * 0.3).padding()
                 Button("Close") {
                     curSectionView = nil;
                 }.padding()

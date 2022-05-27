@@ -16,6 +16,10 @@ class ByteBuf {
         self.buffer = buffer;
     }
 
+    func size() -> Int {
+        return buffer.count;
+    }
+
     private func checkValidSize(len: Int) -> Bool {
         if buffer.count - cursor < len {
             return false;

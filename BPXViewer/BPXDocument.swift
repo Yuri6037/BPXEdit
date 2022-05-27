@@ -51,7 +51,7 @@ struct BPXDocument: FileDocument {
             error = "An error has occured";
             return nil;
         } catch {
-            self.error = "An unknown error has occured";
+            self.error = error.localizedDescription;
             return nil;
         }
     }

@@ -11,11 +11,16 @@ struct MainHeaderView: View {
     var header: bpx_main_header_t?;
 
     fileprivate func getType() -> String {
+        var string: String;
         if header!.ty >= 0x20 && header!.ty <= 0x7E {
-            return String(bytes: [header!.ty], encoding: .ascii)!;
+            string = String(bytes: [header!.ty], encoding: .ascii)!;
         } else {
-            return String(format: "%02X", header!.ty);
+            string = String(format: "%02X", header!.ty);
         }
+        if let name = BundleManager.instance.getBundle()?.main.name {
+            string += " (" + name + ")";
+        }
+        return string;
     }
 
     var body: some View {

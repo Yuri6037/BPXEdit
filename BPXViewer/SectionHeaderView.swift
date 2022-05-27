@@ -11,7 +11,11 @@ struct SectionHeaderView: View {
     var section: Section;
 
     fileprivate func getType() -> String {
-        return String(format: "%02X", section.header.ty);
+        if let name = BundleManager.instance.getBundle()?.main.getSectionName(code: section.header.ty) {
+            return String(format: "%02X", section.header.ty) + " (" + name + ")";
+        } else {
+            return String(format: "%02X", section.header.ty);
+        }
     }
 
     fileprivate func getPointer() -> String {

@@ -30,6 +30,7 @@ struct BPXDocument: FileDocument {
         guard let fileUrl = NSURL.fileURL(withPathComponents: [directory, fileName]) else { throw CocoaError(.fileReadNoPermission) };
         FileManager.default.createFile(atPath: fileUrl.path, contents: configuration.file.regularFileContents, attributes: nil);
         container = try Container(open: fileUrl.path);
+        BundleManager.instance.loadBundle(code: container!.getMainHeader().ty);
     }
 
     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {

@@ -20,6 +20,15 @@ struct BundleMain: Codable
     let code: UInt8
     let name: String
     let section: [Section]
+
+    func getSectionName(code: UInt8) -> String? {
+        for section in section {
+            if section.code == code {
+                return section.name;
+            }
+        }
+        return nil;
+    }
 }
 
 struct Bundle {
@@ -28,6 +37,7 @@ struct Bundle {
 
 class BundleManager {
     private var map: [UInt8: Bundle] = [:];
+    private var bundle: Bundle?;
 
     private init() {}
 
@@ -49,5 +59,13 @@ class BundleManager {
             let obj = try TOMLDecoder().decode(BundleMain.self, from: string);
             map[obj.code] = Bundle(main: obj);
         }
+    }
+
+    func loadBundle(code: UInt8) {
+        bundle = map[code];
+    }
+
+    func getBundle() -> Bundle? {
+        return bundle;
     }
 }

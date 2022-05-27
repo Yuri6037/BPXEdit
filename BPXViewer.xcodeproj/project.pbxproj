@@ -25,6 +25,7 @@
 		DAAAC9A0283BD9B000D663E8 /* HexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAAC99F283BD9B000D663E8 /* HexView.swift */; };
 		DAB22D822840D4D7005C8741 /* BundleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB22D812840D4D7005C8741 /* BundleManager.swift */; };
 		DAB22D852840DB7C005C8741 /* TOMLDecoder in Frameworks */ = {isa = PBXBuildFile; productRef = DAB22D842840DB7C005C8741 /* TOMLDecoder */; };
+		DAB22D8728412255005C8741 /* ByteBuf.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB22D8628412255005C8741 /* ByteBuf.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		DAAAC99D283BD80900D663E8 /* HexView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HexView.xib; sourceTree = "<group>"; };
 		DAAAC99F283BD9B000D663E8 /* HexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexView.swift; sourceTree = "<group>"; };
 		DAB22D812840D4D7005C8741 /* BundleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleManager.swift; sourceTree = "<group>"; };
+		DAB22D8628412255005C8741 /* ByteBuf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteBuf.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				DA90C916283BB9AD0091DE15 /* BPXViewerApp.swift */,
 				DA90C918283BB9AD0091DE15 /* BPXDocument.swift */,
 				DAB22D812840D4D7005C8741 /* BundleManager.swift */,
+				DAB22D8628412255005C8741 /* ByteBuf.swift */,
 				DA90C91A283BB9AD0091DE15 /* ContentView.swift */,
 				DA90C91C283BB9AE0091DE15 /* Assets.xcassets */,
 				DAAAC99D283BD80900D663E8 /* HexView.xib */,
@@ -223,6 +226,7 @@
 				DA90C919283BB9AD0091DE15 /* BPXDocument.swift in Sources */,
 				DA99F38D283FE703007BFEC3 /* SectionHeaderView.swift in Sources */,
 				DA0DCF8F283D371600904DA1 /* Error.swift in Sources */,
+				DAB22D8728412255005C8741 /* ByteBuf.swift in Sources */,
 				DA90C91B283BB9AD0091DE15 /* ContentView.swift in Sources */,
 				DAB22D822840D4D7005C8741 /* BundleManager.swift in Sources */,
 			);

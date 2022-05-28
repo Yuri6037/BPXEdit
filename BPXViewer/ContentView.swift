@@ -61,7 +61,7 @@ struct ContentView: View {
             }
             .sheet(isPresented: $sectionState.showDecodedView) {
                 DecodedView(value: $sectionState.decodedViewData)
-                    .frame(width: geo.size.width * 0.4, height: geo.size.height * 0.5).padding()
+                    .frame(width: geo.size.width * 0.4).padding()
                 Button("Close") { sectionState.showDecodedView(value: nil) }.padding()
             }
             .alert("Error", isPresented: .constant(document.error != nil)) {

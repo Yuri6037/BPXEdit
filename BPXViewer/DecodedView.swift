@@ -38,6 +38,7 @@ struct ArrayView: View {
                                 .foregroundColor(.primary))
             }
         }
+        .frame(minHeight: 200)
     }
 }
 

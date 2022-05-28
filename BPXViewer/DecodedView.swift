@@ -57,10 +57,10 @@ struct ValueView: View {
 }
 
 struct DecodedView: View {
-    @Binding var value: Value?;
+    @Binding var value: Value;
 
     var body: some View {
-        ValueView(value: value!)
+        ValueView(value: value)
     }
 }
 

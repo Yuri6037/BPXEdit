@@ -10,31 +10,14 @@ import SwiftUI
 struct ContentView: View {
     @Binding var document: BPXDocument
     @State var selected = -1;
-    @State var curSectionData: [uint8]?;
-    @State var curDecodedSection: Value?;
+    @StateObject var sectionState = SectionState();
 
     func loadSectionHex() {
-        curSectionData = document.loadSectionAsData(index: selected);
+        sectionState.showHexView(data: document.loadSectionAsData(index: selected));
     }
 
     func decodeSection() {
-        let data = document.loadSectionAsData(index: selected);
-        guard let data = data else { return }
-        if selected != -1 {
-            let ty = document.container!.getSections()[selected].header.ty;
-            curDecodedSection = BundleManager.instance.getBundle()?.typeDescs[Int(ty)]?.decode(buffer: data);
-        } else {
-            curDecodedSection = BundleManager.instance.getBundle()?.typeDescs[selected]?.decode(buffer: data);
-        }
-    }
-
-    func isSectionDecodable() -> Bool {
-        if selected != -1 {
-            let ty = document.container!.getSections()[selected].header.ty;
-            return BundleManager.instance.getBundle()?.typeDescs[Int(ty)] != nil;
-        } else {
-            return BundleManager.instance.getBundle()?.typeDescs[selected] != nil
-        }
+        sectionState.showDecodedView(value: document.decodeSection(index: selected));
     }
 
     var body: some View {
@@ -54,7 +37,8 @@ struct ContentView: View {
                                 Image(systemName: "doc")
                                 Text("Decoded view")
                             }
-                        }.disabled(!isSectionDecodable())
+                        }
+                        .disabled(!document.isSectionDecodable(index: selected))
                     }
                     List {
                         SelectableItem(key: -1, selected: $selected) {
@@ -70,19 +54,15 @@ struct ContentView: View {
                     }
                 }
             }
-            .sheet(isPresented: .constant(curSectionData != nil)) {
-                HexViewWrapper(data: $curSectionData)
+            .sheet(isPresented: $sectionState.showHexView) {
+                HexViewWrapper(data: $sectionState.hexViewData)
                     .frame(width: geo.size.width * 0.7, height: geo.size.height * 0.6).padding()
-                Button("Close") {
-                    curSectionData = nil;
-                }.padding()
+                Button("Close") { sectionState.showHexView(data: nil) }.padding()
             }
-            .sheet(isPresented: .constant(curDecodedSection != nil)) {
-                DecodedView(value: $curDecodedSection)
+            .sheet(isPresented: $sectionState.showDecodedView) {
+                DecodedView(value: $sectionState.decodedViewData)
                     .frame(width: geo.size.width * 0.4, height: geo.size.height * 0.5).padding()
-                Button("Close") {
-                    curDecodedSection = nil;
-                }.padding()
+                Button("Close") { sectionState.showDecodedView(value: nil) }.padding()
             }
             .alert("Error", isPresented: .constant(document.error != nil)) {
                 Text(document.error ?? "")

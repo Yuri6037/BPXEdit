@@ -27,6 +27,7 @@
 		DAB22D852840DB7C005C8741 /* TOMLDecoder in Frameworks */ = {isa = PBXBuildFile; productRef = DAB22D842840DB7C005C8741 /* TOMLDecoder */; };
 		DAB22D8728412255005C8741 /* ByteBuf.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB22D8628412255005C8741 /* ByteBuf.swift */; };
 		DAB22D89284172CF005C8741 /* DecodedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB22D88284172CF005C8741 /* DecodedView.swift */; };
+		DACF4B1F28423ABA008AA6A3 /* SectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACF4B1E28423ABA008AA6A3 /* SectionState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		DAB22D812840D4D7005C8741 /* BundleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleManager.swift; sourceTree = "<group>"; };
 		DAB22D8628412255005C8741 /* ByteBuf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteBuf.swift; sourceTree = "<group>"; };
 		DAB22D88284172CF005C8741 /* DecodedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodedView.swift; sourceTree = "<group>"; };
+		DACF4B1E28423ABA008AA6A3 /* SectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 				DA99F38A283FE64E007BFEC3 /* MainHeaderView.swift */,
 				DA99F38C283FE703007BFEC3 /* SectionHeaderView.swift */,
 				DAB22D88284172CF005C8741 /* DecodedView.swift */,
+				DACF4B1E28423ABA008AA6A3 /* SectionState.swift */,
 			);
 			path = BPXViewer;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 				DA99F38B283FE64E007BFEC3 /* MainHeaderView.swift in Sources */,
 				DAB22D89284172CF005C8741 /* DecodedView.swift in Sources */,
 				DA0DCF94283E4D3300904DA1 /* Section.swift in Sources */,
+				DACF4B1F28423ABA008AA6A3 /* SectionState.swift in Sources */,
 				DA90C919283BB9AD0091DE15 /* BPXDocument.swift in Sources */,
 				DA99F38D283FE703007BFEC3 /* SectionHeaderView.swift in Sources */,
 				DA0DCF8F283D371600904DA1 /* Error.swift in Sources */,

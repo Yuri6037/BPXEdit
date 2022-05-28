@@ -56,4 +56,24 @@ struct BPXDocument: FileDocument {
             return nil;
         }
     }
+
+    mutating func decodeSection(index: Int) -> Value? {
+        let data = loadSectionAsData(index: index);
+        guard let data = data else { return nil }
+        if index != -1 {
+            let ty = container!.getSections()[index].header.ty;
+            return BundleManager.instance.getBundle()?.typeDescs[Int(ty)]?.decode(buffer: data);
+        } else {
+            return BundleManager.instance.getBundle()?.typeDescs[index]?.decode(buffer: data);
+        }
+    }
+
+    func isSectionDecodable(index: Int) -> Bool {
+        if index != -1 {
+            let ty = container!.getSections()[index].header.ty;
+            return BundleManager.instance.getBundle()?.typeDescs[Int(ty)] != nil;
+        } else {
+            return BundleManager.instance.getBundle()?.typeDescs[index] != nil
+        }
+    }
 }

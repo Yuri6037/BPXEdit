@@ -99,17 +99,13 @@ import SwiftUI
 }
 
 struct HexViewWrapper: NSViewControllerRepresentable {
-    @Binding var data: [uint8]?;
+    @Binding var data: [uint8];
 
     func makeNSViewController(context: Context) -> HexView {
         return HexView();
     }
 
     func updateNSViewController(_ controller: HexView, context: Context) {
-        if let data = data {
-            controller.setData(buffer: data);
-        } else {
-            controller.setData(buffer: []);
-        }
+        controller.setData(buffer: data);
     }
 }

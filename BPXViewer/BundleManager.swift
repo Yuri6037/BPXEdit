@@ -60,7 +60,7 @@ enum Value {
             case .u32(let v):
                 return v.formatted()
             case .u64(let v):
-                return v.formatted()
+                return String(v)
             case .i8(let v):
                 return v.formatted()
             case .i16(let v):

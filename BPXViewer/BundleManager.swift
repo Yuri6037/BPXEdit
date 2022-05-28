@@ -46,6 +46,10 @@ enum Value {
         case f32(Float32)
         case f64(Float64)
         case string(String)
+        case ptr8(UInt8)
+        case ptr16(UInt16)
+        case ptr32(UInt32)
+        case ptr64(UInt64)
 
         func toString() -> String {
             switch self {
@@ -73,6 +77,14 @@ enum Value {
                 return v.formatted()
             case .string(let v):
                 return v;
+            case .ptr8(let v):
+                return String(format: "0x%02X", v);
+            case .ptr16(let v):
+                return String(format: "0x%04X", v);
+            case .ptr32(let v):
+                return String(format: "0x%08X", v);
+            case .ptr64(let v):
+                return String(format: "0x%16X", v);
             }
         }
     }
@@ -249,15 +261,24 @@ struct TypeDesc: Codable {
                 //Potentially super slow code but no other options despite my string to obviously be always ASCII characters, swift refuses at all costs to use an int directly! Let it be a good old Theta(n).
                 flagStr = String(flagStr[flagStr.index(flagStr.startIndex, offsetBy: 2)...]);
                 return .scalar(.string(flagStr));
-            default:
-                return nil;
-            /*
-            case .stringPtr:
+            case .stringPtr, .bpxsdPtr:
                 buf.seek(pos: baseOffset + Int(offset));
-                <#code#>
-            case .bpxsdPtr:
-                buf.seek(pos: baseOffset + Int(offset));
-                <#code#>*/
+                switch size {
+                case 1:
+                    guard let v = buf.readUInt8() else { return nil }
+                    return .scalar(.ptr8(v));
+                case 2:
+                    guard let v = buf.readUInt16() else { return nil }
+                    return .scalar(.ptr16(v));
+                case 4:
+                    guard let v = buf.readUInt32() else { return nil }
+                    return .scalar(.ptr32(v));
+                case 8:
+                    guard let v = buf.readUInt64() else { return nil }
+                    return .scalar(.ptr64(v));
+                default:
+                    return nil;
+                }
             }
         }
     }

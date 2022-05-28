@@ -11,16 +11,30 @@ struct ContentView: View {
     @Binding var document: BPXDocument
     @State var selected = -1;
     @State var curSectionData: [uint8]?;
-    @State var curSectionView: Value?;
+    @State var curDecodedSection: Value?;
 
     func loadSectionHex() {
         curSectionData = document.loadSectionAsData(index: selected);
     }
 
-    func loadSectionView() {
+    func decodeSection() {
         let data = document.loadSectionAsData(index: selected);
         guard let data = data else { return }
-        curSectionView = BundleManager.instance.getBundle()?.typeDescs[selected]?.decode(buffer: data);
+        if selected != -1 {
+            let ty = document.container!.getSections()[selected].header.ty;
+            curDecodedSection = BundleManager.instance.getBundle()?.typeDescs[Int(ty)]?.decode(buffer: data);
+        } else {
+            curDecodedSection = BundleManager.instance.getBundle()?.typeDescs[selected]?.decode(buffer: data);
+        }
+    }
+
+    func isSectionDecodable() -> Bool {
+        if selected != -1 {
+            let ty = document.container!.getSections()[selected].header.ty;
+            return BundleManager.instance.getBundle()?.typeDescs[Int(ty)] != nil;
+        } else {
+            return BundleManager.instance.getBundle()?.typeDescs[selected] != nil
+        }
     }
 
     var body: some View {
@@ -35,12 +49,12 @@ struct ContentView: View {
                                 Text("Hex view")
                             }
                         }
-                        Button(action: { loadSectionView() }) {
+                        Button(action: { decodeSection() }) {
                             HStack {
                                 Image(systemName: "doc")
                                 Text("Decoded view")
                             }
-                        }.disabled(BundleManager.instance.getBundle()?.typeDescs[selected] != nil)
+                        }.disabled(!isSectionDecodable())
                     }
                     List {
                         SelectableItem(key: -1, selected: $selected) {
@@ -63,11 +77,11 @@ struct ContentView: View {
                     curSectionData = nil;
                 }.padding()
             }
-            .sheet(isPresented: .constant(curSectionView != nil)) {
-                DecodedView(value: $curSectionView)
-                    .frame(width: geo.size.width * 0.3).padding()
+            .sheet(isPresented: .constant(curDecodedSection != nil)) {
+                DecodedView(value: $curDecodedSection)
+                    .frame(width: geo.size.width * 0.4, height: geo.size.height * 0.5).padding()
                 Button("Close") {
-                    curSectionView = nil;
+                    curDecodedSection = nil;
                 }.padding()
             }
             .alert("Error", isPresented: .constant(document.error != nil)) {

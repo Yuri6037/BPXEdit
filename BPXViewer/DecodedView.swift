@@ -14,7 +14,7 @@ struct StructView: View {
         VStack {
             ForEach(value.sorted(by: { $0.0 < $1.0 }), id: \.key) { key, value in
                 HStack {
-                    Text(key)
+                    Text(key + ": ")
                     Spacer()
                     ValueView(value: value)
                 }

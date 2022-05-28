@@ -7,34 +7,38 @@
 
 import SwiftUI
 
-@ViewBuilder func renderStruct(data: [String: Value]) -> some View {
-    VStack {
-        ForEach(data.sorted(by: { $0.0 < $1.0 }), id: \.key) { key, value in
-            HStack {
-                Text(key)
-                Spacer()
-                ValueView(value: value)
+struct StructView: View {
+    let value: [String: Value];
+
+    var body: some View {
+        VStack {
+            ForEach(value.sorted(by: { $0.0 < $1.0 }), id: \.key) { key, value in
+                HStack {
+                    Text(key)
+                    Spacer()
+                    ValueView(value: value)
+                }
             }
         }
     }
 }
 
-@ViewBuilder func renderArray(data: [Value]) -> some View {
-    List {
-        ForEach(0..<data.count) { id in
-            ValueView(value: data[id])
-                .padding()
-                .frame(maxWidth: .infinity)
-                .overlay(RoundedRectangle(cornerRadius: 12)
-                            .inset(by: 4)
-                            .stroke(lineWidth: 4)
-                            .foregroundColor(.primary))
+struct ArrayView: View {
+    let value: [Value];
+
+    var body: some View {
+        List {
+            ForEach(0..<value.count) { id in
+                ValueView(value: value[id])
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .overlay(RoundedRectangle(cornerRadius: 12)
+                                .inset(by: 4)
+                                .stroke(lineWidth: 4)
+                                .foregroundColor(.primary))
+            }
         }
     }
-}
-
-@ViewBuilder func renderScalar(data: Value.Scalar) -> some View {
-    Text(data.toString())
 }
 
 struct ValueView: View {
@@ -43,11 +47,11 @@ struct ValueView: View {
     var body: some View {
         switch value {
         case .scalar(let scalar):
-            renderScalar(data: scalar)
+            Text(scalar.toString())
         case .structure(let dictionary):
-            renderStruct(data: dictionary)
+            StructView(value: dictionary)
         case .array(let array):
-            renderArray(data: array)
+            ArrayView(value: array)
         }
     }
 }

@@ -11,22 +11,22 @@ struct MainHeaderView: View {
     var header: bpx_main_header_t?;
 
     fileprivate func getType() -> String {
-        var string: String;
         if header!.ty >= 0x20 && header!.ty <= 0x7E {
-            string = String(bytes: [header!.ty], encoding: .ascii)!;
+            return String(bytes: [header!.ty], encoding: .ascii)!;
         } else {
-            string = String(format: "%02X", header!.ty);
+            return String(format: "%02X", header!.ty);
         }
-        if let name = BundleManager.instance.getBundle()?.main.name {
-            string += " (" + name + ")";
-        }
-        return string;
     }
 
     var body: some View {
         BlockView {
             if let header = header {
-                Text("BPX Main Header").bold().padding(.bottom)
+                if let name = BundleManager.instance.getBundle()?.main.name {
+                    Text("BPX Main Header").bold()
+                    Text(name).bold().padding(.bottom)
+                } else {
+                    Text("BPX Main Header").bold().padding(.bottom)
+                }
                 HStack {
                     Text("Version: ").bold()
                     Spacer()

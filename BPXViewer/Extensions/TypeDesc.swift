@@ -1,98 +1,11 @@
 //
-//  BundleManager.swift
+//  TypeDesc.swift - The actual section decoder
 //  BPXViewer
 //
-//  Created by Yuri Edwrad on 5/27/22.
+//  Created by Yuri Edwrad on 5/29/22.
 //
 
 import Foundation
-import AppKit
-import UniformTypeIdentifiers
-import TOMLDecoder
-
-struct BundleMain: Codable {
-    struct Section: Codable {
-        let code: UInt8
-        let name: String
-        let decoder: String?
-    }
-
-    let code: UInt8
-    let name: String
-    let section: [Section]
-    let decoder: String?
-
-    func getSectionName(code: UInt8) -> String? {
-        for section in section {
-            if section.code == code {
-                return section.name;
-            }
-        }
-        return nil;
-    }
-}
-
-enum Value {
-    enum Scalar {
-        case u8(UInt8)
-        case u16(UInt16)
-        case u32(UInt32)
-        case u64(UInt64)
-        case i8(Int8)
-        case i16(Int16)
-        case i32(Int32)
-        case i64(Int64)
-        case bool(Bool)
-        case f32(Float32)
-        case f64(Float64)
-        case string(String)
-        case ptr8(UInt8)
-        case ptr16(UInt16)
-        case ptr32(UInt32)
-        case ptr64(UInt64)
-
-        func toString() -> String {
-            switch self {
-            case .u8(let v):
-                return v.formatted()
-            case .u16(let v):
-                return v.formatted()
-            case .u32(let v):
-                return v.formatted()
-            case .u64(let v):
-                return String(v)
-            case .i8(let v):
-                return v.formatted()
-            case .i16(let v):
-                return v.formatted()
-            case .i32(let v):
-                return v.formatted()
-            case .i64(let v):
-                return v.formatted()
-            case .bool(let v):
-                return v ? "On" : "Off";
-            case .f32(let v):
-                return v.formatted()
-            case .f64(let v):
-                return v.formatted()
-            case .string(let v):
-                return v;
-            case .ptr8(let v):
-                return String(format: "0x%02X", v);
-            case .ptr16(let v):
-                return String(format: "0x%04X", v);
-            case .ptr32(let v):
-                return String(format: "0x%08X", v);
-            case .ptr64(let v):
-                return String(format: "0x%16X", v);
-            }
-        }
-    }
-
-    case scalar(Scalar)
-    case structure([String: Value])
-    case array([Value])
-}
 
 struct TypeDesc: Codable {
     struct TypeDecl: Codable {
@@ -325,59 +238,5 @@ struct TypeDesc: Codable {
     func decode(buffer: [uint8]) -> Value? {
         let buffer = ByteBuf(buffer: buffer);
         return global.decodeInternal(buf: buffer, types: types, baseOffset: 0);
-    }
-}
-
-struct Bundle {
-    let main: BundleMain
-    let typeDescs: [Int: TypeDesc]
-}
-
-fileprivate func tomlLoad<T: Codable>(path: String) throws -> T {
-    let string = try String(contentsOfFile: path, encoding: String.Encoding.utf8);
-    let obj = try TOMLDecoder().decode(T.self, from: string);
-    return obj;
-}
-
-class BundleManager {
-    private var map: [UInt8: Bundle] = [:];
-    private var bundle: Bundle?;
-
-    private init() {}
-
-    static let instance = BundleManager();
-
-    func importBundle() throws {
-        let dialog = NSOpenPanel();
-        dialog.title = "Choose a bundle to import.";
-        dialog.showsResizeIndicator = true;
-        dialog.showsHiddenFiles = false;
-        dialog.canChooseDirectories = false;
-        dialog.canCreateDirectories = false;
-        dialog.allowsMultipleSelection = false;
-        dialog.allowedContentTypes = [UTType(filenameExtension: "bundle", conformingTo: .package)!];
-        if (dialog.runModal() == NSApplication.ModalResponse.OK) {
-            let result = dialog.url?.path;
-            let mainFile = result! + "/main.toml";
-            let main = try tomlLoad(path: mainFile) as BundleMain; //Oh my... Not even able to directly instantiate a generic function! WTF!? Even rust can do this!!
-            var typeDescs: [Int: TypeDesc] = [:]
-            if let filename =  main.decoder {
-                typeDescs[-1] = try tomlLoad(path: result! + "/" + filename);
-            }
-            for section in main.section {
-                if let filename = section.decoder {
-                    typeDescs[Int(section.code)] = try tomlLoad(path: result! + "/" + filename);
-                }
-            }
-            map[main.code] = Bundle(main: main, typeDescs: typeDescs);
-        }
-    }
-
-    func loadBundle(code: UInt8) {
-        bundle = map[code];
-    }
-
-    func getBundle() -> Bundle? {
-        return bundle;
     }
 }

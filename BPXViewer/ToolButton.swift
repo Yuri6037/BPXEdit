@@ -41,3 +41,9 @@ struct ToolButton: View {
         )
     }
 }
+
+struct ToolButton_Previews: PreviewProvider {
+    static var previews: some View {
+        ToolButton(icon: "doc", text: "This is a test") {}
+    }
+}

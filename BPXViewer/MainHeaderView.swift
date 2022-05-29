@@ -57,7 +57,7 @@ struct MainHeaderView: View {
             }
         }
         .padding()
-        .background(.white)
+        .background(Color("MainHeader"))
         .cornerRadius(12)
         .padding()
     }

@@ -26,19 +26,15 @@ struct ContentView: View {
                 HStack {
                     VStack {
                         MainHeaderView(header: document.container?.getMainHeader())
-                        Button(action: { loadSectionHex() }) {
-                            HStack {
-                                Image(systemName: "hexagon")
-                                Text("Hex view")
+                        HStack {
+                            ToolButton(icon: "hexagon", text: "Hex View") {
+                                loadSectionHex()
                             }
-                        }
-                        Button(action: { decodeSection() }) {
-                            HStack {
-                                Image(systemName: "doc")
-                                Text("Decoded view")
+                            ToolButton(icon: "doc", text: "Data View") {
+                                loadSectionHex()
                             }
+                            .disabled(!document.isSectionDecodable(index: selected))
                         }
-                        .disabled(!document.isSectionDecodable(index: selected))
                     }
                     List {
                         SelectableItem(key: -1, selected: $selected) {

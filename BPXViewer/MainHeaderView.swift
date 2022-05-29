@@ -24,7 +24,7 @@ struct MainHeaderView: View {
     }
 
     var body: some View {
-        VStack {
+        BlockView {
             if let header = header {
                 Text("BPX Main Header").bold().padding(.bottom)
                 HStack {
@@ -56,10 +56,6 @@ struct MainHeaderView: View {
                 Text("No container loaded.")
             }
         }
-        .padding()
-        .background(Color("MainHeader"))
-        .cornerRadius(12)
-        .padding()
     }
 }
 

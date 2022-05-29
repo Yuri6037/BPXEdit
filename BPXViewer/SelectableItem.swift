@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SelectableItem<C: View, K: Equatable>: View {
-    var content: () -> C;
+    let content: () -> C;
 
     @Binding var selected: K;
     var key: K;

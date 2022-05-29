@@ -12,12 +12,12 @@ struct ContentView: View {
     @State var selected = -1;
     @StateObject var sectionState = SectionState();
 
-    func loadSectionHex() {
-        sectionState.showHexView(data: document.loadSectionAsData(index: selected));
+    func loadSectionHex(_ index: Int) {
+        sectionState.showHexView(data: document.loadSectionAsData(index: index));
     }
 
-    func decodeSection() {
-        sectionState.showDecodedView(value: document.decodeSection(index: selected));
+    func decodeSection(_ index: Int) {
+        sectionState.showDecodedView(value: document.decodeSection(index: index));
     }
 
     var body: some View {
@@ -26,24 +26,35 @@ struct ContentView: View {
                 HStack {
                     VStack {
                         MainHeaderView(header: document.container?.getMainHeader())
-                        HStack {
-                            ToolButton(icon: "hexagon", text: "Hex View") {
-                                loadSectionHex()
+                        BlockView {
+                            Text("BPX Type Ext").bold()
+                            HStack {
+                                ToolButton(icon: "hexagon", text: "Hex View") {
+                                    loadSectionHex(-1)
+                                }
+                                if document.isSectionDecodable(index: -1) {
+                                    ToolButton(icon: "doc", text: "Data View") {
+                                        decodeSection(-1)
+                                    }
+                                }
                             }
-                            ToolButton(icon: "doc", text: "Data View") {
-                                loadSectionHex()
-                            }
-                            .disabled(!document.isSectionDecodable(index: selected))
                         }
                     }
                     List {
-                        SelectableItem(key: -1, selected: $selected) {
-                            Text("BPX Type Ext").bold()
-                        }
                         if let container = document.container {
                             ForEach(container.getSections()) { section in
                                 SelectableItem(key: section.index, selected: $selected) {
                                     SectionHeaderView(section: section)
+                                    HStack {
+                                        ToolButton(icon: "hexagon", text: "Hex View") {
+                                            loadSectionHex(section.index)
+                                        }
+                                        if document.isSectionDecodable(index: section.index) {
+                                            ToolButton(icon: "doc", text: "Data View") {
+                                                decodeSection(section.index)
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }

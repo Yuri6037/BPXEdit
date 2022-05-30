@@ -30,12 +30,8 @@ struct ArrayView: View {
         List {
             ForEach(0..<value.count) { id in
                 ValueView(value: value[id])
-                    .padding()
+                    .blockView()
                     .frame(maxWidth: .infinity)
-                    .overlay(RoundedRectangle(cornerRadius: 12)
-                                .inset(by: 4)
-                                .stroke(lineWidth: 4)
-                                .foregroundColor(.primary))
             }
         }
         .frame(minHeight: 200)

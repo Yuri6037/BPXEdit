@@ -26,7 +26,7 @@ struct ContentView: View {
                 HStack {
                     VStack {
                         MainHeaderView(header: document.container?.getMainHeader())
-                        BlockView {
+                        VStack {
                             Text("BPX Type Ext").bold()
                             HStack {
                                 ToolButton(icon: "hexagon", text: "Hex View") {
@@ -39,6 +39,7 @@ struct ContentView: View {
                                 }
                             }
                         }
+                        .blockView()
                     }
                     List {
                         if let container = document.container {

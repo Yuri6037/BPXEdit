@@ -7,26 +7,18 @@
 
 import SwiftUI
 
-struct BlockView<C: View>: View {
-    let content: () -> C;
-
-    init(@ViewBuilder content: @escaping () -> C) {
-        self.content = content;
-    }
-
-    var body: some View {
-        VStack(content: content)
-            .padding()
+struct BlockViewModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content.padding()
             .background(Color("MainHeader"))
             .cornerRadius(12)
+            .shadow(radius: 8)
             .padding()
     }
 }
 
-struct BlockView_Previews: PreviewProvider {
-    static var previews: some View {
-        BlockView {
-            Text("test")
-        }
+extension View {
+    func blockView() -> some View {
+        modifier(BlockViewModifier())
     }
 }

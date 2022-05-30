@@ -24,18 +24,22 @@ struct SelectableItem<C: View, K: Equatable>: View {
             VStack(content: content)
                 .padding()
                 .frame(maxWidth: .infinity)
+                .background(Color("MainHeader"))
+                .cornerRadius(12)
+                .shadow(radius: 8)
                 .overlay(RoundedRectangle(cornerRadius: 12)
                             .inset(by: 4)
                             .stroke(lineWidth: 4)
                             .foregroundColor(.accentColor))
+                .padding()
         } else {
             VStack(content: content)
                 .padding()
                 .frame(maxWidth: .infinity)
-                .overlay(RoundedRectangle(cornerRadius: 12)
-                            .inset(by: 4)
-                            .stroke(lineWidth: 4)
-                            .foregroundColor(.primary))
+                .background(Color("MainHeader"))
+                .cornerRadius(12)
+                .shadow(radius: 8)
+                .padding()
                 .onTapGesture {
                     selected = key
                 }

@@ -19,7 +19,7 @@ struct MainHeaderView: View {
     }
 
     var body: some View {
-        BlockView {
+        VStack {
             if let header = header {
                 if let name = BundleManager.instance.getBundle()?.main.name {
                     Text("BPX Main Header").bold()
@@ -56,6 +56,7 @@ struct MainHeaderView: View {
                 Text("No container loaded.")
             }
         }
+        .blockView()
     }
 }
 

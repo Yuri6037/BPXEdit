@@ -114,8 +114,33 @@
 				DA4903702843E6D8006C9169 /* Value.swift */,
 				DA4903722843E739006C9169 /* TypeDesc.swift */,
 				DA4903742843E78A006C9169 /* Loader.swift */,
+				DAB22D8628412255005C8741 /* ByteBuf.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		DA689BF32844BB4500A2EF1B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DA689BF42844BBC600A2EF1B /* Hex */,
+				DA90C91A283BB9AD0091DE15 /* ContentView.swift */,
+				DA99F38A283FE64E007BFEC3 /* MainHeaderView.swift */,
+				DA99F38C283FE703007BFEC3 /* SectionHeaderView.swift */,
+				DAB22D88284172CF005C8741 /* DecodedView.swift */,
+				DA99F388283FA1DF007BFEC3 /* SelectableItem.swift */,
+				DA49036B2843B436006C9169 /* ToolButton.swift */,
+				DA49036D2843E085006C9169 /* BlockView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DA689BF42844BBC600A2EF1B /* Hex */ = {
+			isa = PBXGroup;
+			children = (
+				DAAAC99D283BD80900D663E8 /* HexView.xib */,
+				DAAAC99F283BD9B000D663E8 /* HexView.swift */,
+			);
+			path = Hex;
 			sourceTree = "<group>";
 		};
 		DA90C90A283BB9AD0091DE15 = {
@@ -140,25 +165,16 @@
 		DA90C915283BB9AD0091DE15 /* BPXViewer */ = {
 			isa = PBXGroup;
 			children = (
+				DA689BF32844BB4500A2EF1B /* View */,
 				DA49036F2843E6B7006C9169 /* Extensions */,
 				DA0DCF8B283D36A400904DA1 /* BPX */,
 				DA90C916283BB9AD0091DE15 /* BPXViewerApp.swift */,
+				DACF4B1E28423ABA008AA6A3 /* SectionState.swift */,
 				DA90C918283BB9AD0091DE15 /* BPXDocument.swift */,
-				DAB22D8628412255005C8741 /* ByteBuf.swift */,
-				DA90C91A283BB9AD0091DE15 /* ContentView.swift */,
 				DA90C91C283BB9AE0091DE15 /* Assets.xcassets */,
-				DAAAC99D283BD80900D663E8 /* HexView.xib */,
 				DA90C921283BB9AE0091DE15 /* Info.plist */,
 				DA90C922283BB9AE0091DE15 /* BPXViewer.entitlements */,
 				DA90C91E283BB9AE0091DE15 /* Preview Content */,
-				DAAAC99F283BD9B000D663E8 /* HexView.swift */,
-				DA99F388283FA1DF007BFEC3 /* SelectableItem.swift */,
-				DA99F38A283FE64E007BFEC3 /* MainHeaderView.swift */,
-				DA99F38C283FE703007BFEC3 /* SectionHeaderView.swift */,
-				DAB22D88284172CF005C8741 /* DecodedView.swift */,
-				DACF4B1E28423ABA008AA6A3 /* SectionState.swift */,
-				DA49036B2843B436006C9169 /* ToolButton.swift */,
-				DA49036D2843E085006C9169 /* BlockView.swift */,
 			);
 			path = BPXViewer;
 			sourceTree = "<group>";

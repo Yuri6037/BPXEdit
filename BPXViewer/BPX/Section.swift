@@ -31,6 +31,21 @@ public class SectionData {
         return block;
     }
 
+    public func seek(pos: UInt64) {
+        bpx_section_seek(inner, pos);
+    }
+
+    public func readByte() -> uint8? {
+        var byte: [uint8] = [0];
+        let flag = byte.withUnsafeMutableBufferPointer { buffer in
+            bpx_section_read(inner, buffer.baseAddress, 1) == 1
+        };
+        if !flag {
+            return nil;
+        }
+        return byte[0];
+    }
+
     deinit {
         bpx_section_close(&inner);
     }

@@ -59,7 +59,7 @@ struct ContentView: View {
                                                 decodeSection(section.index)
                                             }
                                         }
-                                        ToolButton(icon: "doc", text: "Strings View") {
+                                        ToolButton(icon: "doc.text", text: "Strings View") {
                                             loadSectionStrings(section.index)
                                         }
                                     }

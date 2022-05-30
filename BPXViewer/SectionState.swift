@@ -10,8 +10,19 @@ import Foundation
 class SectionState: ObservableObject {
     @Published var showHexView: Bool = false;
     @Published var showDecodedView: Bool = false;
+    @Published var showStringView: Bool = false;
+    @Published var stringViewData: [String] = [];
     @Published var hexViewData: [uint8] = [];
     @Published var decodedViewData: Value = .scalar(.u8(0)); //Just a default value so that we don't crash DecodedView anymore.
+
+    func showStringView(value: [String]?) {
+        if let value = value {
+            self.showStringView = true;
+            self.stringViewData = value;
+        } else {
+            self.showStringView = false;
+        }
+    }
 
     func showHexView(data: [uint8]?) {
         if let data = data {

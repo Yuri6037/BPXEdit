@@ -22,7 +22,11 @@ extension SectionData {
                 if let val = String(data: bytes, encoding: String.Encoding.utf8) {
                     lst.append(val)
                 }
+                bytes = Data();
             }
+        }
+        if let val = String(data: bytes, encoding: String.Encoding.utf8) {
+            lst.append(val)
         }
         return lst;
     }

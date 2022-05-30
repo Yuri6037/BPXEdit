@@ -76,4 +76,17 @@ struct BPXDocument: FileDocument {
             return BundleManager.instance.getBundle()?.typeDescs[index] != nil
         }
     }
+
+    mutating func loadSectionAsStrings(index: Int) -> [String]? {
+        do {
+            let data = try container?.getSections()[index].load();
+            return data?.loadStrings();
+        } catch let err as CoreError {
+            error = "An error has occured";
+            return nil;
+        } catch {
+            self.error = error.localizedDescription;
+            return nil;
+        }
+    }
 }

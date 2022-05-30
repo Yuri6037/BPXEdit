@@ -20,6 +20,10 @@ struct ContentView: View {
         sectionState.showDecodedView(value: document.decodeSection(index: index));
     }
 
+    func loadSectionStrings(_ index: Int) {
+        sectionState.showStringView(value: document.loadSectionAsStrings(index: index));
+    }
+
     var body: some View {
         GeometryReader { geo in
             VStack {
@@ -55,6 +59,9 @@ struct ContentView: View {
                                                 decodeSection(section.index)
                                             }
                                         }
+                                        ToolButton(icon: "doc", text: "Strings View") {
+                                            loadSectionStrings(section.index)
+                                        }
                                     }
                                 }
                             }
@@ -71,6 +78,12 @@ struct ContentView: View {
                 DecodedView(value: $sectionState.decodedViewData)
                     .frame(width: geo.size.width * 0.4).padding()
                 Button("Close") { sectionState.showDecodedView(value: nil) }.padding()
+            }
+            .sheet(isPresented: $sectionState.showStringView) {
+                StringView(value: $sectionState.stringViewData)
+                    .frame(width: geo.size.width * 0.4)
+                    .frame(minHeight: 200).padding()
+                Button("Close") { sectionState.showStringView(value: nil) }.padding()
             }
             .alert("Error", isPresented: .constant(document.error != nil)) {
                 Text(document.error ?? "")

@@ -10,7 +10,7 @@ import Foundation
 fileprivate let BUF_SIZE = 8192;
 
 public class SectionData {
-    fileprivate var inner: bpx_section_t?;
+    var inner: bpx_section_t?;
     let size: Int;
 
     fileprivate init(inner: bpx_section_t?, size: Int) {

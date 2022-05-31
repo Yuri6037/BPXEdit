@@ -28,6 +28,21 @@ struct SdValue: Identifiable {
         self.data = data;
         self.children = children;
     }
+
+    func description() -> String {
+        var str = "";
+        if let name = name {
+            if let name1 = name.name {
+                str += String(format: "%s (%X)", name1, name.hash)
+            } else {
+                str += String(format: "%X", name.hash)
+            }
+        }
+        if let data = data {
+            str = String(format: "%s: ", data.getTypeName()) + str + String(format: " - %s", data.toString());
+        }
+        return str;
+    }
 }
 
 fileprivate func decodeValue(name: SdValue.Name?, value: bpx_sd_value_t) -> SdValue? {

@@ -62,6 +62,37 @@ enum Value {
                 return String(format: "0x%16X", v);
             }
         }
+
+        func getTypeName() -> String {
+            switch self {
+            case .u8(_):
+                return "Uint8";
+            case .u16(_):
+                return "Uint16";
+            case .u32(_):
+                return "Uint32";
+            case .u64(_):
+                return "Uint64";
+            case .i8(_):
+                return "Int8";
+            case .i16(_):
+                return "Int16";
+            case .i32(_):
+                return "Int32";
+            case .i64(_):
+                return "Int64";
+            case .bool(_):
+                return "Bool";
+            case .f32(_):
+                return "Float";
+            case .f64(_):
+                return "Double";
+            case .string(_):
+                return "String";
+            default:
+                return "Pointer";
+            }
+        }
     }
 
     case scalar(Scalar)

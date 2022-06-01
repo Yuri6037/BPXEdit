@@ -24,6 +24,10 @@ struct ContentView: View {
         sectionState.showStringView(value: document.loadSectionAsStrings(index: index));
     }
 
+    func loadSectionSd(_ index: Int) {
+        sectionState.showSdView(value: document.loadSectionAsSdValue(index: index));
+    }
+
     var body: some View {
         GeometryReader { geo in
             VStack {
@@ -62,6 +66,9 @@ struct ContentView: View {
                                         ToolButton(icon: "doc.text", text: "Strings View") {
                                             loadSectionStrings(section.index)
                                         }
+                                        ToolButton(icon: "doc.zipper", text: "BPXSD View") {
+                                            loadSectionSd(section.index)
+                                        }
                                     }
                                 }
                             }
@@ -84,6 +91,14 @@ struct ContentView: View {
                     .frame(width: geo.size.width * 0.4)
                     .frame(minHeight: 200).padding()
                 Button("Close") { sectionState.showStringView(value: nil) }.padding()
+            }
+            .sheet(isPresented: $sectionState.showSdView) {
+                ScrollView {
+                    SdView(value: $sectionState.sdViewData)
+                }
+                .frame(width: geo.size.width * 0.4)
+                .frame(minHeight: 200).padding()
+                Button("Close") { sectionState.showSdView(value: nil) }.padding()
             }
             .alert("Error", isPresented: .constant(document.error != nil)) {
                 Text(document.error ?? "")

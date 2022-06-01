@@ -13,6 +13,7 @@
 		DA0DCF91283D377C00904DA1 /* Headers in Resources */ = {isa = PBXBuildFile; fileRef = DA0DCF90283D377C00904DA1 /* Headers */; };
 		DA0DCF94283E4D3300904DA1 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0DCF93283E4D3300904DA1 /* Section.swift */; };
 		DA0DCFBA283E625400904DA1 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DCFB9283E621300904DA1 /* libz.tbd */; };
+		DA1779F82846519E00F3EBC5 /* SdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1779F72846519E00F3EBC5 /* SdView.swift */; };
 		DA49036C2843B436006C9169 /* ToolButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA49036B2843B436006C9169 /* ToolButton.swift */; };
 		DA49036E2843E085006C9169 /* BlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA49036D2843E085006C9169 /* BlockView.swift */; };
 		DA4903712843E6D8006C9169 /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4903702843E6D8006C9169 /* Value.swift */; };
@@ -48,6 +49,7 @@
 		DA0DCFB8283E61FD00904DA1 /* liblzma.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = liblzma.tbd; path = usr/lib/liblzma.tbd; sourceTree = SDKROOT; };
 		DA0DCFB9283E621300904DA1 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		DA0DCFBC283E639F00904DA1 /* liblzma.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = liblzma.5.tbd; path = usr/lib/liblzma.5.tbd; sourceTree = SDKROOT; };
+		DA1779F72846519E00F3EBC5 /* SdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SdView.swift; sourceTree = "<group>"; };
 		DA49036B2843B436006C9169 /* ToolButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolButton.swift; sourceTree = "<group>"; };
 		DA49036D2843E085006C9169 /* BlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
 		DA4903702843E6D8006C9169 /* Value.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				DA49036B2843B436006C9169 /* ToolButton.swift */,
 				DA49036D2843E085006C9169 /* BlockView.swift */,
 				DA689BF52844C46B00A2EF1B /* StringView.swift */,
+				DA1779F72846519E00F3EBC5 /* SdView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				DAB22D89284172CF005C8741 /* DecodedView.swift in Sources */,
 				DA0DCF94283E4D3300904DA1 /* Section.swift in Sources */,
 				DA689BF82844ED8900A2EF1B /* StructuredData.swift in Sources */,
+				DA1779F82846519E00F3EBC5 /* SdView.swift in Sources */,
 				DACF4B1F28423ABA008AA6A3 /* SectionState.swift in Sources */,
 				DA90C919283BB9AD0091DE15 /* BPXDocument.swift in Sources */,
 				DA99F38D283FE703007BFEC3 /* SectionHeaderView.swift in Sources */,

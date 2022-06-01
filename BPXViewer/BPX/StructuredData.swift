@@ -22,24 +22,33 @@ struct SdValue: Identifiable {
     let name: Name?;
     let data: Value.Scalar?;
     let children: [SdValue]?;
+    let isArray: Bool;
 
-    init(name: Name? = nil, data: Value.Scalar? = nil, children: [SdValue]? = nil) {
+    init(name: Name? = nil, data: Value.Scalar? = nil, children: [SdValue]? = nil, isArray: Bool = false) {
         self.name = name;
         self.data = data;
         self.children = children;
+        self.isArray = isArray;
     }
 
     func description() -> String {
         var str = "";
         if let name = name {
             if let name1 = name.name {
-                str += String(format: "%s (%X)", name1, name.hash)
+                str += String(format: "%@ (%X)", name1, name.hash);
             } else {
-                str += String(format: "%X", name.hash)
+                str += String(format: "%X", name.hash);
             }
         }
         if let data = data {
-            str = String(format: "%s: ", data.getTypeName()) + str + String(format: " - %s", data.toString());
+            if name != nil {
+                str += String(format: ": %@    %@", data.getTypeName(), data.toString());
+            } else {
+                str += String(format: "%@    %@", data.getTypeName(), data.toString());
+            }
+        }
+        if str.isEmpty {
+            str += "no name";
         }
         return str;
     }
@@ -87,7 +96,7 @@ fileprivate func decodeValue(name: SdValue.Name?, value: bpx_sd_value_t) -> SdVa
                 varr.append(decoded);
             }
         }
-        return SdValue(name: name, children: varr);
+        return SdValue(name: name, children: varr, isArray: true);
     case BPX_SD_VALUE_TYPE_OBJECT:
         let obj = value.data.as_object;
         let debug = bpx_sd_object_get(obj, "__debug__");
@@ -139,13 +148,14 @@ fileprivate func decodeUndebuggableObject(name: SdValue.Name?, obj: bpx_sd_objec
 
 extension SectionData {
     func loadStructuredData() throws -> SdValue? {
+        seek(pos: 0);
         var value = bpx_sd_value_t();
         let err = bpx_sd_value_decode_section(inner, &value);
         if err != BPX_ERR_NONE {
             throw SdError.fromc(code: err)!;
         }
         let decoded = decodeValue(name: nil, value: value);
-        //TODO: Fix mem leak
+        bpx_sd_value_free(&value);
         return decoded;
     }
 }

@@ -7,6 +7,10 @@
 
 import Foundation
 
+struct SectionNotFound: Error {
+    let section: UInt8
+}
+
 struct Pointer {
     enum Address {
         case p8(UInt8)
@@ -46,7 +50,26 @@ struct Pointer {
         case bpxsd
     }
 
+    enum Value {
+        case bpxsd(SdValue)
+        case string(String)
+    }
+
     let address: Address;
     let type: EType;
     let section: UInt8;
+
+    func load(container: Container) throws -> Value {
+        if let section = container.getSectionByType(type: section) {
+            let data = try section.load();
+            data.seek(pos: address.as_u64());
+            switch type {
+            case .string:
+                return .string(try data.loadString());
+            case .bpxsd:
+                return .bpxsd(try data.loadStructuredData());
+            }
+        }
+        throw SectionNotFound(section: section);
+    }
 }

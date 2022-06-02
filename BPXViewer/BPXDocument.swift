@@ -93,6 +93,7 @@ struct BPXDocument: FileDocument {
     mutating func loadSectionAsSdValue(index: Int) -> SdValue? {
         do {
             let data = try container?.getSections()[index].load();
+            data?.seek(pos: 0);
             return try data?.loadStructuredData();
         } catch let err as CoreError {
             error = "An error has occured";

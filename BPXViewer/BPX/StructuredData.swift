@@ -147,8 +147,7 @@ fileprivate func decodeUndebuggableObject(name: SdValue.Name?, obj: bpx_sd_objec
 }
 
 extension SectionData {
-    func loadStructuredData() throws -> SdValue? {
-        seek(pos: 0);
+    func loadStructuredData() throws -> SdValue {
         var value = bpx_sd_value_t();
         let err = bpx_sd_value_decode_section(inner, &value);
         if err != BPX_ERR_NONE {
@@ -156,6 +155,6 @@ extension SectionData {
         }
         let decoded = decodeValue(name: nil, value: value);
         bpx_sd_value_free(&value);
-        return decoded;
+        return decoded!;
     }
 }

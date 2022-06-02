@@ -82,7 +82,7 @@ struct ContentView: View {
                 Button("Close") { sectionState.showHexView(data: nil) }.padding()
             }
             .sheet(isPresented: $sectionState.showDecodedView) {
-                DecodedView(value: $sectionState.decodedViewData)
+                DecodedView(value: $sectionState.decodedViewData, container: $document.container)
                     .frame(width: geo.size.width * 0.4).padding()
                 Button("Close") { sectionState.showDecodedView(value: nil) }.padding()
             }

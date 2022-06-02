@@ -47,8 +47,8 @@ struct SdValue: Identifiable {
                 str += String(format: "%@    %@", data.getTypeName(), data.toString());
             }
         }
-        if str.isEmpty {
-            str += "no name";
+        if data == nil && name != nil && children == nil {
+            str += ": Null";
         }
         return str;
     }

@@ -22,8 +22,11 @@ extension SectionData {
             }
             bytes.append(byte!);
             if byte! == 0 {
-                guard let val = String(data: bytes, encoding: String.Encoding.utf8) else { throw StringLoadError.invalidUtf8 };
-                return val;
+                let val = String(data: bytes, encoding: String.Encoding.utf8);
+                if val == nil {
+                    throw StringLoadError.invalidUtf8;
+                }
+                return val!;
             }
         }
         throw StringLoadError.truncation;

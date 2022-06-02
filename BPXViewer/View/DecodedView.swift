@@ -9,6 +9,7 @@ import SwiftUI
 
 struct StructView: View {
     let value: [String: Value];
+    @Binding var container: Container?;
 
     var body: some View {
         VStack {
@@ -16,7 +17,7 @@ struct StructView: View {
                 HStack {
                     Text(key + ": ")
                     Spacer()
-                    ValueView(value: value)
+                    ValueView(value: value, container: $container)
                 }
             }
         }
@@ -25,11 +26,12 @@ struct StructView: View {
 
 struct ArrayView: View {
     let value: [Value];
+    @Binding var container: Container?;
 
     var body: some View {
         List {
             ForEach(0..<value.count) { id in
-                ValueView(value: value[id])
+                ValueView(value: value[id], container: $container)
                     .blockView()
                     .frame(maxWidth: .infinity)
             }
@@ -40,26 +42,28 @@ struct ArrayView: View {
 
 struct ValueView: View {
     let value: Value;
+    @Binding var container: Container?;
 
     var body: some View {
         switch value {
         case .scalar(let scalar):
             Text(scalar.toString())
         case .structure(let dictionary):
-            StructView(value: dictionary)
+            StructView(value: dictionary, container: $container)
         case .array(let array):
-            ArrayView(value: array)
-        case .pointer(_):
-            Text("Pointers are not yet supported")
+            ArrayView(value: array, container: $container)
+        case .pointer(let ptr):
+            PointerView(pointer: ptr, container: container)
         }
     }
 }
 
 struct DecodedView: View {
     @Binding var value: Value;
+    @Binding var container: Container?;
 
     var body: some View {
-        ValueView(value: value)
+        ValueView(value: value, container: $container)
     }
 }
 
@@ -72,6 +76,6 @@ struct DecodedView_Previews: PreviewProvider {
                     "Field2": .scalar(.bool(false))
                 ])
             ])
-        ))
+        ), container: .constant(nil))
     }
 }

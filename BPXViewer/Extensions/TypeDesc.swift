@@ -176,22 +176,26 @@ struct TypeDesc: Codable {
                 return .scalar(.string(flagStr));
             case .stringPtr, .bpxsdPtr:
                 buf.seek(pos: baseOffset + Int(offset));
+                let value: Pointer.Address;
                 switch size {
                 case 1:
                     guard let v = buf.readUInt8() else { return nil }
-                    return .scalar(.ptr8(v));
+                    value = .p8(v);
                 case 2:
                     guard let v = buf.readUInt16() else { return nil }
-                    return .scalar(.ptr16(v));
+                    value = .p16(v);
                 case 4:
                     guard let v = buf.readUInt32() else { return nil }
-                    return .scalar(.ptr32(v));
+                    value = .p32(v);
                 case 8:
                     guard let v = buf.readUInt64() else { return nil }
-                    return .scalar(.ptr64(v));
+                    value = .p64(v);
                 default:
                     return nil;
                 }
+                guard let section = section else { return nil }
+                let ty = (type == FieldType.stringPtr) ? Pointer.EType.string : Pointer.EType.bpxsd;
+                return .pointer(Pointer(address: value, type: ty, section: section));
             }
         }
     }

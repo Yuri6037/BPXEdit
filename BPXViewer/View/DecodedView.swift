@@ -49,6 +49,8 @@ struct ValueView: View {
             StructView(value: dictionary)
         case .array(let array):
             ArrayView(value: array)
+        case .pointer(_):
+            Text("Pointers are not yet supported")
         }
     }
 }

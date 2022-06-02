@@ -7,6 +7,50 @@
 
 import Foundation
 
+struct Pointer {
+    enum Address {
+        case p8(UInt8)
+        case p16(UInt16)
+        case p32(UInt32)
+        case p64(UInt64)
+
+        func toString() -> String {
+            switch self {
+            case .p8(let v):
+                return String(format: "0x%02X", v);
+            case .p16(let v):
+                return String(format: "0x%04X", v);
+            case .p32(let v):
+                return String(format: "0x%08X", v);
+            case .p64(let v):
+                return String(format: "0x%16X", v);
+            }
+        }
+
+        func as_u64() -> UInt64 {
+            switch self {
+            case .p8(let v):
+                return UInt64(v)
+            case .p16(let v):
+                return UInt64(v)
+            case .p32(let v):
+                return UInt64(v)
+            case .p64(let v):
+                return UInt64(v)
+            }
+        }
+    }
+
+    enum EType {
+        case string
+        case bpxsd
+    }
+
+    let address: Address;
+    let type: EType;
+    let section: UInt8;
+}
+
 enum Value {
     enum Scalar {
         case u8(UInt8)
@@ -21,10 +65,6 @@ enum Value {
         case f32(Float32)
         case f64(Float64)
         case string(String)
-        case ptr8(UInt8)
-        case ptr16(UInt16)
-        case ptr32(UInt32)
-        case ptr64(UInt64)
 
         func toString() -> String {
             switch self {
@@ -52,14 +92,6 @@ enum Value {
                 return v.formatted()
             case .string(let v):
                 return v;
-            case .ptr8(let v):
-                return String(format: "0x%02X", v);
-            case .ptr16(let v):
-                return String(format: "0x%04X", v);
-            case .ptr32(let v):
-                return String(format: "0x%08X", v);
-            case .ptr64(let v):
-                return String(format: "0x%16X", v);
             }
         }
 
@@ -89,8 +121,6 @@ enum Value {
                 return "Double";
             case .string(_):
                 return "String";
-            default:
-                return "Pointer";
             }
         }
     }
@@ -98,4 +128,5 @@ enum Value {
     case scalar(Scalar)
     case structure([String: Value])
     case array([Value])
+    case pointer(Pointer)
 }

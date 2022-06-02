@@ -42,4 +42,13 @@ public class Container {
     public func getMainHeader() -> bpx_main_header_t {
         return header;
     }
+
+    public func getSectionByType(type: UInt8) -> Section? {
+        for section in sections {
+            if section.header.ty == type {
+                return section;
+            }
+        }
+        return nil;
+    }
 }

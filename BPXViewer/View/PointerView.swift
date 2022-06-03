@@ -16,7 +16,7 @@ fileprivate struct HackBrokenViewBuilder: View {
             case .bpxsd(let v):
                 SdView(value: .constant(v))
             case .string(let v):
-                Text(v)
+                Text(v).textSelection(.enabled)
             }
         } else {
             Text("Loading...")
@@ -76,7 +76,7 @@ struct PopoverButton<C: View>: View {
 
     var body: some View {
         Button(action: { showPopover = !showPopover; action(showPopover); }) {
-            Text(text)
+            Text(text).textSelection(.enabled)
         }
         .popover(isPresented: $showPopover, content: content)
     }

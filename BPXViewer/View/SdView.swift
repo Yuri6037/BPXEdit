@@ -34,6 +34,7 @@ struct SdView: View {
                 HStack {
                     Image(systemName: getIconName())
                     Text(value.description())
+                        .textSelection(.enabled)
                 }
                 .padding(.leading, indentation)
                 VStack(alignment: .leading) {
@@ -46,6 +47,7 @@ struct SdView: View {
             HStack {
                 Image(systemName: getIconName())
                 Text(value.description())
+                    .textSelection(.enabled)
             }
             .padding(.leading, indentation)
         }

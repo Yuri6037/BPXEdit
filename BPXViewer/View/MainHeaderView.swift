@@ -31,26 +31,31 @@ struct MainHeaderView: View {
                     Text("Version: ").bold()
                     Spacer()
                     Text("\(header.version)")
+                        .textSelection(.enabled)
                 }
                 HStack {
                     Text("Type: ").bold()
                     Spacer()
                     Text(getType())
+                        .textSelection(.enabled)
                 }
                 HStack {
                     Text("Checksum: ").bold()
                     Spacer()
                     Text(String(format: "%X", header.chksum))
+                        .textSelection(.enabled)
                 }
                 HStack {
                     Text("Recorded file size: ").bold()
                     Spacer()
                     Text("\(header.file_size)")
+                        .textSelection(.enabled)
                 }
                 HStack {
                     Text("Number of sections: ").bold()
                     Spacer()
                     Text("\(header.section_num)")
+                        .textSelection(.enabled)
                 }
             } else {
                 Text("No container loaded.")

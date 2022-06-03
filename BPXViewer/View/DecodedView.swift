@@ -47,7 +47,7 @@ struct ValueView: View {
     var body: some View {
         switch value {
         case .scalar(let scalar):
-            Text(scalar.toString())
+            Text(scalar.toString()).textSelection(.enabled)
         case .structure(let dictionary):
             StructView(value: dictionary, container: $container)
         case .array(let array):

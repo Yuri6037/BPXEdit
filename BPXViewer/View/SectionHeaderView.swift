@@ -40,36 +40,43 @@ struct SectionHeaderView: View {
                 Text("Type: ").bold()
                 Spacer()
                 Text("\(getType())")
+                    .textSelection(.enabled)
             }
             HStack {
                 Text("Handle: ").bold()
                 Spacer()
                 Text("\(section.handle)")
+                    .textSelection(.enabled)
             }
             HStack {
                 Text("Pointer: ").bold()
                 Spacer()
                 Text("\(getPointer())")
+                    .textSelection(.enabled)
             }
             HStack {
                 Text("Size: ").bold()
                 Spacer()
                 Text("\(section.header.size)")
+                    .textSelection(.enabled)
             }
             HStack {
                 Text("Size (after compression): ").bold()
                 Spacer()
                 Text("\(section.header.csize)")
+                    .textSelection(.enabled)
             }
             HStack {
                 Text("Checksum: ").bold()
                 Spacer()
                 Text(String(format: "%X", section.header.chksum))
+                    .textSelection(.enabled)
             }
             HStack {
                 Text("Flags: ").bold()
                 Spacer()
                 Text("\(getFlags())")
+                    .textSelection(.enabled)
             }
         }
     }

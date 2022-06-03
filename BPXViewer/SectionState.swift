@@ -7,11 +7,16 @@
 
 import Foundation
 
+enum ViewType {
+    case closed
+    case hex
+    case decoded
+    case bpxsd
+    case strings
+}
+
 class SectionState: ObservableObject {
-    @Published var showHexView: Bool = false;
-    @Published var showDecodedView: Bool = false;
-    @Published var showStringView: Bool = false;
-    @Published var showSdView: Bool = false;
+    @Published var viewType: ViewType = .closed;
     @Published var stringViewData: [String] = [];
     @Published var hexViewData: [uint8] = [];
     @Published var decodedViewData: Value = .scalar(.u8(0)); //Just a default value so that we don't crash DecodedView anymore.
@@ -19,37 +24,37 @@ class SectionState: ObservableObject {
 
     func showSdView(value: SdValue?) {
         if let value = value {
-            self.showSdView = true;
             self.sdViewData = value;
+            self.viewType = .bpxsd;
         } else {
-            self.showSdView = false;
+            self.viewType = .closed;
         }
     }
 
     func showStringView(value: [String]?) {
         if let value = value {
-            self.showStringView = true;
             self.stringViewData = value;
+            self.viewType = .strings;
         } else {
-            self.showStringView = false;
+            self.viewType = .closed;
         }
     }
 
     func showHexView(data: [uint8]?) {
         if let data = data {
-            self.showHexView = true;
             self.hexViewData = data;
+            self.viewType = .hex;
         } else {
-            self.showHexView = false;
+            self.viewType = .closed;
         }
     }
 
     func showDecodedView(value: Value?) {
         if let value = value {
-            self.showDecodedView = true;
             self.decodedViewData = value;
+            self.viewType = .decoded;
         } else {
-            self.showDecodedView = false;
+            self.viewType = .closed;
         }
     }
 }

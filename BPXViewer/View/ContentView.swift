@@ -34,72 +34,56 @@ struct ContentView: View {
             VStack {
                 HStack {
                     VStack {
-                        MainHeaderView(header: document.container?.getMainHeader())
-                        VStack {
-                            Text("BPX Type Ext").bold()
-                            HStack {
-                                ToolButton(icon: "hexagon", text: "Hex View") {
-                                    loadSectionHex(-1)
-                                }
-                                if document.isSectionDecodable(index: -1) {
-                                    ToolButton(icon: "doc", text: "Data View") {
-                                        decodeSection(-1)
+                        HStack {
+                            MainHeaderView(header: document.container?.getMainHeader())
+                            VStack {
+                                Text("BPX Type Ext").bold()
+                                HStack {
+                                    ToolButton(icon: "hexagon", text: "Hex View") {
+                                        loadSectionHex(-1)
+                                    }
+                                    if document.isSectionDecodable(index: -1) {
+                                        ToolButton(icon: "doc", text: "Data View") {
+                                            decodeSection(-1)
+                                        }
                                     }
                                 }
                             }
+                            .blockView()
                         }
-                        .blockView()
-                    }
-                    List {
-                        if let container = document.container {
-                            ForEach(container.getSections()) { section in
-                                SelectableItem(key: section.index, selected: $selected) {
-                                    SectionHeaderView(section: section)
-                                    HStack {
-                                        ToolButton(icon: "hexagon", text: "Hex View") {
-                                            loadSectionHex(section.index)
-                                        }
-                                        if document.isSectionDecodable(index: section.index) {
-                                            ToolButton(icon: "doc", text: "Data View") {
-                                                decodeSection(section.index)
+                        List {
+                            if let container = document.container {
+                                ForEach(container.getSections()) { section in
+                                    SelectableItem(key: section.index, selected: $selected) {
+                                        SectionHeaderView(section: section)
+                                        HStack {
+                                            ToolButton(icon: "hexagon", text: "Hex View") {
+                                                loadSectionHex(section.index)
+                                            }
+                                            if document.isSectionDecodable(index: section.index) {
+                                                ToolButton(icon: "doc", text: "Data View") {
+                                                    decodeSection(section.index)
+                                                }
+                                            }
+                                            ToolButton(icon: "doc.text", text: "Strings View") {
+                                                loadSectionStrings(section.index)
+                                            }
+                                            ToolButton(icon: "doc.zipper", text: "BPXSD View") {
+                                                loadSectionSd(section.index)
                                             }
                                         }
-                                        ToolButton(icon: "doc.text", text: "Strings View") {
-                                            loadSectionStrings(section.index)
-                                        }
-                                        ToolButton(icon: "doc.zipper", text: "BPXSD View") {
-                                            loadSectionSd(section.index)
-                                        }
                                     }
                                 }
                             }
                         }
+                        .padding()
                     }
+                    //Main view
+                    MainSectionView(document: $document)
+                        .environmentObject(sectionState)
+                        .frame(width: geo.size.width * 0.55)
+                        .padding()
                 }
-            }
-            .sheet(isPresented: $sectionState.showHexView) {
-                HexViewWrapper(data: $sectionState.hexViewData)
-                    .frame(width: geo.size.width * 0.7, height: geo.size.height * 0.6).padding()
-                Button("Close") { sectionState.showHexView(data: nil) }.padding()
-            }
-            .sheet(isPresented: $sectionState.showDecodedView) {
-                DecodedView(value: $sectionState.decodedViewData, container: $document.container)
-                    .frame(width: geo.size.width * 0.4).padding()
-                Button("Close") { sectionState.showDecodedView(value: nil) }.padding()
-            }
-            .sheet(isPresented: $sectionState.showStringView) {
-                StringView(value: $sectionState.stringViewData)
-                    .frame(width: geo.size.width * 0.4)
-                    .frame(minHeight: 200).padding()
-                Button("Close") { sectionState.showStringView(value: nil) }.padding()
-            }
-            .sheet(isPresented: $sectionState.showSdView) {
-                ScrollView {
-                    SdView(value: $sectionState.sdViewData)
-                }
-                .frame(width: geo.size.width * 0.4)
-                .frame(minHeight: 200).padding()
-                Button("Close") { sectionState.showSdView(value: nil) }.padding()
             }
         }
     }

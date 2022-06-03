@@ -64,7 +64,7 @@ struct SectionHeaderView: View {
             HStack {
                 Text("Checksum: ").bold()
                 Spacer()
-                Text("\(section.header.chksum)")
+                Text(String(format: "%X", section.header.chksum))
             }
             HStack {
                 Text("Flags: ").bold()

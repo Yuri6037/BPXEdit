@@ -40,7 +40,7 @@ struct MainHeaderView: View {
                 HStack {
                     Text("Checksum: ").bold()
                     Spacer()
-                    Text("\(header.chksum)")
+                    Text(String(format: "%X", header.chksum))
                 }
                 HStack {
                     Text("Recorded file size: ").bold()

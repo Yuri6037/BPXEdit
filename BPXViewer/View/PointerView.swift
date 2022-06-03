@@ -51,8 +51,7 @@ struct PointerView: View {
             let val = try pointer.load(container: container!);
             value = val;
         } catch {
-            print(error.localizedDescription);
-            self.error = error.localizedDescription;
+            self.error = "Failed to load pointer: " + String(describing: error);
         }
     }
 

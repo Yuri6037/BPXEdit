@@ -21,7 +21,8 @@ struct BPXViewerApp: App {
     var body: some Scene {
         DocumentGroup(viewing: BPXDocument.self) { file in
             ContentView(document: file.$document)
-                .alert(item: $error) { error in Alert(title: Text("Error importing bundle"), message: Text(error)) }
+                .withErrorHandler()
+                //.alert(item: $error) { error in Alert(title: Text("Error importing bundle"), message: Text(error)) }
         }
         .commands {
             CommandGroup(after: .newItem) {

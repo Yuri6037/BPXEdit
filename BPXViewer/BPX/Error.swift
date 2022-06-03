@@ -13,7 +13,18 @@ public enum BpxcError: Error {
     case fileCreate
 }
 
-extension BpxcError {
+extension BpxcError: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .invalidPath:
+            return "Invalid path.";
+        case .fileOpen:
+            return "Failed to open file.";
+        case .fileCreate:
+            return "Failed to create file.";
+        }
+    }
+
     public static func fromc(code: bpx_error_t) -> BpxcError? {
         switch code {
         case UInt32(BPX_ERR_INVALID_PATH):
@@ -26,7 +37,6 @@ extension BpxcError {
             return nil;
         }
     }
-
 }
 
 public enum CoreError: Error {
@@ -41,7 +51,30 @@ public enum CoreError: Error {
     case bpxc(error: BpxcError)
 }
 
-extension CoreError {
+extension CoreError: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .checksum:
+            return "BPX checksum error.";
+        case .io:
+            return "IO error.";
+        case .badVersion:
+            return "Unrecognized BPX version.";
+        case .badSignature:
+            return "Unrecognized file signature.";
+        case .capacity:
+            return "Section capacity exceeded.";
+        case .inflate(let error):
+            return "BPX inflate error: " + error.description + ".";
+        case .deflate(let error):
+            return "BPX deflate error: " + error.description + ".";
+        case .open(let error):
+            return "Failed to open section: " + error.description + ".";
+        case .bpxc(let error):
+            return "Low-level bpxc error: " + error.description + ".";
+        }
+    }
+
     public static func fromc(code: bpx_error_t) -> CoreError? {
         switch code {
         case UInt32(BPX_ERR_CORE_CHKSUM):
@@ -80,7 +113,22 @@ public enum InflateError: Error {
     case io
 }
 
-extension InflateError {
+extension InflateError: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .memory:
+            return "Memory allocation failure.";
+        case .unsupported:
+            return "Unsupported operation.";
+        case .data:
+            return "Data error.";
+        case .unknown:
+            return "Unknown error.";
+        case .io:
+            return "IO error.";
+        }
+    }
+    
     public static func fromc(code: bpx_error_t) -> InflateError? {
         switch code {
         case UInt32(BPX_ERR_INFLATE_MEMOR):
@@ -107,7 +155,22 @@ public enum DeflateError: Error {
     case io
 }
 
-extension DeflateError {
+extension DeflateError: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .memory:
+            return "Memory allocation failure.";
+        case .unsupported:
+            return "Unsupported operation.";
+        case .data:
+            return "Data error.";
+        case .unknown:
+            return "Unknown error.";
+        case .io:
+            return "IO error.";
+        }
+    }
+
     public static func fromc(code: bpx_error_t) -> DeflateError? {
         switch code {
         case UInt32(BPX_ERR_DEFLATE_MEMORY):
@@ -131,7 +194,16 @@ public enum OpenError: Error {
     case sectionNotLoaded
 }
 
-extension OpenError {
+extension OpenError: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .sectionInUse:
+            return "The section is already in use.";
+        case .sectionNotLoaded:
+            return "The section is not loaded.";
+        }
+    }
+
     public static func fromc(code: bpx_error_t) -> OpenError? {
         switch code {
         case UInt32(BPX_ERR_OPEN_SECTION_IN_USE):
@@ -153,7 +225,24 @@ public enum SdError: Error {
     case notAnObject
 }
 
-extension SdError {
+extension SdError: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .io:
+            return "IO error";
+        case .truncation:
+            return "Data is truncated.";
+        case .badTypeCode:
+            return "Unrecognized type code.";
+        case .utf8:
+            return "Invalid UTF-8 string.";
+        case .capacityExceeded:
+            return "Capacity exceeded.";
+        case .notAnObject:
+            return "Value is not an object.";
+        }
+    }
+
     public static func fromc(code: bpx_error_t) -> SdError? {
         switch code {
         case UInt32(BPX_ERR_SD_IO):

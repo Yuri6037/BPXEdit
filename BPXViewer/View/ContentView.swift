@@ -11,21 +11,22 @@ struct ContentView: View {
     @Binding var document: BPXDocument
     @State var selected = -1;
     @StateObject var sectionState = SectionState();
+    @EnvironmentObject var errorHost: ErrorHost;
 
     func loadSectionHex(_ index: Int) {
-        sectionState.showHexView(data: document.loadSectionAsData(index: index));
+        sectionState.showHexView(data: document.loadSectionAsData(errorHost, index: index));
     }
 
     func decodeSection(_ index: Int) {
-        sectionState.showDecodedView(value: document.decodeSection(index: index));
+        sectionState.showDecodedView(value: document.decodeSection(errorHost, index: index));
     }
 
     func loadSectionStrings(_ index: Int) {
-        sectionState.showStringView(value: document.loadSectionAsStrings(index: index));
+        sectionState.showStringView(value: document.loadSectionAsStrings(errorHost, index: index));
     }
 
     func loadSectionSd(_ index: Int) {
-        sectionState.showSdView(value: document.loadSectionAsSdValue(index: index));
+        sectionState.showSdView(value: document.loadSectionAsSdValue(errorHost, index: index));
     }
 
     var body: some View {
@@ -100,9 +101,20 @@ struct ContentView: View {
                 .frame(minHeight: 200).padding()
                 Button("Close") { sectionState.showSdView(value: nil) }.padding()
             }
-            .alert("Error", isPresented: .constant(document.error != nil)) {
-                Text(document.error ?? "")
-            }
+            //.alert(isPresented: .constant(document.error != nil), error: $document.error, actions: { _ in
+                //Button("OK") {
+                    // whatever can be done here?! It's just a fucking error message box what the fuck is that supposed to do!!!???
+                //}
+            //}) { _ in /* Unfortunatly it is impossible to use the passed parameter because that parameter is a binding which prevents use of '?' or '??' operator which is necessary in this case because Text cannot display nil... */
+              //  Text(document.error?.message ?? "")
+            //}
+            /*.alert(item: $document.error) { error in
+                Alert(title: Text(error.title), message: Text(error.message))
+            }*/
+            /*.alert(document.error?.title ?? "Error", isPresented: .constant(document.error != nil)) {
+                //Unfortunatly SwiftUI refuses at all costs to display errors so this message will unfortunatly never be displayed!!
+                Text(document.error?.message ?? "")
+            }*/
         }
     }
 }

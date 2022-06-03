@@ -24,6 +24,7 @@
 		DA560CF72848ECCF0057AB1A /* Pointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA560CF62848ECCF0057AB1A /* Pointer.swift */; };
 		DA689BF62844C46B00A2EF1B /* StringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA689BF52844C46B00A2EF1B /* StringView.swift */; };
 		DA689BF82844ED8900A2EF1B /* StructuredData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA689BF72844ED8900A2EF1B /* StructuredData.swift */; };
+		DA737EFF2849FF0C003143B4 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA737EFE2849FF0C003143B4 /* ErrorHandler.swift */; };
 		DA90C917283BB9AD0091DE15 /* BPXViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90C916283BB9AD0091DE15 /* BPXViewerApp.swift */; };
 		DA90C919283BB9AD0091DE15 /* BPXDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90C918283BB9AD0091DE15 /* BPXDocument.swift */; };
 		DA90C91B283BB9AD0091DE15 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90C91A283BB9AD0091DE15 /* ContentView.swift */; };
@@ -62,6 +63,7 @@
 		DA560CF62848ECCF0057AB1A /* Pointer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pointer.swift; sourceTree = "<group>"; };
 		DA689BF52844C46B00A2EF1B /* StringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringView.swift; sourceTree = "<group>"; };
 		DA689BF72844ED8900A2EF1B /* StructuredData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructuredData.swift; sourceTree = "<group>"; };
+		DA737EFE2849FF0C003143B4 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		DA90C913283BB9AD0091DE15 /* BPXViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BPXViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA90C916283BB9AD0091DE15 /* BPXViewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPXViewerApp.swift; sourceTree = "<group>"; };
 		DA90C918283BB9AD0091DE15 /* BPXDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPXDocument.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				DA689BF52844C46B00A2EF1B /* StringView.swift */,
 				DA1779F72846519E00F3EBC5 /* SdView.swift */,
 				DA560CF42848BD790057AB1A /* PointerView.swift */,
+				DA737EFE2849FF0C003143B4 /* ErrorHandler.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				DA99F38B283FE64E007BFEC3 /* MainHeaderView.swift in Sources */,
 				DA4903752843E78A006C9169 /* Loader.swift in Sources */,
 				DA49036C2843B436006C9169 /* ToolButton.swift in Sources */,
+				DA737EFF2849FF0C003143B4 /* ErrorHandler.swift in Sources */,
 				DA4903732843E739006C9169 /* TypeDesc.swift in Sources */,
 				DA4903772843E911006C9169 /* Strings.swift in Sources */,
 				DAB22D89284172CF005C8741 /* DecodedView.swift in Sources */,

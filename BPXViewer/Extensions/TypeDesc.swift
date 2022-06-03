@@ -7,6 +7,18 @@
 
 import Foundation
 
+func parseBitflag(flags: [String: UInt64], field: UInt64) -> String {
+    var flagStr = "";
+    for (name, mask) in flags {
+        if field & mask != 0 {
+            flagStr += " | " + name;
+        }
+    }
+    //Potentially super slow code but no other options despite my string to obviously be always ASCII characters, swift refuses at all costs to use an int directly! Let it be a good old Theta(n).
+    flagStr = String(flagStr[flagStr.index(flagStr.startIndex, offsetBy: 2)...]);
+    return flagStr;
+}
+
 struct TypeDesc: Codable {
     struct TypeDecl: Codable {
         enum FieldType: String, Codable {
@@ -146,34 +158,30 @@ struct TypeDesc: Codable {
                 return .array(structs);
             case .bitflags:
                 buf.seek(pos: baseOffset + Int(offset));
-                let bits: Int;
+                let bits: UInt64;
                 switch size {
                 case 1:
                     guard let v = buf.readUInt8() else { return nil }
-                    bits = Int(v);
+                    bits = UInt64(v);
                 case 2:
                     guard let v = buf.readUInt16() else { return nil }
-                    bits = Int(v);
+                    bits = UInt64(v);
                 case 4:
                     guard let v = buf.readUInt32() else { return nil }
-                    bits = Int(v);
+                    bits = UInt64(v);
                 case 8:
                     guard let v = buf.readUInt64() else { return nil }
-                    bits = Int(v);
+                    bits = UInt64(v);
                 default:
                     return nil;
                 }
                 guard let var1 = item, let flags = types[var1] else { return nil }
-                var flagStr = "";
+                var flags1: [String: UInt64] = [:];
                 for (name, mask) in flags {
                     guard let mask = mask.asInt() else { return nil }
-                    if bits & mask != 0 {
-                        flagStr += " | " + name;
-                    }
+                    flags1[name] = UInt64(mask);
                 }
-                //Potentially super slow code but no other options despite my string to obviously be always ASCII characters, swift refuses at all costs to use an int directly! Let it be a good old Theta(n).
-                flagStr = String(flagStr[flagStr.index(flagStr.startIndex, offsetBy: 2)...]);
-                return .scalar(.string(flagStr));
+                return .scalar(.string(parseBitflag(flags: flags1, field: bits)))
             case .stringPtr, .bpxsdPtr:
                 buf.seek(pos: baseOffset + Int(offset));
                 let value: Pointer.Address;

@@ -101,20 +101,6 @@ struct ContentView: View {
                 .frame(minHeight: 200).padding()
                 Button("Close") { sectionState.showSdView(value: nil) }.padding()
             }
-            //.alert(isPresented: .constant(document.error != nil), error: $document.error, actions: { _ in
-                //Button("OK") {
-                    // whatever can be done here?! It's just a fucking error message box what the fuck is that supposed to do!!!???
-                //}
-            //}) { _ in /* Unfortunatly it is impossible to use the passed parameter because that parameter is a binding which prevents use of '?' or '??' operator which is necessary in this case because Text cannot display nil... */
-              //  Text(document.error?.message ?? "")
-            //}
-            /*.alert(item: $document.error) { error in
-                Alert(title: Text(error.title), message: Text(error.message))
-            }*/
-            /*.alert(document.error?.title ?? "Error", isPresented: .constant(document.error != nil)) {
-                //Unfortunatly SwiftUI refuses at all costs to display errors so this message will unfortunatly never be displayed!!
-                Text(document.error?.message ?? "")
-            }*/
         }
     }
 }

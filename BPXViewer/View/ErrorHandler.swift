@@ -11,14 +11,16 @@ import SwiftUI
 struct ErrorInfo: LocalizedError {
     let title: String;
     let message: String;
+    let context: String;
 
     var errorDescription: String? {
         return title;
     }
 
-    init(title: String = "BPX Error", message: String) {
+    init(title: String = "BPX Error", message: String, context: String = "loader") {
         self.title = title;
         self.message = message;
+        self.context = context;
     }
 }
 
@@ -57,7 +59,7 @@ fileprivate struct ErrorHandlerViewModifier: ViewModifier {
                 errorHost.close()
             }
         }) { error in
-            Text(error.message)
+            Text("Error in " + error.context + ": " + error.message)
         }
     }
 }

@@ -50,7 +50,7 @@ struct BPXDocument: FileDocument {
             let data = try container?.getSections()[index].load();
             return data?.loadInMemory();
         } catch {
-            errorHost.spawn(ErrorInfo(message: String(describing: error)));
+            errorHost.spawn(ErrorInfo(message: String(describing: error), context: "Hex View"));
             return nil;
         }
     }
@@ -66,7 +66,7 @@ struct BPXDocument: FileDocument {
             decoded = BundleManager.instance.getBundle()?.typeDescs[index]?.decode(buffer: data);
         }
         if decoded == nil {
-            errorHost.spawn(ErrorInfo(title: "Decode Error", message: "Unable to decode any object or array in the section."));
+            errorHost.spawn(ErrorInfo(title: "Decode Error", message: "Unable to decode any object or array in the section.", context: "Data View"));
         }
         return decoded;
     }
@@ -85,7 +85,7 @@ struct BPXDocument: FileDocument {
             let data = try container?.getSections()[index].load();
             return data?.loadStrings();
         } catch {
-            errorHost.spawn(ErrorInfo(message: String(describing: error)));
+            errorHost.spawn(ErrorInfo(message: String(describing: error), context: "Strings View"));
             return nil;
         }
     }
@@ -96,7 +96,7 @@ struct BPXDocument: FileDocument {
             data?.seek(pos: 0);
             return try data?.loadStructuredData();
         } catch {
-            errorHost.spawn(ErrorInfo(message: String(describing: error)));
+            errorHost.spawn(ErrorInfo(message: String(describing: error), context: "BPXSD View"));
             return nil;
         }
     }

@@ -120,22 +120,6 @@ class BundleManager {
         }
     }
 
-    func importBundle() throws {
-        let dialog = NSOpenPanel();
-        dialog.title = "Choose a bundle to import.";
-        dialog.showsResizeIndicator = true;
-        dialog.showsHiddenFiles = false;
-        dialog.canChooseDirectories = false;
-        dialog.canCreateDirectories = false;
-        dialog.allowsMultipleSelection = false;
-        dialog.allowedContentTypes = [UTType(filenameExtension: "bundle", conformingTo: .package)!];
-        if (dialog.runModal() == NSApplication.ModalResponse.OK) {
-            let result = dialog.url?.path;
-            let bundle = try loadBundle(path: result!);
-            map[bundle.main.code] = bundle;
-        }
-    }
-
     func bindBundle(code: UInt8) {
         bundle = map[code];
     }

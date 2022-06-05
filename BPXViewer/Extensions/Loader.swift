@@ -14,7 +14,7 @@ fileprivate func tomlLoad<T: Codable>(path: String) throws -> T {
     return obj;
 }
 
-func loadBundle(path: String) throws -> Bundle {
+func loadBundle(path: String, id: UUID = UUID(), date: Date = Date.now) throws -> Bundle {
     let mainFile = path + "/main.toml";
     let main = try tomlLoad(path: mainFile) as BundleMain; //Oh my... Not even able to directly instantiate a generic function! WTF!? Even rust can do this!!
     var typeDescs: [Int: TypeDesc] = [:]
@@ -26,5 +26,5 @@ func loadBundle(path: String) throws -> Bundle {
             typeDescs[Int(section.code)] = try tomlLoad(path: path + "/" + filename);
         }
     }
-    return Bundle(main: main, typeDescs: typeDescs);
+    return Bundle(id: id, date: date, main: main, typeDescs: typeDescs);
 }

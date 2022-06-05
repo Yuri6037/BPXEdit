@@ -7,34 +7,23 @@
 
 import SwiftUI
 
-extension String: Identifiable {
-    public typealias ID = Int
-    public var id: Int {
-        return hash
-    }
-}
-
 @main
 struct BPXViewerApp: App {
-    @State var error: String?;
+    init() {
+        if BundleManager.instance.isErrored() {
+            openBundleManagerWindow()
+        }
+    }
 
     var body: some Scene {
         DocumentGroup(viewing: BPXDocument.self) { file in
             ContentView(document: file.$document)
                 .withErrorHandler()
-                //.alert(item: $error) { error in Alert(title: Text("Error importing bundle"), message: Text(error)) }
         }
         .commands {
             CommandGroup(after: .newItem) {
                 Divider()
-                Button(action: {
-                    do {
-                        try BundleManager.instance.importBundle()
-                    } catch {
-                        self.error = error.localizedDescription;
-                    }
-                }) { Text("Import type description bundle") }
-                Button(action: {}) { Text("Type description bundles") }
+                Button(action: { openBundleManagerWindow() }) { Text("Type description bundles") }
             }
         }
     }

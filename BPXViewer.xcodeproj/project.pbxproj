@@ -14,6 +14,8 @@
 		DA0DCF94283E4D3300904DA1 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0DCF93283E4D3300904DA1 /* Section.swift */; };
 		DA0DCFBA283E625400904DA1 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DCFB9283E621300904DA1 /* libz.tbd */; };
 		DA1779F82846519E00F3EBC5 /* SdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1779F72846519E00F3EBC5 /* SdView.swift */; };
+		DA245EA9284BB55C00465539 /* WindowReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA245EA8284BB55C00465539 /* WindowReader.swift */; };
+		DA2B4A40284CB72A00EF40D8 /* Hacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2B4A3F284CB72A00EF40D8 /* Hacks.swift */; };
 		DA49036C2843B436006C9169 /* ToolButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA49036B2843B436006C9169 /* ToolButton.swift */; };
 		DA49036E2843E085006C9169 /* BlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA49036D2843E085006C9169 /* BlockView.swift */; };
 		DA4903712843E6D8006C9169 /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4903702843E6D8006C9169 /* Value.swift */; };
@@ -41,6 +43,7 @@
 		DAB22D8728412255005C8741 /* ByteBuf.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB22D8628412255005C8741 /* ByteBuf.swift */; };
 		DAB22D89284172CF005C8741 /* DecodedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB22D88284172CF005C8741 /* DecodedView.swift */; };
 		DACF4B1F28423ABA008AA6A3 /* SectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACF4B1E28423ABA008AA6A3 /* SectionState.swift */; };
+		DADF6379284AADC60028D6A4 /* BundleManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADF6378284AADC60028D6A4 /* BundleManagerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +57,8 @@
 		DA0DCFB9283E621300904DA1 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		DA0DCFBC283E639F00904DA1 /* liblzma.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = liblzma.5.tbd; path = usr/lib/liblzma.5.tbd; sourceTree = SDKROOT; };
 		DA1779F72846519E00F3EBC5 /* SdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SdView.swift; sourceTree = "<group>"; };
+		DA245EA8284BB55C00465539 /* WindowReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowReader.swift; sourceTree = "<group>"; };
+		DA2B4A3F284CB72A00EF40D8 /* Hacks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hacks.swift; sourceTree = "<group>"; };
 		DA49036B2843B436006C9169 /* ToolButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolButton.swift; sourceTree = "<group>"; };
 		DA49036D2843E085006C9169 /* BlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
 		DA4903702843E6D8006C9169 /* Value.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
@@ -83,6 +88,7 @@
 		DAB22D8628412255005C8741 /* ByteBuf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteBuf.swift; sourceTree = "<group>"; };
 		DAB22D88284172CF005C8741 /* DecodedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodedView.swift; sourceTree = "<group>"; };
 		DACF4B1E28423ABA008AA6A3 /* SectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionState.swift; sourceTree = "<group>"; };
+		DADF6378284AADC60028D6A4 /* BundleManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleManagerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +157,8 @@
 				DA560CF42848BD790057AB1A /* PointerView.swift */,
 				DA737EFE2849FF0C003143B4 /* ErrorHandler.swift */,
 				DA737F02284A43F1003143B4 /* MainSectionView.swift */,
+				DADF6378284AADC60028D6A4 /* BundleManagerView.swift */,
+				DA245EA8284BB55C00465539 /* WindowReader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -192,6 +200,7 @@
 				DA90C916283BB9AD0091DE15 /* BPXViewerApp.swift */,
 				DACF4B1E28423ABA008AA6A3 /* SectionState.swift */,
 				DA90C918283BB9AD0091DE15 /* BPXDocument.swift */,
+				DA2B4A3F284CB72A00EF40D8 /* Hacks.swift */,
 				DA90C91C283BB9AE0091DE15 /* Assets.xcassets */,
 				DA90C921283BB9AE0091DE15 /* Info.plist */,
 				DA90C922283BB9AE0091DE15 /* BPXViewer.entitlements */,
@@ -292,10 +301,13 @@
 				DA90C917283BB9AD0091DE15 /* BPXViewerApp.swift in Sources */,
 				DA99F389283FA1DF007BFEC3 /* SelectableItem.swift in Sources */,
 				DA0DCF8D283D36B900904DA1 /* Container.swift in Sources */,
+				DADF6379284AADC60028D6A4 /* BundleManagerView.swift in Sources */,
 				DA689BF62844C46B00A2EF1B /* StringView.swift in Sources */,
 				DA4903712843E6D8006C9169 /* Value.swift in Sources */,
 				DA99F38B283FE64E007BFEC3 /* MainHeaderView.swift in Sources */,
+				DA245EA9284BB55C00465539 /* WindowReader.swift in Sources */,
 				DA4903752843E78A006C9169 /* Loader.swift in Sources */,
+				DA2B4A40284CB72A00EF40D8 /* Hacks.swift in Sources */,
 				DA49036C2843B436006C9169 /* ToolButton.swift in Sources */,
 				DA737EFF2849FF0C003143B4 /* ErrorHandler.swift in Sources */,
 				DA4903732843E739006C9169 /* TypeDesc.swift in Sources */,

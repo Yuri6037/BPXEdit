@@ -10,49 +10,49 @@ import Foundation
 enum ViewType {
     case closed
     case hex
-    case decoded
+    case data
     case bpxsd
     case strings
 }
 
 class SectionState: ObservableObject {
     @Published var viewType: ViewType = .closed;
-    @Published var stringViewData: [String] = [];
-    @Published var hexViewData: [uint8] = [];
-    @Published var decodedViewData: Value = .scalar(.u8(0)); //Just a default value so that we don't crash DecodedView anymore.
-    @Published var sdViewData: SdValue = SdValue();
+    @Published var stringView: [String] = [];
+    @Published var hexView: [uint8] = [];
+    @Published var dataView: Value = .scalar(.u8(0)); //Just a default value so that we don't crash DecodedView anymore.
+    @Published var structuredDataView: SdValue = SdValue();
 
-    func showSdView(value: SdValue?) {
+    func showStructuredData(value: SdValue?) {
         if let value = value {
-            self.sdViewData = value;
+            self.structuredDataView = value;
             self.viewType = .bpxsd;
         } else {
             self.viewType = .closed;
         }
     }
 
-    func showStringView(value: [String]?) {
+    func showStrings(value: [String]?) {
         if let value = value {
-            self.stringViewData = value;
+            self.stringView = value;
             self.viewType = .strings;
         } else {
             self.viewType = .closed;
         }
     }
 
-    func showHexView(data: [uint8]?) {
+    func showHex(data: [uint8]?) {
         if let data = data {
-            self.hexViewData = data;
+            self.hexView = data;
             self.viewType = .hex;
         } else {
             self.viewType = .closed;
         }
     }
 
-    func showDecodedView(value: Value?) {
+    func showData(value: Value?) {
         if let value = value {
-            self.decodedViewData = value;
-            self.viewType = .decoded;
+            self.dataView = value;
+            self.viewType = .data;
         } else {
             self.viewType = .closed;
         }

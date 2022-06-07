@@ -43,8 +43,8 @@ struct BPXDocument: FileDocument {
         return nil;
     }
 
-    func loadSectionAsData(_ errorHost: ErrorHost, index: Int) -> [uint8]? {
-        if index == -1 {
+    func loadRaw(errorHost: ErrorHost, section: Int) -> [uint8]? {
+        if section == -1 {
             var useless = container?.getMainHeader().type_ext;
             let buffer = withUnsafeBytes(of: &useless) { (rawptr) in
                 Array(rawptr)
@@ -52,7 +52,7 @@ struct BPXDocument: FileDocument {
             return buffer;
         }
         do {
-            let data = try container?.getSections()[index].load();
+            let data = try container?.getSections()[section].load();
             return data?.loadInMemory();
         } catch {
             errorHost.spawn(ErrorInfo(message: String(describing: error), context: "Hex View"));
@@ -60,15 +60,15 @@ struct BPXDocument: FileDocument {
         }
     }
 
-    func decodeSection(_ errorHost: ErrorHost, index: Int, bundle: Bundle) -> Value? {
-        let data = loadSectionAsData(errorHost, index: index);
+    func loadData(errorHost: ErrorHost, section: Int, bundle: Bundle) -> Value? {
+        let data = loadRaw(errorHost: errorHost, section: section);
         guard let data = data else { return nil }
         let decoded: Value?;
-        if index != -1 {
-            let ty = container!.getSections()[index].header.ty;
+        if section != -1 {
+            let ty = container!.getSections()[section].header.ty;
             decoded = bundle.typeDescs[Int(ty)]?.decode(buffer: data);
         } else {
-            decoded = bundle.typeDescs[index]?.decode(buffer: data);
+            decoded = bundle.typeDescs[-1]?.decode(buffer: data); //Type declaration -1 is always BPX Extended Data.
         }
         if decoded == nil {
             errorHost.spawn(ErrorInfo(title: "Decode Error", message: "Unable to decode any object or array in the section.", context: "Data View"));
@@ -76,18 +76,18 @@ struct BPXDocument: FileDocument {
         return decoded;
     }
 
-    func isSectionDecodable(index: Int, bundle: Bundle) -> Bool {
-        if index != -1 {
-            let ty = container!.getSections()[index].header.ty;
+    func canDecode(section: Int, bundle: Bundle) -> Bool {
+        if section != -1 {
+            let ty = container!.getSections()[section].header.ty;
             return bundle.typeDescs[Int(ty)] != nil;
         } else {
-            return bundle.typeDescs[index] != nil
+            return bundle.typeDescs[-1] != nil
         }
     }
 
-    func loadSectionAsStrings(_ errorHost: ErrorHost, index: Int) -> [String]? {
+    func loadStrings(errorHost: ErrorHost, section: Int) -> [String]? {
         do {
-            let data = try container?.getSections()[index].load();
+            let data = try container?.getSections()[section].load();
             return data?.loadStrings();
         } catch {
             errorHost.spawn(ErrorInfo(message: String(describing: error), context: "Strings View"));
@@ -95,9 +95,9 @@ struct BPXDocument: FileDocument {
         }
     }
 
-    func loadSectionAsSdValue(_ errorHost: ErrorHost, index: Int) -> SdValue? {
+    func loadStructuredData(errorHost: ErrorHost, section: Int) -> SdValue? {
         do {
-            let data = try container?.getSections()[index].load();
+            let data = try container?.getSections()[section].load();
             data?.seek(pos: 0);
             return try data?.loadStructuredData();
         } catch {

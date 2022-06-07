@@ -14,20 +14,20 @@ struct ContentView: View {
     @EnvironmentObject var errorHost: ErrorHost;
     @State var bundle: Bundle?;
 
-    func loadSectionHex(_ index: Int) {
-        sectionState.showHexView(data: document.loadSectionAsData(errorHost, index: index));
+    func loadHex(_ index: Int) {
+        sectionState.showHex(data: document.loadRaw(errorHost: errorHost, section: index));
     }
 
-    func decodeSection(_ index: Int) {
-        sectionState.showDecodedView(value: document.decodeSection(errorHost, index: index, bundle: bundle!));
+    func loadData(_ index: Int) {
+        sectionState.showData(value: document.loadData(errorHost: errorHost, section: index, bundle: bundle!));
     }
 
-    func loadSectionStrings(_ index: Int) {
-        sectionState.showStringView(value: document.loadSectionAsStrings(errorHost, index: index));
+    func loadStrings(_ index: Int) {
+        sectionState.showStrings(value: document.loadStrings(errorHost: errorHost, section: index));
     }
 
-    func loadSectionSd(_ index: Int) {
-        sectionState.showSdView(value: document.loadSectionAsSdValue(errorHost, index: index));
+    func loadStructuredData(_ index: Int) {
+        sectionState.showStructuredData(value: document.loadStructuredData(errorHost: errorHost, section: index));
     }
 
     var body: some View {
@@ -41,11 +41,11 @@ struct ContentView: View {
                                 Text("BPX Type Ext").bold()
                                 HStack {
                                     ToolButton(icon: "hexagon", text: "Hex View") {
-                                        loadSectionHex(-1)
+                                        loadHex(-1)
                                     }
-                                    if bundle != nil && document.isSectionDecodable(index: -1, bundle: bundle!) {
+                                    if bundle != nil && document.canDecode(section: -1, bundle: bundle!) {
                                         ToolButton(icon: "doc", text: "Data View") {
-                                            decodeSection(-1)
+                                            loadData(-1)
                                         }
                                     }
                                 }
@@ -59,18 +59,18 @@ struct ContentView: View {
                                         SectionHeaderView(section: section)
                                         HStack {
                                             ToolButton(icon: "hexagon", text: "Hex View") {
-                                                loadSectionHex(section.index)
+                                                loadHex(section.index)
                                             }
-                                            if bundle != nil && document.isSectionDecodable(index: section.index, bundle: bundle!) {
+                                            if bundle != nil && document.canDecode(section: section.index, bundle: bundle!) {
                                                 ToolButton(icon: "doc", text: "Data View") {
-                                                    decodeSection(section.index)
+                                                    loadData(section.index)
                                                 }
                                             }
                                             ToolButton(icon: "doc.text", text: "Strings View") {
-                                                loadSectionStrings(section.index)
+                                                loadStrings(section.index)
                                             }
                                             ToolButton(icon: "doc.zipper", text: "BPXSD View") {
-                                                loadSectionSd(section.index)
+                                                loadStructuredData(section.index)
                                             }
                                         }
                                     }

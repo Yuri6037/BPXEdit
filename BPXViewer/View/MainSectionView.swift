@@ -16,15 +16,15 @@ struct MainSectionView: View {
         case .closed:
             Text("Please open a section view.")
         case .hex:
-            HexViewWrapper(data: $sectionState.hexViewData)
-        case .decoded:
-            DecodedView(value: $sectionState.decodedViewData, container: $document.container)
+            HexViewWrapper(data: $sectionState.hexView)
+        case .data:
+            DecodedView(value: $sectionState.dataView, container: $document.container)
         case .bpxsd:
             ScrollView {
-                SdView(value: $sectionState.sdViewData)
+                SdView(value: $sectionState.structuredDataView)
             }
         case .strings:
-            StringView(value: $sectionState.stringViewData)
+            StringView(value: $sectionState.stringView)
         }
     }
 }

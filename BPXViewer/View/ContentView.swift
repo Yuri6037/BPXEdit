@@ -12,13 +12,14 @@ struct ContentView: View {
     @State var selected = -1;
     @StateObject var sectionState = SectionState();
     @EnvironmentObject var errorHost: ErrorHost;
+    @State var bundle: Bundle?;
 
     func loadSectionHex(_ index: Int) {
         sectionState.showHexView(data: document.loadSectionAsData(errorHost, index: index));
     }
 
     func decodeSection(_ index: Int) {
-        sectionState.showDecodedView(value: document.decodeSection(errorHost, index: index));
+        sectionState.showDecodedView(value: document.decodeSection(errorHost, index: index, bundle: bundle!));
     }
 
     func loadSectionStrings(_ index: Int) {
@@ -42,7 +43,7 @@ struct ContentView: View {
                                     ToolButton(icon: "hexagon", text: "Hex View") {
                                         loadSectionHex(-1)
                                     }
-                                    if document.isSectionDecodable(index: -1) {
+                                    if bundle != nil && document.isSectionDecodable(index: -1, bundle: bundle!) {
                                         ToolButton(icon: "doc", text: "Data View") {
                                             decodeSection(-1)
                                         }
@@ -60,7 +61,7 @@ struct ContentView: View {
                                             ToolButton(icon: "hexagon", text: "Hex View") {
                                                 loadSectionHex(section.index)
                                             }
-                                            if document.isSectionDecodable(index: section.index) {
+                                            if bundle != nil && document.isSectionDecodable(index: section.index, bundle: bundle!) {
                                                 ToolButton(icon: "doc", text: "Data View") {
                                                     decodeSection(section.index)
                                                 }
@@ -85,6 +86,8 @@ struct ContentView: View {
                         .padding()
                 }
             }
+        }.onAppear {
+            bundle = document.findBundle();
         }
     }
 }

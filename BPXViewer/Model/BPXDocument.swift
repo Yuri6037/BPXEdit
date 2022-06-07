@@ -16,8 +16,6 @@ extension UTType {
 
 struct BPXDocument: FileDocument {
     var container: Container?;
-    //var error: String?;
-    //var error: ErrorInfo?;
 
     static var readableContentTypes: [UTType] { [.exampleText] }
 
@@ -38,7 +36,14 @@ struct BPXDocument: FileDocument {
         throw CocoaError(.fileWriteNoPermission)
     }
 
-    mutating func loadSectionAsData(_ errorHost: ErrorHost, index: Int) -> [uint8]? {
+    func findBundle() -> Bundle? {
+        if let container = container {
+            return BundleManager.instance.findBundle(code: container.getMainHeader().ty);
+        }
+        return nil;
+    }
+
+    func loadSectionAsData(_ errorHost: ErrorHost, index: Int) -> [uint8]? {
         if index == -1 {
             var useless = container?.getMainHeader().type_ext;
             let buffer = withUnsafeBytes(of: &useless) { (rawptr) in
@@ -55,15 +60,15 @@ struct BPXDocument: FileDocument {
         }
     }
 
-    mutating func decodeSection(_ errorHost: ErrorHost, index: Int) -> Value? {
+    func decodeSection(_ errorHost: ErrorHost, index: Int, bundle: Bundle) -> Value? {
         let data = loadSectionAsData(errorHost, index: index);
         guard let data = data else { return nil }
         let decoded: Value?;
         if index != -1 {
             let ty = container!.getSections()[index].header.ty;
-            decoded = BundleManager.instance.getBundle()?.typeDescs[Int(ty)]?.decode(buffer: data);
+            decoded = bundle.typeDescs[Int(ty)]?.decode(buffer: data);
         } else {
-            decoded = BundleManager.instance.getBundle()?.typeDescs[index]?.decode(buffer: data);
+            decoded = bundle.typeDescs[index]?.decode(buffer: data);
         }
         if decoded == nil {
             errorHost.spawn(ErrorInfo(title: "Decode Error", message: "Unable to decode any object or array in the section.", context: "Data View"));
@@ -71,16 +76,16 @@ struct BPXDocument: FileDocument {
         return decoded;
     }
 
-    func isSectionDecodable(index: Int) -> Bool {
+    func isSectionDecodable(index: Int, bundle: Bundle) -> Bool {
         if index != -1 {
             let ty = container!.getSections()[index].header.ty;
-            return BundleManager.instance.getBundle()?.typeDescs[Int(ty)] != nil;
+            return bundle.typeDescs[Int(ty)] != nil;
         } else {
-            return BundleManager.instance.getBundle()?.typeDescs[index] != nil
+            return bundle.typeDescs[index] != nil
         }
     }
 
-    mutating func loadSectionAsStrings(_ errorHost: ErrorHost, index: Int) -> [String]? {
+    func loadSectionAsStrings(_ errorHost: ErrorHost, index: Int) -> [String]? {
         do {
             let data = try container?.getSections()[index].load();
             return data?.loadStrings();
@@ -90,7 +95,7 @@ struct BPXDocument: FileDocument {
         }
     }
 
-    mutating func loadSectionAsSdValue(_ errorHost: ErrorHost, index: Int) -> SdValue? {
+    func loadSectionAsSdValue(_ errorHost: ErrorHost, index: Int) -> SdValue? {
         do {
             let data = try container?.getSections()[index].load();
             data?.seek(pos: 0);

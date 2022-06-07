@@ -127,4 +127,8 @@ class BundleManager {
     func getBundle() -> Bundle? {
         return bundle;
     }
+
+    func findBundle(code: UInt8) -> Bundle? {
+        return map[code];
+    }
 }

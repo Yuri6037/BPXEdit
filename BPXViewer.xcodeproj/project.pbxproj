@@ -36,6 +36,8 @@
 		DA99F389283FA1DF007BFEC3 /* SelectableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA99F388283FA1DF007BFEC3 /* SelectableItem.swift */; };
 		DA99F38B283FE64E007BFEC3 /* MainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA99F38A283FE64E007BFEC3 /* MainHeaderView.swift */; };
 		DA99F38D283FE703007BFEC3 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA99F38C283FE703007BFEC3 /* SectionHeaderView.swift */; };
+		DAA2DEFD284F74FE001F5D68 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA2DEFC284F74FE001F5D68 /* MainView.swift */; };
+		DAA2DEFF284F77F7001F5D68 /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA2DEFE284F77F7001F5D68 /* NavigationView.swift */; };
 		DAAAC99E283BD80900D663E8 /* HexView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAAAC99D283BD80900D663E8 /* HexView.xib */; };
 		DAAAC9A0283BD9B000D663E8 /* HexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAAC99F283BD9B000D663E8 /* HexView.swift */; };
 		DAB22D822840D4D7005C8741 /* BundleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB22D812840D4D7005C8741 /* BundleManager.swift */; };
@@ -82,6 +84,8 @@
 		DA99F388283FA1DF007BFEC3 /* SelectableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableItem.swift; sourceTree = "<group>"; };
 		DA99F38A283FE64E007BFEC3 /* MainHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHeaderView.swift; sourceTree = "<group>"; };
 		DA99F38C283FE703007BFEC3 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
+		DAA2DEFC284F74FE001F5D68 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		DAA2DEFE284F77F7001F5D68 /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
 		DAAAC99D283BD80900D663E8 /* HexView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HexView.xib; sourceTree = "<group>"; };
 		DAAAC99F283BD9B000D663E8 /* HexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexView.swift; sourceTree = "<group>"; };
 		DAB22D812840D4D7005C8741 /* BundleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleManager.swift; sourceTree = "<group>"; };
@@ -145,9 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				DA689BF42844BBC600A2EF1B /* Hex */,
-				DA90C91A283BB9AD0091DE15 /* ContentView.swift */,
-				DA99F38A283FE64E007BFEC3 /* MainHeaderView.swift */,
-				DA99F38C283FE703007BFEC3 /* SectionHeaderView.swift */,
+				DAA2DF00284F7971001F5D68 /* Content */,
 				DAB22D88284172CF005C8741 /* DecodedView.swift */,
 				DA99F388283FA1DF007BFEC3 /* SelectableItem.swift */,
 				DA49036B2843B436006C9169 /* ToolButton.swift */,
@@ -223,6 +225,18 @@
 				DA90C918283BB9AD0091DE15 /* BPXDocument.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		DAA2DF00284F7971001F5D68 /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				DA90C91A283BB9AD0091DE15 /* ContentView.swift */,
+				DA99F38A283FE64E007BFEC3 /* MainHeaderView.swift */,
+				DA99F38C283FE703007BFEC3 /* SectionHeaderView.swift */,
+				DAA2DEFC284F74FE001F5D68 /* MainView.swift */,
+				DAA2DEFE284F77F7001F5D68 /* NavigationView.swift */,
+			);
+			path = Content;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,8 +343,10 @@
 				DA737F03284A43F1003143B4 /* MainSectionView.swift in Sources */,
 				DA90C919283BB9AD0091DE15 /* BPXDocument.swift in Sources */,
 				DA99F38D283FE703007BFEC3 /* SectionHeaderView.swift in Sources */,
+				DAA2DEFF284F77F7001F5D68 /* NavigationView.swift in Sources */,
 				DA0DCF8F283D371600904DA1 /* Error.swift in Sources */,
 				DAB22D8728412255005C8741 /* ByteBuf.swift in Sources */,
+				DAA2DEFD284F74FE001F5D68 /* MainView.swift in Sources */,
 				DA90C91B283BB9AD0091DE15 /* ContentView.swift in Sources */,
 				DAB22D822840D4D7005C8741 /* BundleManager.swift in Sources */,
 			);

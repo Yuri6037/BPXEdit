@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MainSectionView: View {
+struct SectionView: View {
     @Binding var document: BPXDocument;
     @EnvironmentObject var sectionState: SectionState;
 
@@ -18,7 +18,7 @@ struct MainSectionView: View {
         case .hex:
             HexViewWrapper(data: $sectionState.hexView)
         case .data:
-            DecodedView(value: $sectionState.dataView, container: $document.container)
+            DataView(value: $sectionState.dataView, container: $document.container)
         case .bpxsd:
             ScrollView {
                 SdView(value: $sectionState.structuredDataView)
@@ -31,6 +31,6 @@ struct MainSectionView: View {
 
 struct MainSectionView_Previews: PreviewProvider {
     static var previews: some View {
-        MainSectionView(document: .constant(BPXDocument()))
+        SectionView(document: .constant(BPXDocument()))
     }
 }

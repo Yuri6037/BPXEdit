@@ -39,7 +39,7 @@ struct ContentView: View {
                         NavigationView(document: $document, bundle: $bundle, selected: $selected)
                     }.environmentObject(sectionState)
                     //Main view
-                    MainSectionView(document: $document)
+                    SectionView(document: $document)
                         .environmentObject(sectionState)
                         .frame(width: geo.size.width * 0.55)
                         .padding()

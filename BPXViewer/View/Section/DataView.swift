@@ -58,7 +58,7 @@ struct ValueView: View {
     }
 }
 
-struct DecodedView: View {
+struct DataView: View {
     @Binding var value: Value;
     @Binding var container: Container?;
 
@@ -67,9 +67,9 @@ struct DecodedView: View {
     }
 }
 
-struct DecodedView_Previews: PreviewProvider {
+struct DataView_Previews: PreviewProvider {
     static var previews: some View {
-        DecodedView(value: .constant(
+        DataView(value: .constant(
             .array([
                 .structure([
                     "Field1": .scalar(.u8(42)),

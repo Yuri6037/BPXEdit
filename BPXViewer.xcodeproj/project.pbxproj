@@ -27,7 +27,7 @@
 		DA689BF62844C46B00A2EF1B /* StringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA689BF52844C46B00A2EF1B /* StringView.swift */; };
 		DA689BF82844ED8900A2EF1B /* StructuredData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA689BF72844ED8900A2EF1B /* StructuredData.swift */; };
 		DA737EFF2849FF0C003143B4 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA737EFE2849FF0C003143B4 /* ErrorHandler.swift */; };
-		DA737F03284A43F1003143B4 /* MainSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA737F02284A43F1003143B4 /* MainSectionView.swift */; };
+		DA737F03284A43F1003143B4 /* SectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA737F02284A43F1003143B4 /* SectionView.swift */; };
 		DA90C917283BB9AD0091DE15 /* BPXViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90C916283BB9AD0091DE15 /* BPXViewerApp.swift */; };
 		DA90C919283BB9AD0091DE15 /* BPXDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90C918283BB9AD0091DE15 /* BPXDocument.swift */; };
 		DA90C91B283BB9AD0091DE15 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90C91A283BB9AD0091DE15 /* ContentView.swift */; };
@@ -43,7 +43,7 @@
 		DAB22D822840D4D7005C8741 /* BundleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB22D812840D4D7005C8741 /* BundleManager.swift */; };
 		DAB22D852840DB7C005C8741 /* TOMLDecoder in Frameworks */ = {isa = PBXBuildFile; productRef = DAB22D842840DB7C005C8741 /* TOMLDecoder */; };
 		DAB22D8728412255005C8741 /* ByteBuf.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB22D8628412255005C8741 /* ByteBuf.swift */; };
-		DAB22D89284172CF005C8741 /* DecodedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB22D88284172CF005C8741 /* DecodedView.swift */; };
+		DAB22D89284172CF005C8741 /* DataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB22D88284172CF005C8741 /* DataView.swift */; };
 		DACF4B1F28423ABA008AA6A3 /* SectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACF4B1E28423ABA008AA6A3 /* SectionState.swift */; };
 		DADF6379284AADC60028D6A4 /* BundleManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADF6378284AADC60028D6A4 /* BundleManagerView.swift */; };
 /* End PBXBuildFile section */
@@ -72,7 +72,7 @@
 		DA689BF52844C46B00A2EF1B /* StringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringView.swift; sourceTree = "<group>"; };
 		DA689BF72844ED8900A2EF1B /* StructuredData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructuredData.swift; sourceTree = "<group>"; };
 		DA737EFE2849FF0C003143B4 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
-		DA737F02284A43F1003143B4 /* MainSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSectionView.swift; sourceTree = "<group>"; };
+		DA737F02284A43F1003143B4 /* SectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionView.swift; sourceTree = "<group>"; };
 		DA90C913283BB9AD0091DE15 /* BPXViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BPXViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA90C916283BB9AD0091DE15 /* BPXViewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPXViewerApp.swift; sourceTree = "<group>"; };
 		DA90C918283BB9AD0091DE15 /* BPXDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPXDocument.swift; sourceTree = "<group>"; };
@@ -90,7 +90,7 @@
 		DAAAC99F283BD9B000D663E8 /* HexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexView.swift; sourceTree = "<group>"; };
 		DAB22D812840D4D7005C8741 /* BundleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleManager.swift; sourceTree = "<group>"; };
 		DAB22D8628412255005C8741 /* ByteBuf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteBuf.swift; sourceTree = "<group>"; };
-		DAB22D88284172CF005C8741 /* DecodedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodedView.swift; sourceTree = "<group>"; };
+		DAB22D88284172CF005C8741 /* DataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataView.swift; sourceTree = "<group>"; };
 		DACF4B1E28423ABA008AA6A3 /* SectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionState.swift; sourceTree = "<group>"; };
 		DADF6378284AADC60028D6A4 /* BundleManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleManagerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -150,15 +150,11 @@
 			children = (
 				DA689BF42844BBC600A2EF1B /* Hex */,
 				DAA2DF00284F7971001F5D68 /* Content */,
-				DAB22D88284172CF005C8741 /* DecodedView.swift */,
+				DAA2DF01284F7A3F001F5D68 /* Section */,
 				DA99F388283FA1DF007BFEC3 /* SelectableItem.swift */,
 				DA49036B2843B436006C9169 /* ToolButton.swift */,
 				DA49036D2843E085006C9169 /* BlockView.swift */,
-				DA689BF52844C46B00A2EF1B /* StringView.swift */,
-				DA1779F72846519E00F3EBC5 /* SdView.swift */,
-				DA560CF42848BD790057AB1A /* PointerView.swift */,
 				DA737EFE2849FF0C003143B4 /* ErrorHandler.swift */,
-				DA737F02284A43F1003143B4 /* MainSectionView.swift */,
 				DADF6378284AADC60028D6A4 /* BundleManagerView.swift */,
 				DA245EA8284BB55C00465539 /* WindowReader.swift */,
 			);
@@ -237,6 +233,18 @@
 				DAA2DEFE284F77F7001F5D68 /* NavigationView.swift */,
 			);
 			path = Content;
+			sourceTree = "<group>";
+		};
+		DAA2DF01284F7A3F001F5D68 /* Section */ = {
+			isa = PBXGroup;
+			children = (
+				DA737F02284A43F1003143B4 /* SectionView.swift */,
+				DAB22D88284172CF005C8741 /* DataView.swift */,
+				DA689BF52844C46B00A2EF1B /* StringView.swift */,
+				DA1779F72846519E00F3EBC5 /* SdView.swift */,
+				DA560CF42848BD790057AB1A /* PointerView.swift */,
+			);
+			path = Section;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -334,13 +342,13 @@
 				DA737EFF2849FF0C003143B4 /* ErrorHandler.swift in Sources */,
 				DA4903732843E739006C9169 /* TypeDesc.swift in Sources */,
 				DA4903772843E911006C9169 /* Strings.swift in Sources */,
-				DAB22D89284172CF005C8741 /* DecodedView.swift in Sources */,
+				DAB22D89284172CF005C8741 /* DataView.swift in Sources */,
 				DA0DCF94283E4D3300904DA1 /* Section.swift in Sources */,
 				DA689BF82844ED8900A2EF1B /* StructuredData.swift in Sources */,
 				DA1779F82846519E00F3EBC5 /* SdView.swift in Sources */,
 				DA560CF52848BD790057AB1A /* PointerView.swift in Sources */,
 				DACF4B1F28423ABA008AA6A3 /* SectionState.swift in Sources */,
-				DA737F03284A43F1003143B4 /* MainSectionView.swift in Sources */,
+				DA737F03284A43F1003143B4 /* SectionView.swift in Sources */,
 				DA90C919283BB9AD0091DE15 /* BPXDocument.swift in Sources */,
 				DA99F38D283FE703007BFEC3 /* SectionHeaderView.swift in Sources */,
 				DAA2DEFF284F77F7001F5D68 /* NavigationView.swift in Sources */,

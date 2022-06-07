@@ -197,9 +197,8 @@
 				DA689BF32844BB4500A2EF1B /* View */,
 				DA49036F2843E6B7006C9169 /* Extensions */,
 				DA0DCF8B283D36A400904DA1 /* BPX */,
+				DAA2DEF9284F67E0001F5D68 /* Model */,
 				DA90C916283BB9AD0091DE15 /* BPXViewerApp.swift */,
-				DACF4B1E28423ABA008AA6A3 /* SectionState.swift */,
-				DA90C918283BB9AD0091DE15 /* BPXDocument.swift */,
 				DA2B4A3F284CB72A00EF40D8 /* Hacks.swift */,
 				DA90C91C283BB9AE0091DE15 /* Assets.xcassets */,
 				DA90C921283BB9AE0091DE15 /* Info.plist */,
@@ -215,6 +214,15 @@
 				DA90C91F283BB9AE0091DE15 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		DAA2DEF9284F67E0001F5D68 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DACF4B1E28423ABA008AA6A3 /* SectionState.swift */,
+				DA90C918283BB9AD0091DE15 /* BPXDocument.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

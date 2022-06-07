@@ -14,22 +14,6 @@ struct ContentView: View {
     @EnvironmentObject var errorHost: ErrorHost;
     @State var bundle: Bundle?;
 
-    func loadHex(_ index: Int) {
-        sectionState.showHex(data: document.loadRaw(errorHost: errorHost, section: index));
-    }
-
-    func loadData(_ index: Int) {
-        sectionState.showData(value: document.loadData(errorHost: errorHost, section: index, bundle: bundle!));
-    }
-
-    func loadStrings(_ index: Int) {
-        sectionState.showStrings(value: document.loadStrings(errorHost: errorHost, section: index));
-    }
-
-    func loadStructuredData(_ index: Int) {
-        sectionState.showStructuredData(value: document.loadStructuredData(errorHost: errorHost, section: index));
-    }
-
     var body: some View {
         GeometryReader { geo in
             VStack {

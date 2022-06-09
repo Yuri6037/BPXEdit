@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct BPXViewerApp: App {
+    @StateObject var globalState = GlobalState();
+
     init() {
         if BundleManager.instance.isErrored() {
             openBundleManagerWindow()
@@ -18,12 +20,16 @@ struct BPXViewerApp: App {
     var body: some Scene {
         DocumentGroup(viewing: BPXDocument.self) { file in
             ContentView(document: file.$document)
+                .environmentObject(globalState)
                 .withErrorHandler()
         }
         .commands {
             CommandGroup(after: .newItem) {
                 Divider()
                 Button(action: { openBundleManagerWindow() }) { Text("Type description bundles") }
+                Button(action: {
+                    globalState.activeState?.showReInterpretMenu = true;
+                }) { Text("Re-interpret as...") }.disabled(globalState.activeWindow == nil)
             }
         }
     }

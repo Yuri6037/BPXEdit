@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA028EDB285140C000319D4C /* GlobalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA028EDA285140C000319D4C /* GlobalState.swift */; };
 		DA0DCF87283D331600904DA1 /* bpxc.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DCF86283D331600904DA1 /* bpxc.xcframework */; };
 		DA0DCF8D283D36B900904DA1 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0DCF8C283D36B900904DA1 /* Container.swift */; };
 		DA0DCF8F283D371600904DA1 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0DCF8E283D371600904DA1 /* Error.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DA028EDA285140C000319D4C /* GlobalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalState.swift; sourceTree = "<group>"; };
 		DA0DCF86283D331600904DA1 /* bpxc.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = bpxc.xcframework; sourceTree = "<group>"; };
 		DA0DCF8A283D33E500904DA1 /* bpx_bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bpx_bridge.h; sourceTree = "<group>"; };
 		DA0DCF8C283D36B900904DA1 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 			children = (
 				DACF4B1E28423ABA008AA6A3 /* SectionState.swift */,
 				DA90C918283BB9AD0091DE15 /* BPXDocument.swift */,
+				DA028EDA285140C000319D4C /* GlobalState.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 				DAA2DEFF284F77F7001F5D68 /* NavigationView.swift in Sources */,
 				DA0DCF8F283D371600904DA1 /* Error.swift in Sources */,
 				DAB22D8728412255005C8741 /* ByteBuf.swift in Sources */,
+				DA028EDB285140C000319D4C /* GlobalState.swift in Sources */,
 				DAA2DEFD284F74FE001F5D68 /* MainView.swift in Sources */,
 				DA90C91B283BB9AD0091DE15 /* ContentView.swift in Sources */,
 				DAB22D822840D4D7005C8741 /* BundleManager.swift in Sources */,

@@ -49,7 +49,10 @@ struct BundleManagerView: View {
 
     var body: some View {
         VStack {
-            WindowReader(window: $window).frame(width: 0, height: 0)
+            WindowReader { window in
+                self.window = window;
+            }
+            .frame(width: 0, height: 0)
             HStack {
                 ToolButton(icon: "bag.badge.plus", text: "Add", action: installBundle)
                 ToolButton(icon: "trash", text: "Remove", action: uninstallBundle)

@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct WindowReader: NSViewRepresentable {
-    @Binding var window: NSWindow?;
+    let action: (NSWindow?) -> Void;
 
     func makeNSView(context: Context) -> some NSView {
         let view = NSView()
         DispatchQueue.main.async {
-            self.window = view.window;
+            self.action(view.window)
         }
         return view;
     }

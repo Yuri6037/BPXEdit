@@ -40,6 +40,14 @@ class SectionState: ObservableObject {
         }
     }
 
+    func reset() {
+        self.viewType = .closed;
+        self.hexView = [];
+        self.stringView = [];
+        self.dataView = .scalar(.u8(0));
+        self.structuredDataView = SdValue();
+    }
+
     func showHex(data: [uint8]?) {
         if let data = data {
             self.hexView = data;

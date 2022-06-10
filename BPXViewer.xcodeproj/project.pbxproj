@@ -47,6 +47,7 @@
 		DAB22D89284172CF005C8741 /* DataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB22D88284172CF005C8741 /* DataView.swift */; };
 		DACF4B1F28423ABA008AA6A3 /* SectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACF4B1E28423ABA008AA6A3 /* SectionState.swift */; };
 		DADF6379284AADC60028D6A4 /* BundleManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADF6378284AADC60028D6A4 /* BundleManagerView.swift */; };
+		DAFAF49C2853354100BAB154 /* ReInterpretMenuModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFAF49B2853354100BAB154 /* ReInterpretMenuModal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,6 +96,7 @@
 		DAB22D88284172CF005C8741 /* DataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataView.swift; sourceTree = "<group>"; };
 		DACF4B1E28423ABA008AA6A3 /* SectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionState.swift; sourceTree = "<group>"; };
 		DADF6378284AADC60028D6A4 /* BundleManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleManagerView.swift; sourceTree = "<group>"; };
+		DAFAF49B2853354100BAB154 /* ReInterpretMenuModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReInterpretMenuModal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +236,7 @@
 				DA99F38C283FE703007BFEC3 /* SectionHeaderView.swift */,
 				DAA2DEFC284F74FE001F5D68 /* MainView.swift */,
 				DAA2DEFE284F77F7001F5D68 /* NavigationView.swift */,
+				DAFAF49B2853354100BAB154 /* ReInterpretMenuModal.swift */,
 			);
 			path = Content;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				DAAAC9A0283BD9B000D663E8 /* HexView.swift in Sources */,
 				DA90C917283BB9AD0091DE15 /* BPXViewerApp.swift in Sources */,
 				DA99F389283FA1DF007BFEC3 /* SelectableItem.swift in Sources */,
+				DAFAF49C2853354100BAB154 /* ReInterpretMenuModal.swift in Sources */,
 				DA0DCF8D283D36B900904DA1 /* Container.swift in Sources */,
 				DADF6379284AADC60028D6A4 /* BundleManagerView.swift in Sources */,
 				DA689BF62844C46B00A2EF1B /* StringView.swift in Sources */,

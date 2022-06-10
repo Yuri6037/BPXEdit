@@ -37,17 +37,19 @@ struct ContentView: View {
                         .padding()
                 }
             }
+            .sheet(isPresented: $windowState.showReInterpretMenu) {
+                ReInterpretMenuModal(
+                    isPresented: $windowState.showReInterpretMenu,
+                    action: { bundle in
+                        self.bundle = bundle;
+                        sectionState.reset();
+                    },
+                    selected: bundle
+                ).frame(width: geo.size.width * 0.5, height: geo.size.height * 0.5)
+            }
         }
         .onAppear {
             bundle = document.findBundle();
-        }
-        .sheet(isPresented: $windowState.showReInterpretMenu) {
-            VStack {
-                Text("Available type bundle list goes here!")
-                Button(action: { windowState.showReInterpretMenu = false }) {
-                    Text("Close")
-                }
-            }.padding()
         }
     }
 }

@@ -29,8 +29,8 @@ struct SectionView: View {
     }
 }
 
-struct MainSectionView_Previews: PreviewProvider {
+struct SectionView_Previews: PreviewProvider {
     static var previews: some View {
-        SectionView(document: .constant(BPXDocument()))
+        SectionView(document: .constant(BPXDocument())).environmentObject(SectionState())
     }
 }

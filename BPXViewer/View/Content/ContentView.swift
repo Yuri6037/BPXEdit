@@ -28,13 +28,22 @@ struct ContentView: View {
                 HStack {
                     VStack {
                         MainView(document: $document, bundle: $bundle)
+                            .environmentObject(sectionState)
                         NavigationView(document: $document, bundle: $bundle, selected: $selected)
-                    }.environmentObject(sectionState)
+                    }
                     //Main view
-                    SectionView(document: $document)
-                        .environmentObject(sectionState)
-                        .frame(width: geo.size.width * 0.55)
-                        .padding()
+                    VStack {
+                        ToolBarView(document: $document, bundle: $bundle, selected: $selected)
+                            .environmentObject(sectionState)
+                            .frame(maxWidth: .infinity)
+                            .background(Color("MainHeader"))
+                            .cornerRadius(6)
+                        Spacer()
+                        SectionView(document: $document)
+                            .environmentObject(sectionState)
+                    }
+                    .frame(width: geo.size.width * 0.55)
+                    .padding()
                 }
             }
             .sheet(isPresented: $windowState.showReInterpretMenu) {

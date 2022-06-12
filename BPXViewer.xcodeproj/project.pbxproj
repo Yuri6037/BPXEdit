@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DA028EDB285140C000319D4C /* GlobalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA028EDA285140C000319D4C /* GlobalState.swift */; };
+		DA0AF22A2856177500B336EA /* ToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0AF2292856177400B336EA /* ToolBarView.swift */; };
 		DA0DCF87283D331600904DA1 /* bpxc.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DCF86283D331600904DA1 /* bpxc.xcframework */; };
 		DA0DCF8D283D36B900904DA1 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0DCF8C283D36B900904DA1 /* Container.swift */; };
 		DA0DCF8F283D371600904DA1 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0DCF8E283D371600904DA1 /* Error.swift */; };
@@ -52,6 +53,7 @@
 
 /* Begin PBXFileReference section */
 		DA028EDA285140C000319D4C /* GlobalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalState.swift; sourceTree = "<group>"; };
+		DA0AF2292856177400B336EA /* ToolBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarView.swift; sourceTree = "<group>"; };
 		DA0DCF86283D331600904DA1 /* bpxc.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = bpxc.xcframework; sourceTree = "<group>"; };
 		DA0DCF8A283D33E500904DA1 /* bpx_bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bpx_bridge.h; sourceTree = "<group>"; };
 		DA0DCF8C283D36B900904DA1 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				DAA2DEFC284F74FE001F5D68 /* MainView.swift */,
 				DAA2DEFE284F77F7001F5D68 /* NavigationView.swift */,
 				DAFAF49B2853354100BAB154 /* ReInterpretMenuModal.swift */,
+				DA0AF2292856177400B336EA /* ToolBarView.swift */,
 			);
 			path = Content;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 			files = (
 				DA560CF72848ECCF0057AB1A /* Pointer.swift in Sources */,
 				DA49036E2843E085006C9169 /* BlockView.swift in Sources */,
+				DA0AF22A2856177500B336EA /* ToolBarView.swift in Sources */,
 				DAAAC9A0283BD9B000D663E8 /* HexView.swift in Sources */,
 				DA90C917283BB9AD0091DE15 /* BPXViewerApp.swift in Sources */,
 				DA99F389283FA1DF007BFEC3 /* SelectableItem.swift in Sources */,

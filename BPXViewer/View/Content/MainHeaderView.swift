@@ -22,12 +22,7 @@ struct MainHeaderView: View {
     var body: some View {
         VStack {
             if let header = header {
-                if let name = bundle?.main.name {
-                    Text("BPX Main Header").bold()
-                    Text(name).bold().padding(.bottom)
-                } else {
-                    Text("BPX Main Header").bold().padding(.bottom)
-                }
+                Text("Main Header").bold()
                 HStack {
                     Text("Version: ").bold()
                     Spacer()
@@ -62,7 +57,6 @@ struct MainHeaderView: View {
                 Text("No container loaded.")
             }
         }
-        .blockView()
     }
 }
 

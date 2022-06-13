@@ -70,18 +70,18 @@ struct MainView: View {
 
     var body: some View {
         if let name = bundle?.main.name {
-                VStack {
-                    Text(name).bold().padding(.bottom)
-                    HeadersView(document: $document, bundle: $bundle, typeExt: $typeExt)
+            VStack {
+                Text(name).bold().padding(.bottom)
+                HeadersView(document: $document, bundle: $bundle, typeExt: $typeExt)
+            }
+            .blockView()
+            .overlay {
+                GeometryReader { geo in
+                    EmptyView()
+                        .onAppear { updateState(width: geo.size.width) }
+                        .onChange(of: geo.size) { size in updateState(width: size.width) }
                 }
-                .blockView()
-                .overlay {
-                    GeometryReader { geo in
-                        EmptyView()
-                            .onAppear { updateState(width: geo.size.width) }
-                            .onChange(of: geo.size) { size in updateState(width: size.width) }
-                    }
-                }
+            }
         } else {
             HeadersView(document: $document, bundle: $bundle, typeExt: .constant(nil)).blockView()
         }

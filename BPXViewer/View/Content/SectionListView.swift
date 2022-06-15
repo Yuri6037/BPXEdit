@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NavigationView: View {
+struct SectionListView: View {
     @Binding var document: BPXDocument;
     @Binding var bundle: Bundle?;
     @Binding var selected: Int;
@@ -29,6 +29,6 @@ struct NavigationView: View {
 
 struct NavigationView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView(document: .constant(BPXDocument()), bundle: .constant(nil), selected: .constant(0))
+        SectionListView(document: .constant(BPXDocument()), bundle: .constant(nil), selected: .constant(0))
     }
 }

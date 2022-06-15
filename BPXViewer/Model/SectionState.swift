@@ -22,6 +22,21 @@ class SectionState: ObservableObject {
     @Published var dataView: Value = .scalar(.u8(0)); //Just a default value so that we don't crash DecodedView anymore.
     @Published var structuredDataView: SdValue = SdValue();
 
+    func canEdit() -> Bool {
+        switch viewType {
+        case .closed:
+            return false;
+        case .hex:
+            return false;
+        case .data:
+            return true;
+        case .bpxsd:
+            return false;
+        case .strings:
+            return false;
+        }
+    }
+
     func showStructuredData(value: SdValue?) {
         if let value = value {
             self.structuredDataView = value;

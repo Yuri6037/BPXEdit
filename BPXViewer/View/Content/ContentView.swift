@@ -28,7 +28,7 @@ struct ContentView: View {
                 HStack {
                     VStack {
                         MainView(document: $document, bundle: $bundle)
-                        NavigationView(document: $document, bundle: $bundle, selected: $selected)
+                        SectionListView(document: $document, bundle: $bundle, selected: $selected)
                     }
                     //Main view
                     VStack {

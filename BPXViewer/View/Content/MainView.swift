@@ -11,8 +11,11 @@ fileprivate struct HeadersView: View {
     @Binding var document: BPXDocument
     @Binding var bundle: Bundle?;
     @EnvironmentObject var errorHost: ErrorHost;
-    @EnvironmentObject var sectionState: SectionState;
     @Binding var typeExt: Value?;
+    @State var showHexView = false;
+    @State var showDataView = false;
+    @State var dataView: Value = .scalar(.u8(0));
+    @State var hexView: [uint8] = [];
 
     var body: some View {
         HStack(alignment: .top) {
@@ -26,7 +29,10 @@ fileprivate struct HeadersView: View {
                 HStack {
                     ToolButton(icon: "hexagon", text: "Hex View") {
                         let data = document.loadRaw(errorHost: errorHost, section: -1);
-                        sectionState.showHex(data: data);
+                        if let data = data {
+                            showHexView = true;
+                            hexView = data;
+                        }
                     }
                     if typeExt == nil {
                         ToolButton(
@@ -35,7 +41,10 @@ fileprivate struct HeadersView: View {
                             disabled: bundle == nil || !document.canDecode(section: -1, bundle: bundle!),
                             action: {
                                 let value = document.loadData(errorHost: errorHost, section: -1, bundle: bundle!);
-                                sectionState.showData(value: value);
+                                if let value = value {
+                                    showDataView = true;
+                                    dataView = value;
+                                }
                             }
                         )
                     }
@@ -43,6 +52,20 @@ fileprivate struct HeadersView: View {
             }
         }
         .fixedSize(horizontal: false, vertical: true)
+        .sheet(isPresented: $showHexView) {
+            VStack {
+                HexViewWrapper(data: $hexView).frame(minWidth: 500, minHeight: 80)
+                Button("Close") { showHexView = false }
+            }
+            .padding()
+        }
+        .sheet(isPresented: $showDataView) {
+            VStack {
+                DataView(value: $dataView, container: $document.container)
+                Button("Close") { showDataView = false }
+            }
+            .padding()
+        }
     }
 }
 
@@ -50,7 +73,6 @@ struct MainView: View {
     @Binding var document: BPXDocument
     @Binding var bundle: Bundle?;
     @EnvironmentObject var errorHost: ErrorHost;
-    @EnvironmentObject var sectionState: SectionState;
     @State var typeExt: Value?;
 
     fileprivate let minWidth: CGFloat = 512;

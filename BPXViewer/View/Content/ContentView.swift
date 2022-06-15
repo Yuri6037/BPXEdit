@@ -28,7 +28,6 @@ struct ContentView: View {
                 HStack {
                     VStack {
                         MainView(document: $document, bundle: $bundle)
-                            .environmentObject(sectionState)
                         NavigationView(document: $document, bundle: $bundle, selected: $selected)
                     }
                     //Main view

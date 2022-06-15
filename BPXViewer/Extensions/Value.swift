@@ -85,4 +85,13 @@ enum Value {
     case structure([String: Value])
     case array([Value])
     case pointer(Pointer)
+
+    func asArray() -> [Value]? {
+        switch self {
+        case .array(let arr):
+            return arr;
+        default:
+            return nil;
+        }
+    }
 }

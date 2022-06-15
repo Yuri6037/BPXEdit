@@ -23,7 +23,6 @@ struct SectionListView: View {
                 }
             }
         }
-        .padding()
     }
 }
 

@@ -62,6 +62,45 @@ struct ContentView: View {
     }
 }
 
+struct ContentViewV2: View {
+    @Binding var document: BPXDocument
+    @State var selected = -1;
+    @StateObject var sectionState = SectionState();
+    @EnvironmentObject var errorHost: ErrorHost;
+    @State var bundle: Bundle?;
+    @EnvironmentObject var globalState: GlobalState;
+    @StateObject var windowState = WindowState();
+
+    private func toggleSidebar() {
+        #if os(iOS)
+        #else
+        NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
+        #endif
+    }
+
+    var body: some View {
+        NavigationView {
+            /*VStack {
+                MainView(document: $document, bundle: $bundle)*/
+            SectionListView(document: $document, bundle: $bundle, selected: $selected)
+                .frame(minWidth: 350)
+                .toolbar {
+                    ToolButton(icon: "sidebar.leading", text: "Toggle Sidebar", action: toggleSidebar)
+                }
+            //}
+            SectionView(document: $document)
+                .environmentObject(sectionState)
+                .toolbar {
+                    ToolBarView(document: $document, bundle: $bundle, selected: $selected)
+                        .environmentObject(sectionState)
+                }
+        }
+        .onAppear {
+            bundle = document.findBundle();
+        }
+    }
+}
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(document: .constant(BPXDocument()))

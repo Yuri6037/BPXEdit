@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SectionView: View {
+struct SectionContentView: View {
     @Binding var document: BPXDocument;
     @EnvironmentObject var sectionState: SectionState;
 
@@ -29,8 +29,45 @@ struct SectionView: View {
     }
 }
 
+struct SectionView: View {
+    @Binding var document: BPXDocument;
+    @Binding var bundle: Bundle?;
+    @EnvironmentObject var sectionState: SectionState;
+    let section: Int;
+
+    private func getSection() -> Section {
+        return document.container!.getSections()[section]
+    }
+
+    var body: some View {
+        if section == -1 {
+            Text("No selection.")
+        } else {
+            ScrollView {
+                VStack {
+                    if let name = bundle?.main.getSectionName(code: getSection().header.ty) {
+                        Text("Section #\(section)").bold()
+                        Text(name)
+                    } else {
+                        Text("Section #\(section)").bold()
+                    }
+                }
+                .blockView()
+                SectionHeaderView(section: getSection())
+                    .blockView()
+                    .frame(maxWidth: .infinity)
+            }
+            .frame(minWidth: 300)
+            .toolbar { ToolBarView(document: $document, bundle: $bundle, section: section) }
+            .onAppear {
+                sectionState.reset()
+            }
+        }
+    }
+}
+
 struct SectionView_Previews: PreviewProvider {
     static var previews: some View {
-        SectionView(document: .constant(BPXDocument())).environmentObject(SectionState())
+        SectionView(document: .constant(BPXDocument()), bundle: .constant(nil), section: -1).environmentObject(SectionState())
     }
 }

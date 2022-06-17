@@ -30,12 +30,6 @@ struct SectionHeaderView: View {
 
     var body: some View {
         VStack {
-            if let name = BundleManager.instance.getBundle()?.main.getSectionName(code: section.header.ty) {
-                Text("Section #\(section.index)").bold()
-                Text(name).bold().padding(.bottom)
-            } else {
-                Text("Section #\(section.index)").bold().padding(.bottom)
-            }
             HStack {
                 Text("Type: ").bold()
                 Spacer()

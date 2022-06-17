@@ -10,47 +10,48 @@ import SwiftUI
 struct ToolBarView: View {
     @Binding var document: BPXDocument;
     @Binding var bundle: Bundle?;
-    @Binding var selected: Int;
     @EnvironmentObject var sectionState: SectionState;
     @EnvironmentObject var errorHost: ErrorHost;
+    let section: Int;
 
-    func loadHex(_ index: Int) {
-        sectionState.showHex(data: document.loadRaw(errorHost: errorHost, section: index));
+    func loadHex() {
+        sectionState.showHex(data: document.loadRaw(errorHost: errorHost, section: section));
     }
 
-    func loadData(_ index: Int) {
-        sectionState.showData(value: document.loadData(errorHost: errorHost, section: index, bundle: bundle!));
+    func loadData() {
+        sectionState.showData(value: document.loadData(errorHost: errorHost, section: section, bundle: bundle!));
     }
 
-    func loadStrings(_ index: Int) {
-        sectionState.showStrings(value: document.loadStrings(errorHost: errorHost, section: index));
+    func loadStrings() {
+        sectionState.showStrings(value: document.loadStrings(errorHost: errorHost, section: section));
     }
 
-    func loadStructuredData(_ index: Int) {
-        sectionState.showStructuredData(value: document.loadStructuredData(errorHost: errorHost, section: index));
+    func loadStructuredData() {
+        sectionState.showStructuredData(value: document.loadStructuredData(errorHost: errorHost, section: section));
     }
 
     var body: some View {
         HStack {
-            ToolButton(icon: "hexagon", text: "Hex View", disabled: selected < 0) {
-                loadHex(selected)
+            ToolButton(icon: "hexagon", text: "Hex View", disabled: section < 0) {
+                loadHex()
             }
-            ToolButton(icon: "doc", text: "Data View", disabled: selected < 0 || bundle == nil || !document.canDecode(section: selected, bundle: bundle!)) {
-                loadData(selected)
+            ToolButton(icon: "doc", text: "Data View", disabled: section < 0 || bundle == nil || !document.canDecode(section: section, bundle: bundle!)) {
+                loadData()
             }
-            ToolButton(icon: "doc.text", text: "Strings View", disabled: selected < 0) {
-                loadStrings(selected)
+            ToolButton(icon: "doc.text", text: "Strings View", disabled: section < 0) {
+                loadStrings()
             }
-            ToolButton(icon: "doc.zipper", text: "BPXSD View", disabled: selected < 0) {
-                loadStructuredData(selected)
+            ToolButton(icon: "doc.zipper", text: "BPXSD View", disabled: section < 0) {
+                loadStructuredData()
             }
         }
+        .fixedSize()
         .padding(4)
     }
 }
 
 struct ToolBarView_Previews: PreviewProvider {
     static var previews: some View {
-        ToolBarView(document: .constant(BPXDocument()), bundle: .constant(nil), selected: .constant(-1))
+        ToolBarView(document: .constant(BPXDocument()), bundle: .constant(nil), section: -1).environmentObject(SectionState())
     }
 }

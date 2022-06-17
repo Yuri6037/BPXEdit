@@ -10,15 +10,22 @@ import SwiftUI
 struct SectionListView: View {
     @Binding var document: BPXDocument;
     @Binding var bundle: Bundle?;
-    @Binding var selected: Int;
     @EnvironmentObject var errorHost: ErrorHost;
 
     var body: some View {
         List {
             if let container = document.container {
                 ForEach(container.getSections()) { section in
-                    SelectableItem(key: section.index, selected: $selected) {
+                    /*SelectableItem(key: section.index, selected: $selected) {
                         SectionHeaderView(section: section)
+                    }*/
+                    NavigationLink(destination: SectionView(document: $document, bundle: $bundle, section: section.index)) {
+                        VStack(alignment: .leading) {
+                            Text("Section #\(section.index)").bold()
+                            if let name = bundle?.main.getSectionName(code: section.header.ty) {
+                                Text(name)
+                            }
+                        }
                     }
                 }
             }
@@ -28,6 +35,6 @@ struct SectionListView: View {
 
 struct NavigationView_Previews: PreviewProvider {
     static var previews: some View {
-        SectionListView(document: .constant(BPXDocument()), bundle: .constant(nil), selected: .constant(0))
+        SectionListView(document: .constant(BPXDocument()), bundle: .constant(nil))
     }
 }

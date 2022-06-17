@@ -43,7 +43,6 @@ struct UUIDParseError : Error {}
 class BundleManager {
     private var map: [UInt8: Bundle] = [:];
     private var list: [Bundle] = [];
-    private var bundle: Bundle?;
     private var lastError: ErrorInfo?;
 
     fileprivate func register(bundle: Bundle) {
@@ -118,14 +117,6 @@ class BundleManager {
         } catch {
             lastError = ErrorInfo(title: "Bundle Error", message: String(describing: error), context: "Bundle Uninstallation");
         }
-    }
-
-    func bindBundle(code: UInt8) {
-        bundle = map[code];
-    }
-
-    func getBundle() -> Bundle? {
-        return bundle;
     }
 
     func findBundle(code: UInt8) -> Bundle? {

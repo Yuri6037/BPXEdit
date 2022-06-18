@@ -13,6 +13,9 @@ struct SectionListView: View {
 
     var body: some View {
         List {
+            NavigationLink(destination: MainView()) {
+                Text("Base").bold()
+            }
             ForEach(object.sections) { section in
                 NavigationLink(destination: SectionView(section: section.index)) {
                     VStack(alignment: .leading) {

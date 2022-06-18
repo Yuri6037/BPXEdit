@@ -35,7 +35,7 @@ struct ToolBarView: View {
                 icon: "trash",
                 text: "Delete Section",
                 disabled: !object.isValid(section: section),
-                action: { object.removeSection(section: section) }
+                action: { object.remove(section: section) }
             )
             Divider()
             ToolButton(

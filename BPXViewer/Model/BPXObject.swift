@@ -28,7 +28,7 @@ class BPXObject: ObservableObject {
         bundle = nil;
     }
 
-    func removeSection(section: Int) {
+    func remove(section: Int) {
         document.container?.removeSection(index: section);
         sections = document.container?.getSections() ?? [];
     }

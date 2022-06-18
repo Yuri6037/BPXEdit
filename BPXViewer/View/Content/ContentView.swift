@@ -22,21 +22,39 @@ struct ContentViewV2: View {
     }
 
     var body: some View {
-        NavigationView {
-            /*VStack {
-                MainView(document: $document, bundle: $bundle)*/
-            SectionListView()
-                .environmentObject(object)
-                .environmentObject(sectionState)
-                .frame(minWidth: 180)
-                .toolbar {
-                    ToolButton(icon: "sidebar.leading", text: "Toggle Sidebar", action: toggleSidebar)
+        GeometryReader { geo in
+            NavigationView {
+                SectionListView()
+                    .environmentObject(object)
+                    .environmentObject(sectionState)
+                    .frame(minWidth: 180)
+                    .toolbar {
+                        ToolButton(icon: "sidebar.leading", text:   "Toggle Sidebar", action: toggleSidebar)
+                    }
+                SectionView(section: -1)
+                    .environmentObject(object)
+                SectionContentView()
+                    .environmentObject(object)
+                    .environmentObject(sectionState)
+            }
+            .sheet(isPresented: $windowState.showReInterpretMenu) {
+                ReInterpretMenuModal(
+                    isPresented: $windowState.showReInterpretMenu,
+                    action: { bundle in
+                        object.bundle = bundle;
+                        sectionState.reset();
+                    },
+                    selected: object.bundle
+                ).frame(width: geo.size.width * 0.5, height: geo.size.height * 0.5)
+            }
+            .overlay(WindowReader { window in
+                if let window = window {
+                    globalState.addWindow(
+                        window: window,
+                        model: windowState
+                    );
                 }
-            SectionView(section: -1)
-                .environmentObject(object)
-            SectionContentView()
-                .environmentObject(object)
-                .environmentObject(sectionState)
+            })
         }
     }
 }

@@ -8,8 +8,7 @@
 import SwiftUI
 
 fileprivate struct HeadersView: View {
-    @Binding var document: BPXDocument
-    @Binding var bundle: Bundle?;
+    @EnvironmentObject var object: BPXObject;
     @EnvironmentObject var errorHost: ErrorHost;
     @Binding var typeExt: Value?;
     @State var showHexView = false;
@@ -19,16 +18,16 @@ fileprivate struct HeadersView: View {
 
     var body: some View {
         HStack(alignment: .top) {
-            MainHeaderView(bundle: $bundle, header: document.container?.getMainHeader())
+            MainHeaderView(bundle: $object.bundle, header: object.document.container?.getMainHeader())
             Divider()
             VStack {
                 Text("Type Ext").bold()
                 if typeExt != nil {
-                    DataView(value: .constant(typeExt!), container: $document.container)
+                    DataView(value: .constant(typeExt!), container: $object.document.container)
                 }
                 HStack {
                     ToolButton(icon: "hexagon", text: "Hex View") {
-                        let data = document.loadRaw(errorHost: errorHost, section: -1);
+                        let data = object.loadRaw(errorHost: errorHost, section: -1);
                         if let data = data {
                             showHexView = true;
                             hexView = data;
@@ -38,9 +37,9 @@ fileprivate struct HeadersView: View {
                         ToolButton(
                             icon: "doc",
                             text: "Data View",
-                            disabled: bundle == nil || !document.canDecode(section: -1, bundle: bundle!),
+                            disabled: !object.canDecode(section: -1),
                             action: {
-                                let value = document.loadData(errorHost: errorHost, section: -1, bundle: bundle!);
+                                let value = object.loadData(errorHost: errorHost, section: -1);
                                 if let value = value {
                                     showDataView = true;
                                     dataView = value;
@@ -61,7 +60,7 @@ fileprivate struct HeadersView: View {
         }
         .sheet(isPresented: $showDataView) {
             VStack {
-                DataView(value: $dataView, container: $document.container)
+                DataView(value: $dataView, container: $object.document.container)
                 Button("Close") { showDataView = false }
             }
             .padding()
@@ -70,8 +69,7 @@ fileprivate struct HeadersView: View {
 }
 
 struct MainView: View {
-    @Binding var document: BPXDocument
-    @Binding var bundle: Bundle?;
+    @EnvironmentObject var object: BPXObject;
     @EnvironmentObject var errorHost: ErrorHost;
     @State var typeExt: Value?;
 
@@ -79,7 +77,7 @@ struct MainView: View {
 
     func updateState(width: CGFloat) {
         if width >= minWidth && typeExt == nil {
-            let data = document.loadData(errorHost: errorHost, section: -1, bundle: bundle!);
+            let data = object.loadData(errorHost: errorHost, section: -1);
             if let data = data {
                 typeExt = data;
             } else {
@@ -91,10 +89,10 @@ struct MainView: View {
     }
 
     var body: some View {
-        if let name = bundle?.main.name {
+        if let name = object.bundle?.main.name {
             VStack {
                 Text(name).bold().padding(.bottom)
-                HeadersView(document: $document, bundle: $bundle, typeExt: $typeExt)
+                HeadersView(typeExt: $typeExt)
             }
             .blockView()
             .overlay {
@@ -105,13 +103,13 @@ struct MainView: View {
                 }
             }
         } else {
-            HeadersView(document: $document, bundle: $bundle, typeExt: .constant(nil)).blockView()
+            HeadersView(typeExt: .constant(nil)).blockView()
         }
     }
 }
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(document: .constant(BPXDocument()), bundle: .constant(nil))
+        MainView().environmentObject(BPXObject())
     }
 }

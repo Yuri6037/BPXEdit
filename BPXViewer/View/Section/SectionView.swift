@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SectionContentView: View {
-    @Binding var document: BPXDocument;
+    @EnvironmentObject var object: BPXObject;
     @EnvironmentObject var sectionState: SectionState;
 
     var body: some View {
@@ -18,7 +18,7 @@ struct SectionContentView: View {
         case .hex:
             HexViewWrapper(data: $sectionState.hexView)
         case .data:
-            DataView(value: $sectionState.dataView, container: $document.container)
+            DataView(value: $sectionState.dataView, container: $object.document.container)
         case .bpxsd:
             ScrollView {
                 SdView(value: $sectionState.structuredDataView)
@@ -30,22 +30,22 @@ struct SectionContentView: View {
 }
 
 struct SectionView: View {
-    @Binding var document: BPXDocument;
-    @Binding var bundle: Bundle?;
+    @EnvironmentObject var object: BPXObject;
     @EnvironmentObject var sectionState: SectionState;
     let section: Int;
 
     private func getSection() -> Section {
-        return document.container!.getSections()[section]
+        return object.sections[section]
     }
 
     var body: some View {
-        if section == -1 {
+        if !object.isValid(section: section) {
             Text("No selection.")
+                .toolbar { ToolBarView(section: section) }
         } else {
             ScrollView {
                 VStack {
-                    if let name = bundle?.main.getSectionName(code: getSection().header.ty) {
+                    if let name = object.bundle?.main.getSectionName(code: getSection().header.ty) {
                         Text("Section #\(section)").bold()
                         Text(name)
                     } else {
@@ -58,7 +58,7 @@ struct SectionView: View {
                     .frame(maxWidth: .infinity)
             }
             .frame(minWidth: 300)
-            .toolbar { ToolBarView(document: $document, bundle: $bundle, section: section) }
+            .toolbar { ToolBarView(section: section) }
             .onAppear {
                 sectionState.reset()
             }
@@ -68,6 +68,6 @@ struct SectionView: View {
 
 struct SectionView_Previews: PreviewProvider {
     static var previews: some View {
-        SectionView(document: .constant(BPXDocument()), bundle: .constant(nil), section: -1).environmentObject(SectionState())
+        SectionView(section: -1).environmentObject(SectionState()).environmentObject(BPXObject())
     }
 }

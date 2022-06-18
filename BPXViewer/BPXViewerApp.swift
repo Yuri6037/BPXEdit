@@ -19,7 +19,7 @@ struct BPXViewerApp: App {
 
     var body: some Scene {
         DocumentGroup(viewing: BPXDocument.self) { file in
-            ContentViewV2(document: file.$document)
+            ContentViewV2(object: BPXObject(document: file.$document))
                 .environmentObject(globalState)
                 .withErrorHandler()
         }

@@ -63,10 +63,9 @@ import SwiftUI
 }*/
 
 struct ContentViewV2: View {
-    @Binding var document: BPXDocument
+    @StateObject var object: BPXObject;
     @StateObject var sectionState = SectionState();
     @EnvironmentObject var errorHost: ErrorHost;
-    @State var bundle: Bundle?;
     @EnvironmentObject var globalState: GlobalState;
     @StateObject var windowState = WindowState();
 
@@ -81,26 +80,24 @@ struct ContentViewV2: View {
         NavigationView {
             /*VStack {
                 MainView(document: $document, bundle: $bundle)*/
-            SectionListView(document: $document, bundle: $bundle)
+            SectionListView()
+                .environmentObject(object)
                 .environmentObject(sectionState)
                 .frame(minWidth: 180)
                 .toolbar {
                     ToolButton(icon: "sidebar.leading", text: "Toggle Sidebar", action: toggleSidebar)
                 }
-            //}
-            SectionView(document: $document, bundle: $bundle, section: -1)
-            SectionContentView(document: $document)
+            SectionView(section: -1)
+                .environmentObject(object)
+            SectionContentView()
+                .environmentObject(object)
                 .environmentObject(sectionState)
-                //.frame(maxWidth: .infinity)
-        }
-        .onAppear {
-            bundle = document.findBundle();
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentViewV2(document: .constant(BPXDocument()))
+        ContentViewV2(object: BPXObject())
     }
 }

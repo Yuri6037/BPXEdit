@@ -17,6 +17,7 @@
 		DA0DCFBA283E625400904DA1 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DCFB9283E621300904DA1 /* libz.tbd */; };
 		DA1779F82846519E00F3EBC5 /* SdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1779F72846519E00F3EBC5 /* SdView.swift */; };
 		DA20D91D285DF5B80025D3E2 /* BPXObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA20D91C285DF5B80025D3E2 /* BPXObject.swift */; };
+		DA20D91F285E747D0025D3E2 /* SectionContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA20D91E285E747D0025D3E2 /* SectionContentView.swift */; };
 		DA245EA9284BB55C00465539 /* WindowReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA245EA8284BB55C00465539 /* WindowReader.swift */; };
 		DA2B4A40284CB72A00EF40D8 /* Hacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2B4A3F284CB72A00EF40D8 /* Hacks.swift */; };
 		DA49036C2843B436006C9169 /* ToolButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA49036B2843B436006C9169 /* ToolButton.swift */; };
@@ -66,6 +67,7 @@
 		DA0DCFBC283E639F00904DA1 /* liblzma.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = liblzma.5.tbd; path = usr/lib/liblzma.5.tbd; sourceTree = SDKROOT; };
 		DA1779F72846519E00F3EBC5 /* SdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SdView.swift; sourceTree = "<group>"; };
 		DA20D91C285DF5B80025D3E2 /* BPXObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPXObject.swift; sourceTree = "<group>"; };
+		DA20D91E285E747D0025D3E2 /* SectionContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionContentView.swift; sourceTree = "<group>"; };
 		DA245EA8284BB55C00465539 /* WindowReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowReader.swift; sourceTree = "<group>"; };
 		DA2B4A3F284CB72A00EF40D8 /* Hacks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hacks.swift; sourceTree = "<group>"; };
 		DA49036B2843B436006C9169 /* ToolButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolButton.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				DA689BF52844C46B00A2EF1B /* StringView.swift */,
 				DA1779F72846519E00F3EBC5 /* SdView.swift */,
 				DA560CF42848BD790057AB1A /* PointerView.swift */,
+				DA20D91E285E747D0025D3E2 /* SectionContentView.swift */,
 			);
 			path = Section;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				DACF4B1F28423ABA008AA6A3 /* SectionState.swift in Sources */,
 				DA737F03284A43F1003143B4 /* SectionView.swift in Sources */,
 				DA90C919283BB9AD0091DE15 /* BPXDocument.swift in Sources */,
+				DA20D91F285E747D0025D3E2 /* SectionContentView.swift in Sources */,
 				DA99F38D283FE703007BFEC3 /* SectionHeaderView.swift in Sources */,
 				DAA2DEFF284F77F7001F5D68 /* SectionListView.swift in Sources */,
 				DA0DCF8F283D371600904DA1 /* Error.swift in Sources */,

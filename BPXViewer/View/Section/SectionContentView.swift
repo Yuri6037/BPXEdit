@@ -12,19 +12,14 @@ struct SectionContentView: View {
     @EnvironmentObject var sectionState: SectionState;
 
     var body: some View {
-        switch sectionState.viewType {
-        case .closed:
-            Text("Please open a section view.")
-        case .hex:
-            HexViewWrapper(data: $sectionState.hexView)
-        case .data:
-            DataView(value: $sectionState.dataView, container: $object.document.container)
-        case .bpxsd:
-            ScrollView {
-                SdView(value: $sectionState.structuredDataView)
-            }
-        case .strings:
-            StringView(value: $sectionState.stringView)
+        switch sectionState.viewMode {
+        case .editor(_):
+            Text("Not yet supported.").toolbar { EmptyView() }
+        case .viewer(let section):
+            SectionViewer()
+                .toolbar { SectionViewerToolBarView(section: section) }
+        default:
+            Text("Internal error!")
         }
     }
 }

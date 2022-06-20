@@ -15,27 +15,19 @@ enum ViewType {
     case strings
 }
 
+enum ViewMode {
+    case editor(Int)
+    case viewer(Int)
+    case none
+}
+
 class SectionState: ObservableObject {
     @Published var viewType: ViewType = .closed;
     @Published var stringView: [String] = [];
     @Published var hexView: [uint8] = [];
     @Published var dataView: Value = .scalar(.u8(0)); //Just a default value so that we don't crash DecodedView anymore.
     @Published var structuredDataView: SdValue = SdValue();
-
-    func canEdit() -> Bool {
-        switch viewType {
-        case .closed:
-            return false;
-        case .hex:
-            return false;
-        case .data:
-            return true;
-        case .bpxsd:
-            return false;
-        case .strings:
-            return false;
-        }
-    }
+    @Published var viewMode: ViewMode = .none;
 
     func showStructuredData(value: SdValue?) {
         if let value = value {
@@ -61,6 +53,25 @@ class SectionState: ObservableObject {
         self.stringView = [];
         self.dataView = .scalar(.u8(0));
         self.structuredDataView = SdValue();
+        self.viewMode = .none;
+    }
+    
+    func isClosed() -> Bool {
+        switch viewMode {
+        case .none:
+            return true;
+        default:
+            return false;
+        }
+    }
+
+    func isViewer() -> Bool {
+        switch viewMode {
+        case .viewer(_):
+            return true;
+        default:
+            return false;
+        }
     }
 
     func showHex(data: [uint8]?) {

@@ -33,9 +33,12 @@ struct ContentViewV2: View {
                     }
                 SectionView(section: -1)
                     .environmentObject(object)
-                SectionContentView()
-                    .environmentObject(object)
                     .environmentObject(sectionState)
+                if !sectionState.isClosed() {
+                    SectionContentView()
+                        .environmentObject(object)
+                        .environmentObject(sectionState)
+                }
             }
             .sheet(isPresented: $windowState.showReInterpretMenu) {
                 ReInterpretMenuModal(

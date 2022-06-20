@@ -10,6 +10,7 @@ import SwiftUI
 struct MainView: View {
     @EnvironmentObject var object: BPXObject;
     @EnvironmentObject var errorHost: ErrorHost;
+    @EnvironmentObject var sectionState: SectionState;
     @State var dataView: Value?;
     @State var hexView: [uint8]?;
 
@@ -43,12 +44,15 @@ struct MainView: View {
             let data = object.loadData(errorHost: errorHost, section: -1);
             dataView = data;
             hexView = hex;
+            sectionState.reset();
         }
     }
 }
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView().environmentObject(BPXObject())
+        MainView()
+            .environmentObject(BPXObject())
+            .environmentObject(SectionState())
     }
 }

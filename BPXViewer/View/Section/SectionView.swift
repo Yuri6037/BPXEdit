@@ -35,10 +35,11 @@ struct SectionView: View {
                     .blockView()
                     .frame(maxWidth: .infinity)
             }
-            .frame(minWidth: 300)
+            .frame(minWidth: 325)
             .toolbar { ToolBarView(section: section) }
             .onAppear {
                 sectionState.reset()
+                sectionState.viewMode = .viewer(section)
             }
         }
     }

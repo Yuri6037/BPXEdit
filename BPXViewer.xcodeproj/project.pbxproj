@@ -32,6 +32,7 @@
 		DA560CF72848ECCF0057AB1A /* Pointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA560CF62848ECCF0057AB1A /* Pointer.swift */; };
 		DA689BF62844C46B00A2EF1B /* StringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA689BF52844C46B00A2EF1B /* StringView.swift */; };
 		DA689BF82844ED8900A2EF1B /* StructuredData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA689BF72844ED8900A2EF1B /* StructuredData.swift */; };
+		DA6EF43F28609383008796A8 /* SectionEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6EF43E28609383008796A8 /* SectionEditor.swift */; };
 		DA737EFF2849FF0C003143B4 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA737EFE2849FF0C003143B4 /* ErrorHandler.swift */; };
 		DA737F03284A43F1003143B4 /* SectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA737F02284A43F1003143B4 /* SectionView.swift */; };
 		DA90C917283BB9AD0091DE15 /* BPXViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90C916283BB9AD0091DE15 /* BPXViewerApp.swift */; };
@@ -84,6 +85,7 @@
 		DA560CF62848ECCF0057AB1A /* Pointer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pointer.swift; sourceTree = "<group>"; };
 		DA689BF52844C46B00A2EF1B /* StringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringView.swift; sourceTree = "<group>"; };
 		DA689BF72844ED8900A2EF1B /* StructuredData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructuredData.swift; sourceTree = "<group>"; };
+		DA6EF43E28609383008796A8 /* SectionEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionEditor.swift; sourceTree = "<group>"; };
 		DA737EFE2849FF0C003143B4 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		DA737F02284A43F1003143B4 /* SectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionView.swift; sourceTree = "<group>"; };
 		DA90C913283BB9AD0091DE15 /* BPXViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BPXViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -197,6 +199,14 @@
 			path = Hex;
 			sourceTree = "<group>";
 		};
+		DA6EF43D28609362008796A8 /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+				DA6EF43E28609383008796A8 /* SectionEditor.swift */,
+			);
+			path = Editor;
+			sourceTree = "<group>";
+		};
 		DA90C90A283BB9AD0091DE15 = {
 			isa = PBXGroup;
 			children = (
@@ -269,6 +279,7 @@
 		DAA2DF01284F7A3F001F5D68 /* Section */ = {
 			isa = PBXGroup;
 			children = (
+				DA6EF43D28609362008796A8 /* Editor */,
 				DA18D41A285FCBB50092A224 /* Viewer */,
 				DA737F02284A43F1003143B4 /* SectionView.swift */,
 				DA20D91E285E747D0025D3E2 /* SectionContentView.swift */,
@@ -380,6 +391,7 @@
 				DA1779F82846519E00F3EBC5 /* SdView.swift in Sources */,
 				DA560CF52848BD790057AB1A /* PointerView.swift in Sources */,
 				DACF4B1F28423ABA008AA6A3 /* SectionState.swift in Sources */,
+				DA6EF43F28609383008796A8 /* SectionEditor.swift in Sources */,
 				DA737F03284A43F1003143B4 /* SectionView.swift in Sources */,
 				DA90C919283BB9AD0091DE15 /* BPXDocument.swift in Sources */,
 				DA20D91F285E747D0025D3E2 /* SectionContentView.swift in Sources */,

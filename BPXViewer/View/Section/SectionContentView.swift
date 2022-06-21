@@ -13,8 +13,8 @@ struct SectionContentView: View {
 
     var body: some View {
         switch sectionState.viewMode {
-        case .editor(_):
-            Text("Not yet supported.").toolbar { EmptyView() }
+        case .editor(let section):
+            SectionEditor(section: section)
         case .viewer(let section):
             SectionViewer()
                 .toolbar { SectionViewerToolBarView(section: section) }

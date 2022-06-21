@@ -50,7 +50,7 @@ struct SectionViewerToolBarView: View {
                 action: { loadStrings() }
             )
             ToolButton(
-                icon: "doc.zipper",
+                icon: "rectangle.stack",
                 text: "BPXSD View",
                 disabled: !object.isValid(section: section),
                 action: { loadStructuredData() }

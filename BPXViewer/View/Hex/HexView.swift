@@ -17,9 +17,11 @@ import SwiftUI
     private var charWidth: CGFloat = 0.0;
     private var observer: NSKeyValueObservation?;
     private var data: [uint8]?;
+    private var hax = false;
 
     override func viewDidLoad() {
         hex.delegate = self;
+        ascii.delegate = self;
         let font = NSFont.monospacedSystemFont(ofSize: 16, weight: .regular);
         hex.font = font;
         ascii.font = font;
@@ -68,21 +70,45 @@ import SwiftUI
     override func viewWillDisappear() {
         data = nil;
         hex.delegate = nil;
+        ascii.delegate = nil;
         observer?.invalidate();
     }
 
     func textViewDidChangeSelection(_ notification: Notification) {
-        let cursor = hex.selectedRange();
-        let selectionStart = cursor.location;
-        let selectionEnd = cursor.location + cursor.length;
-        let startByteIndex = (selectionStart - (selectionStart / ((bytesPerLine * 3) + 1))) / 3;
-        let endByteIndex = (selectionEnd - (selectionEnd / ((bytesPerLine * 3) + 1))) / 3;
-        let startAscii = startByteIndex + startByteIndex / bytesPerLine;
-        let endAscii = (endByteIndex + endByteIndex / bytesPerLine) + 1;
-        var cursor1 = ascii.selectedRange();
-        cursor1.location = startAscii;
-        cursor1.length = endAscii - startAscii;
-        ascii.setSelectedRange(cursor1);
+        if hax {
+            hax = false;
+            return;
+        }
+        if notification.object as? NSTextView? == hex {
+            let cursor = hex.selectedRange();
+            let selectionStart = cursor.location;
+            let selectionEnd = cursor.location + cursor.length;
+            let startByteIndex = (selectionStart - (selectionStart / ((bytesPerLine * 3) + 1))) / 3;
+            let endByteIndex = (selectionEnd - (selectionEnd / ((bytesPerLine * 3) + 1))) / 3;
+            let startAscii = startByteIndex + startByteIndex / bytesPerLine;
+            let endAscii = (endByteIndex + endByteIndex / bytesPerLine) + 1;
+            var cursor1 = ascii.selectedRange();
+            cursor1.location = startAscii;
+            cursor1.length = endAscii - startAscii;
+            hax = true;
+            ascii.setSelectedRange(cursor1);
+        } else if notification.object as? NSTextView? == ascii {
+            let cursor = ascii.selectedRange();
+            let selectionStart = cursor.location;
+            let selectionEnd = cursor.location + cursor.length;
+            let startByteIndex = selectionStart - selectionStart / (bytesPerLine + 1);
+            var endByteIndex = (selectionEnd - selectionEnd / (bytesPerLine + 1)) - 1;
+            if endByteIndex < startByteIndex {
+                endByteIndex = startByteIndex;
+            }
+            let startHex = (startByteIndex * 3) + ((startByteIndex * 3) / (bytesPerLine * 3));
+            let endHex = ((endByteIndex * 3) + ((endByteIndex * 3) / (bytesPerLine * 3))) + 2;
+            var cursor1 = hex.selectedRange();
+            cursor1.location = startHex;
+            cursor1.length = endHex - startHex;
+            hax = true;
+            hex.setSelectedRange(cursor1);
+        }
     }
 
     private func getMaxBytesPerLine() -> Int {
@@ -93,6 +119,9 @@ import SwiftUI
     }
 
     public func setData(buffer: [uint8]) {
+        if data == buffer {
+            return;
+        }
         data = buffer;
         render();
     }

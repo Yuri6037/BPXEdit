@@ -18,6 +18,8 @@
 		DA1779F82846519E00F3EBC5 /* SdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1779F72846519E00F3EBC5 /* SdView.swift */; };
 		DA18D419285FCB3B0092A224 /* SectionViewerToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA18D418285FCB3B0092A224 /* SectionViewerToolBarView.swift */; };
 		DA18D41C285FCD250092A224 /* SectionViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA18D41B285FCD250092A224 /* SectionViewer.swift */; };
+		DA1FB3DE2865138C00492206 /* HexViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1FB3DD2865138C00492206 /* HexViewer.swift */; };
+		DA1FB3E0286514AE00492206 /* HexViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1FB3DF286514AE00492206 /* HexViewWrapper.swift */; };
 		DA20D91D285DF5B80025D3E2 /* BPXObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA20D91C285DF5B80025D3E2 /* BPXObject.swift */; };
 		DA20D91F285E747D0025D3E2 /* SectionContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA20D91E285E747D0025D3E2 /* SectionContentView.swift */; };
 		DA245EA9284BB55C00465539 /* WindowReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA245EA8284BB55C00465539 /* WindowReader.swift */; };
@@ -45,6 +47,7 @@
 		DA99F38D283FE703007BFEC3 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA99F38C283FE703007BFEC3 /* SectionHeaderView.swift */; };
 		DAA2DEFD284F74FE001F5D68 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA2DEFC284F74FE001F5D68 /* MainView.swift */; };
 		DAA2DEFF284F77F7001F5D68 /* SectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA2DEFE284F77F7001F5D68 /* SectionListView.swift */; };
+		DAA8A66C2865B5CA00FB8812 /* bypass_garbage_signed_bits_count.c in Sources */ = {isa = PBXBuildFile; fileRef = DAA8A66B2865B5CA00FB8812 /* bypass_garbage_signed_bits_count.c */; };
 		DAAAC99E283BD80900D663E8 /* HexView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAAAC99D283BD80900D663E8 /* HexView.xib */; };
 		DAAAC9A0283BD9B000D663E8 /* HexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAAC99F283BD9B000D663E8 /* HexView.swift */; };
 		DAB22D822840D4D7005C8741 /* BundleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB22D812840D4D7005C8741 /* BundleManager.swift */; };
@@ -71,6 +74,8 @@
 		DA1779F72846519E00F3EBC5 /* SdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SdView.swift; sourceTree = "<group>"; };
 		DA18D418285FCB3B0092A224 /* SectionViewerToolBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionViewerToolBarView.swift; sourceTree = "<group>"; };
 		DA18D41B285FCD250092A224 /* SectionViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionViewer.swift; sourceTree = "<group>"; };
+		DA1FB3DD2865138C00492206 /* HexViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexViewer.swift; sourceTree = "<group>"; };
+		DA1FB3DF286514AE00492206 /* HexViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexViewWrapper.swift; sourceTree = "<group>"; };
 		DA20D91C285DF5B80025D3E2 /* BPXObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPXObject.swift; sourceTree = "<group>"; };
 		DA20D91E285E747D0025D3E2 /* SectionContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionContentView.swift; sourceTree = "<group>"; };
 		DA245EA8284BB55C00465539 /* WindowReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowReader.swift; sourceTree = "<group>"; };
@@ -101,6 +106,7 @@
 		DA99F38C283FE703007BFEC3 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		DAA2DEFC284F74FE001F5D68 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		DAA2DEFE284F77F7001F5D68 /* SectionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionListView.swift; sourceTree = "<group>"; };
+		DAA8A66B2865B5CA00FB8812 /* bypass_garbage_signed_bits_count.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = bypass_garbage_signed_bits_count.c; sourceTree = "<group>"; };
 		DAAAC99D283BD80900D663E8 /* HexView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HexView.xib; sourceTree = "<group>"; };
 		DAAAC99F283BD9B000D663E8 /* HexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexView.swift; sourceTree = "<group>"; };
 		DAB22D812840D4D7005C8741 /* BundleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleManager.swift; sourceTree = "<group>"; };
@@ -195,6 +201,8 @@
 			children = (
 				DAAAC99D283BD80900D663E8 /* HexView.xib */,
 				DAAAC99F283BD9B000D663E8 /* HexView.swift */,
+				DA1FB3DD2865138C00492206 /* HexViewer.swift */,
+				DA1FB3DF286514AE00492206 /* HexViewWrapper.swift */,
 			);
 			path = Hex;
 			sourceTree = "<group>";
@@ -239,6 +247,7 @@
 				DA90C921283BB9AE0091DE15 /* Info.plist */,
 				DA90C922283BB9AE0091DE15 /* BPXViewer.entitlements */,
 				DA90C91E283BB9AE0091DE15 /* Preview Content */,
+				DAA8A66B2865B5CA00FB8812 /* bypass_garbage_signed_bits_count.c */,
 			);
 			path = BPXViewer;
 			sourceTree = "<group>";
@@ -368,6 +377,7 @@
 				DA560CF72848ECCF0057AB1A /* Pointer.swift in Sources */,
 				DA49036E2843E085006C9169 /* BlockView.swift in Sources */,
 				DA0AF22A2856177500B336EA /* ToolBarView.swift in Sources */,
+				DAA8A66C2865B5CA00FB8812 /* bypass_garbage_signed_bits_count.c in Sources */,
 				DAAAC9A0283BD9B000D663E8 /* HexView.swift in Sources */,
 				DA90C917283BB9AD0091DE15 /* BPXViewerApp.swift in Sources */,
 				DA99F389283FA1DF007BFEC3 /* SelectableItem.swift in Sources */,
@@ -377,7 +387,9 @@
 				DA689BF62844C46B00A2EF1B /* StringView.swift in Sources */,
 				DA4903712843E6D8006C9169 /* Value.swift in Sources */,
 				DA99F38B283FE64E007BFEC3 /* MainHeaderView.swift in Sources */,
+				DA1FB3E0286514AE00492206 /* HexViewWrapper.swift in Sources */,
 				DA245EA9284BB55C00465539 /* WindowReader.swift in Sources */,
+				DA1FB3DE2865138C00492206 /* HexViewer.swift in Sources */,
 				DA4903752843E78A006C9169 /* Loader.swift in Sources */,
 				DA2B4A40284CB72A00EF40D8 /* Hacks.swift in Sources */,
 				DA49036C2843B436006C9169 /* ToolButton.swift in Sources */,

@@ -9,11 +9,12 @@ import Foundation
 import AppKit
 
 class ByteBuf {
-    private let buffer: [uint8]
+    private var buffer: [uint8]
     private var cursor = 0;
 
     init(buffer: [uint8]) {
         self.buffer = buffer;
+        self.buffer.append(0); //Swift cannot support loading only 2 bytes of the buffer when exactly 2 bytes are in so append one more useless byte...
     }
 
     func size() -> Int {
@@ -36,7 +37,7 @@ class ByteBuf {
         if !checkValidSize(len: 1) {
             return nil;
         }
-        let val = Int8(buffer[cursor]);
+        let val = bypass_garbage_signed_bits_count(buffer[cursor]);
         cursor += 1;
         return val;
     }

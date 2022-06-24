@@ -14,4 +14,7 @@
 #include <bpx/section.h>
 #include <bpx/error_codes.h>
 
+//Searched for 1 hour on google there exists no solution in swift, well then throw good old proper C at it!
+int8_t bypass_garbage_signed_bits_count(uint8_t byte);
+
 #endif /* bpx_bridge_h */

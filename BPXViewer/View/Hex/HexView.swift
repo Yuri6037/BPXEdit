@@ -9,6 +9,32 @@ import Foundation
 import Cocoa
 import SwiftUI
 
+struct Selection {
+    let start: Int;
+    let end: Int;
+    let length: Int;
+    let bytes: [uint8]?; //If selection is too large (> 16 bytes) this field is not computed for performance reasons.
+    // This field may also be nil if no data buffer is connected to the hex view.
+
+    init(start: Int, end: Int, bytes: [uint8]? = nil) {
+        self.start = start;
+        self.end = end + 1;
+        self.length = (end + 1) - start;
+        self.bytes = bytes;
+    }
+
+    init() {
+        start = 0;
+        end = 0;
+        length = 0;
+        bytes = nil;
+    }
+}
+
+protocol HexViewDelegate: AnyObject {
+    func hexViewDidChangeSelection(_ selection: Selection);
+}
+
 @IBDesignable class HexView: NSViewController, NSTextViewDelegate {
     @IBOutlet var address: NSTextView!
     @IBOutlet var hex: NSTextView!
@@ -18,6 +44,7 @@ import SwiftUI
     private var observer: NSKeyValueObservation?;
     private var data: [uint8]?;
     private var hax = false;
+    weak var delegate: HexViewDelegate?;
 
     override func viewDidLoad() {
         hex.delegate = self;
@@ -74,6 +101,23 @@ import SwiftUI
         observer?.invalidate();
     }
 
+    func notifyDelegate(start: Int, end: Int) {
+        let selection: Selection;
+        let length = end - start;
+        if length <= 0 {
+            selection = Selection();
+        } else if length <= 16 {
+            if let data = data?[start...end] {
+                selection = Selection(start: start, end: end, bytes: Array(data));
+            } else {
+                selection = Selection(start: start, end: end);
+            }
+        } else {
+            selection = Selection(start: start, end: end);
+        }
+        delegate?.hexViewDidChangeSelection(selection);
+    }
+
     func textViewDidChangeSelection(_ notification: Notification) {
         if hax {
             hax = false;
@@ -92,6 +136,7 @@ import SwiftUI
             cursor1.length = endAscii - startAscii;
             hax = true;
             ascii.setSelectedRange(cursor1);
+            notifyDelegate(start: startByteIndex, end: endByteIndex);
         } else if notification.object as? NSTextView? == ascii {
             let cursor = ascii.selectedRange();
             let selectionStart = cursor.location;
@@ -108,6 +153,7 @@ import SwiftUI
             cursor1.length = endHex - startHex;
             hax = true;
             hex.setSelectedRange(cursor1);
+            notifyDelegate(start: startByteIndex, end: endByteIndex);
         }
     }
 
@@ -124,17 +170,5 @@ import SwiftUI
         }
         data = buffer;
         render();
-    }
-}
-
-struct HexViewWrapper: NSViewControllerRepresentable {
-    @Binding var data: [uint8];
-
-    func makeNSViewController(context: Context) -> HexView {
-        return HexView();
-    }
-
-    func updateNSViewController(_ controller: HexView, context: Context) {
-        controller.setData(buffer: data);
     }
 }

@@ -31,7 +31,7 @@ struct MainView: View {
             if let hex = hexView {
                 VStack {
                     Text("Hex View").bold()
-                    HexViewWrapper(data: .constant(hex))
+                    HexViewer(data: .constant(hex))
                         .frame(height: 200)
                 }
                 .blockView()

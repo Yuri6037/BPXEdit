@@ -15,7 +15,7 @@ struct SectionEditor: View {
     let section: Int;
 
     var body: some View {
-        HexViewWrapper(data: $data)
+        HexViewer(data: $data)
             .toolbar {
                 ToolbarItem(placement: .automatic) {
                     Toggle(isOn: $append) {

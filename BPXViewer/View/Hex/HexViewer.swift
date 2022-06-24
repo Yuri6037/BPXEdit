@@ -43,6 +43,12 @@ struct HexViewer: View {
     @Binding var data: [uint8];
     @State var selection: Selection = Selection();
     @State var parser: ValueParser = .u8;
+    let selectionChanged: ((Selection) -> Void)?;
+
+    init(data: Binding<[uint8]>, selectionChanged: ((Selection) -> Void)? = nil) {
+        _data = data;
+        self.selectionChanged = selectionChanged;
+    }
 
     private func parse(parser: ValueParser) -> Value? {
         if let bytes = selection.bytes {
@@ -120,6 +126,11 @@ struct HexViewer: View {
                             .fixedSize()
                         }
                     }
+                }
+            }
+            .onChange(of: selection) { newSelection in
+                if let selectionChanged = selectionChanged {
+                    selectionChanged(newSelection);
                 }
             }
         }

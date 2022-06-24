@@ -9,7 +9,7 @@ import Foundation
 import Cocoa
 import SwiftUI
 
-struct Selection {
+struct Selection: Equatable {
     let start: Int;
     let end: Int;
     let length: Int;

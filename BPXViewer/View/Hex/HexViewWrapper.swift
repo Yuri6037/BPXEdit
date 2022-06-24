@@ -8,15 +8,17 @@
 import Foundation
 import SwiftUI
 
-class Coordinator: HexViewDelegate {
-    let parent: HexViewWrapper;
+class Coordinator: NSObject, HexViewDelegate {
+    @Binding var selection: Selection;
 
-    init(_ parent: HexViewWrapper) {
-        self.parent = parent;
+    init(_ selection: Binding<Selection>) {
+        _selection = selection;
     }
 
     func hexViewDidChangeSelection(_ selection: Selection) {
-        self.parent.selection = selection;
+        DispatchQueue.main.async {
+            self.selection = selection;
+        }
     }
 }
 
@@ -25,7 +27,7 @@ struct HexViewWrapper: NSViewControllerRepresentable {
     @Binding var selection: Selection;
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(self)
+        Coordinator($selection)
     }
 
     func makeNSViewController(context: Context) -> HexView {

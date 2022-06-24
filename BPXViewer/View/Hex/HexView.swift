@@ -104,7 +104,8 @@ protocol HexViewDelegate: AnyObject {
     func notifyDelegate(start: Int, end: Int) {
         let selection: Selection;
         let length = end - start;
-        if length <= 0 {
+        if length < 0 || start >= data?.count ?? 0 || end >= data?.count ?? 0 {
+            //We're out of bounds.
             selection = Selection();
         } else if length <= 16 {
             if let data = data?[start...end] {

@@ -24,84 +24,44 @@ struct HexViewer: View {
     @Binding var data: [uint8];
     @State var selection: Selection = Selection();
     @State var parser: ValueParser = .u8;
-    @State var value: Value?;
 
-    private func parse(parser: ValueParser) {
+    private func parse(parser: ValueParser) -> Value? {
         if let bytes = selection.bytes {
             let buf = ByteBuf(buffer: bytes);
             switch parser {
             case .u8:
-                if let v = buf.readUInt8() {
-                    value = .scalar(.u8(v));
-                } else {
-                    value = nil;
-                }
-                break;
+                guard let v = buf.readUInt8() else { return nil }
+                return .scalar(.u8(v));
             case .u16:
-                if let v = buf.readUInt16() {
-                    value = .scalar(.u16(v));
-                } else {
-                    value = nil;
-                }
-                break;
+                guard let v = buf.readUInt16() else { return nil }
+                return .scalar(.u16(v));
             case .u32:
-                if let v = buf.readUInt32() {
-                    value = .scalar(.u32(v));
-                } else {
-                    value = nil;
-                }
-                break;
+                guard let v = buf.readUInt32() else { return nil }
+                return .scalar(.u32(v));
             case .u64:
-                if let v = buf.readUInt64() {
-                    value = .scalar(.u64(v));
-                } else {
-                    value = nil;
-                }
-                break;
+                guard let v = buf.readUInt64() else { return nil }
+                return .scalar(.u64(v));
             case .i8:
-                if let v = buf.readInt8() {
-                    value = .scalar(.i8(v));
-                } else {
-                    value = nil;
-                }
-                break;
+                guard let v = buf.readInt8() else { return nil }
+                return .scalar(.i8(v));
             case .i16:
-                if let v = buf.readInt16() {
-                    value = .scalar(.i16(v));
-                } else {
-                    value = nil;
-                }
-                break;
+                guard let v = buf.readInt16() else { return nil }
+                return .scalar(.i16(v));
             case .i32:
-                if let v = buf.readInt32() {
-                    value = .scalar(.i32(v));
-                } else {
-                    value = nil;
-                }
-                break;
+                guard let v = buf.readInt32() else { return nil }
+                return .scalar(.i32(v));
             case .i64:
-                if let v = buf.readInt64() {
-                    value = .scalar(.i64(v));
-                } else {
-                    value = nil;
-                }
-                break;
+                guard let v = buf.readInt64() else { return nil }
+                return .scalar(.i64(v));
             case .f32:
-                if let v = buf.readFloat32() {
-                    value = .scalar(.f32(v));
-                } else {
-                    value = nil;
-                }
-                break;
+                guard let v = buf.readFloat32() else { return nil }
+                return .scalar(.f32(v));
             case .f64:
-                if let v = buf.readFloat64() {
-                    value = .scalar(.f64(v));
-                } else {
-                    value = nil;
-                }
-                break;
+                guard let v = buf.readFloat64() else { return nil }
+                return .scalar(.f64(v));
             }
         }
+        return nil;
     }
 
     var body: some View {
@@ -129,9 +89,7 @@ struct HexViewer: View {
                                 Text("32 bits float").tag(ValueParser.f32)
                                 Text("64 bits float").tag(ValueParser.f64)
                             }
-                            .onChange(of: parser, perform: parse)
-                            .onAppear { parse(parser: parser) }
-                            if let value = value {
+                            if let value = parse(parser: parser) {
                                 ValueView(value: value, container: .constant(nil))
                             } else {
                                 Text("Could not parse value")
@@ -153,10 +111,8 @@ struct HexViewer: View {
                                 Text("64 bits float").tag(ValueParser.f64)
                             }
                             .padding(.trailing)
-                            .onChange(of: parser, perform: parse)
-                            .onAppear { parse(parser: parser) }
                             Divider()
-                            if let value = value {
+                            if let value = parse(parser: parser) {
                                 ValueView(value: value, container: .constant(nil))
                                     .padding(.leading)
                             } else {

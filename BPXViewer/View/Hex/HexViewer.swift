@@ -20,6 +20,25 @@ enum ValueParser {
     case f64
 }
 
+fileprivate struct ParserPicker: View {
+    @Binding var selection: ValueParser;
+
+    var body: some View {
+        Picker("Interpreter", selection: $selection) {
+            Text("8 bits unsigned").tag(ValueParser.u8)
+            Text("16 bits unsigned").tag(ValueParser.u16)
+            Text("32 bits unsigned").tag(ValueParser.u32)
+            Text("64 bits unsigned").tag(ValueParser.u64)
+            Text("8 bits signed").tag(ValueParser.i8)
+            Text("16 bits signed").tag(ValueParser.i16)
+            Text("32 bits signed").tag(ValueParser.i32)
+            Text("64 bits signed").tag(ValueParser.i64)
+            Text("32 bits float").tag(ValueParser.f32)
+            Text("64 bits float").tag(ValueParser.f64)
+        }
+    }
+}
+
 struct HexViewer: View {
     @Binding var data: [uint8];
     @State var selection: Selection = Selection();
@@ -77,18 +96,7 @@ struct HexViewer: View {
                     }
                     if geo.size.width < 512 {
                         VStack {
-                            Picker("Interpreter", selection: $parser) {
-                                Text("8 bits unsigned").tag(ValueParser.u8)
-                                Text("16 bits unsigned").tag(ValueParser.u16)
-                                Text("32 bits unsigned").tag(ValueParser.u32)
-                                Text("64 bits unsigned").tag(ValueParser.u64)
-                                Text("8 bits signed").tag(ValueParser.i8)
-                                Text("16 bits signed").tag(ValueParser.i16)
-                                Text("32 bits signed").tag(ValueParser.i32)
-                                Text("64 bits signed").tag(ValueParser.i64)
-                                Text("32 bits float").tag(ValueParser.f32)
-                                Text("64 bits float").tag(ValueParser.f64)
-                            }
+                            ParserPicker(selection: $parser)
                             if let value = parse(parser: parser) {
                                 ValueView(value: value, container: .constant(nil))
                             } else {
@@ -98,26 +106,12 @@ struct HexViewer: View {
                         .fixedSize()
                     } else {
                         HStack {
-                            Picker("Interpreter", selection: $parser) {
-                                Text("8 bits unsigned").tag(ValueParser.u8)
-                                Text("16 bits unsigned").tag(ValueParser.u16)
-                                Text("32 bits unsigned").tag(ValueParser.u32)
-                                Text("64 bits unsigned").tag(ValueParser.u64)
-                                Text("8 bits signed").tag(ValueParser.i8)
-                                Text("16 bits signed").tag(ValueParser.i16)
-                                Text("32 bits signed").tag(ValueParser.i32)
-                                Text("64 bits signed").tag(ValueParser.i64)
-                                Text("32 bits float").tag(ValueParser.f32)
-                                Text("64 bits float").tag(ValueParser.f64)
-                            }
-                            .padding(.trailing)
+                            ParserPicker(selection: $parser).padding(.trailing)
                             Divider()
                             if let value = parse(parser: parser) {
-                                ValueView(value: value, container: .constant(nil))
-                                    .padding(.leading)
+                                ValueView(value: value, container: .constant(nil)).padding(.leading)
                             } else {
-                                Text("Could not parse value")
-                                    .padding(.leading)
+                                Text("Could not parse value").padding(.leading)
                             }
                         }
                         .fixedSize()

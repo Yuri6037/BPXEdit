@@ -22,7 +22,7 @@ class ByteBuf {
     }
 
     private func checkValidSize(len: Int) -> Bool {
-        if buffer.count - cursor < len {
+        if buffer.count - 1 - cursor < len {
             return false;
         } else {
             return true;

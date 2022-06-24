@@ -101,7 +101,7 @@ protocol HexViewDelegate: AnyObject {
         observer?.invalidate();
     }
 
-    func notifyDelegate(start: Int, end: Int) {
+    private func notifyDelegate(start: Int, end: Int) {
         let selection: Selection;
         let length = end - start;
         if length < 0 || start >= data?.count ?? 0 || end >= data?.count ?? 0 {
@@ -119,6 +119,26 @@ protocol HexViewDelegate: AnyObject {
         delegate?.hexViewDidChangeSelection(selection);
     }
 
+    private func setAsciiSelection(startByte: Int, endByte: Int) {
+        let startAscii = startByte + startByte / bytesPerLine;
+        let endAscii = (endByte + endByte / bytesPerLine) + 1;
+        var cursor = ascii.selectedRange();
+        cursor.location = startAscii;
+        cursor.length = endAscii - startAscii;
+        hax = true;
+        ascii.setSelectedRange(cursor);
+    }
+
+    private func setHexSelection(startByte: Int, endByte: Int) {
+        let startHex = (startByte * 3) + ((startByte * 3) / (bytesPerLine * 3));
+        let endHex = ((endByte * 3) + ((endByte * 3) / (bytesPerLine * 3))) + 2;
+        var cursor = hex.selectedRange();
+        cursor.location = startHex;
+        cursor.length = endHex - startHex;
+        hax = true;
+        hex.setSelectedRange(cursor);
+    }
+
     func textViewDidChangeSelection(_ notification: Notification) {
         if hax {
             hax = false;
@@ -130,13 +150,10 @@ protocol HexViewDelegate: AnyObject {
             let selectionEnd = cursor.location + cursor.length;
             let startByteIndex = (selectionStart - (selectionStart / ((bytesPerLine * 3) + 1))) / 3;
             let endByteIndex = (selectionEnd - (selectionEnd / ((bytesPerLine * 3) + 1))) / 3;
-            let startAscii = startByteIndex + startByteIndex / bytesPerLine;
-            let endAscii = (endByteIndex + endByteIndex / bytesPerLine) + 1;
-            var cursor1 = ascii.selectedRange();
-            cursor1.location = startAscii;
-            cursor1.length = endAscii - startAscii;
-            hax = true;
-            ascii.setSelectedRange(cursor1);
+            setAsciiSelection(startByte: startByteIndex, endByte: endByteIndex)
+            if startByteIndex == endByteIndex {
+                setHexSelection(startByte: startByteIndex, endByte: endByteIndex);
+            }
             notifyDelegate(start: startByteIndex, end: endByteIndex);
         } else if notification.object as? NSTextView? == ascii {
             let cursor = ascii.selectedRange();
@@ -147,13 +164,10 @@ protocol HexViewDelegate: AnyObject {
             if endByteIndex < startByteIndex {
                 endByteIndex = startByteIndex;
             }
-            let startHex = (startByteIndex * 3) + ((startByteIndex * 3) / (bytesPerLine * 3));
-            let endHex = ((endByteIndex * 3) + ((endByteIndex * 3) / (bytesPerLine * 3))) + 2;
-            var cursor1 = hex.selectedRange();
-            cursor1.location = startHex;
-            cursor1.length = endHex - startHex;
-            hax = true;
-            hex.setSelectedRange(cursor1);
+            setHexSelection(startByte: startByteIndex, endByte: endByteIndex);
+            if startByteIndex == endByteIndex {
+                setAsciiSelection(startByte: startByteIndex, endByte: endByteIndex);
+            }
             notifyDelegate(start: startByteIndex, end: endByteIndex);
         }
     }

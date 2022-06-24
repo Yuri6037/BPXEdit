@@ -88,33 +88,37 @@ struct HexViewer: View {
             VStack {
                 HexViewWrapper(data: $data, selection: $selection)
                 Divider()
-                VStack {
-                    HStack {
-                        Text("Current selection: ").bold()
-                        Text("[\(selection.start); \(selection.end))")
-                        Text("(length: \(selection.length))")
-                    }
-                    if geo.size.width < 512 {
-                        VStack {
-                            ParserPicker(selection: $parser)
-                            if let value = parse(parser: parser) {
-                                ValueView(value: value, container: .constant(nil))
-                            } else {
-                                Text("Could not parse value")
-                            }
-                        }
-                        .fixedSize()
-                    } else {
+                if selection.length == 0 {
+                    Text("Selection is out of range.").bold()
+                } else {
+                    VStack {
                         HStack {
-                            ParserPicker(selection: $parser).padding(.trailing)
-                            Divider()
-                            if let value = parse(parser: parser) {
-                                ValueView(value: value, container: .constant(nil)).padding(.leading)
-                            } else {
-                                Text("Could not parse value").padding(.leading)
-                            }
+                            Text("Current selection: ").bold()
+                            Text("[\(selection.start); \(selection.end))")
+                            Text("(length: \(selection.length))")
                         }
-                        .fixedSize()
+                        if geo.size.width < 512 {
+                            VStack {
+                                ParserPicker(selection: $parser)
+                                if let value = parse(parser: parser) {
+                                    ValueView(value: value, container: .constant(nil))
+                                } else {
+                                    Text("Could not parse value")
+                                }
+                            }
+                            .fixedSize()
+                        } else {
+                            HStack {
+                                ParserPicker(selection: $parser).padding(.trailing)
+                                Divider()
+                                if let value = parse(parser: parser) {
+                                    ValueView(value: value, container: .constant(nil)).padding(.leading)
+                                } else {
+                                    Text("Could not parse value").padding(.leading)
+                                }
+                            }
+                            .fixedSize()
+                        }
                     }
                 }
             }

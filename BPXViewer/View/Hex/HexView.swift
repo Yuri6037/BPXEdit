@@ -44,6 +44,7 @@ protocol HexViewDelegate: AnyObject {
     private var observer: NSKeyValueObservation?;
     private var data: [uint8]?;
     private var hax = false;
+    private var prevBytesPerLine: Int = 16;
     weak var delegate: HexViewDelegate?;
 
     override func viewDidLoad() {
@@ -65,6 +66,9 @@ protocol HexViewDelegate: AnyObject {
 
     private func render() {
         if let data = data {
+            if prevBytesPerLine == bytesPerLine {
+                return; //It's useless to re-render the entire view if the width didn't change!
+            }
             var ascii = "";
             var address = "";
             var hex = "";
@@ -91,6 +95,7 @@ protocol HexViewDelegate: AnyObject {
             self.address.string = address;
             self.ascii.string = ascii;
             self.hex.string = hex;
+            prevBytesPerLine = bytesPerLine;
         }
     }
 

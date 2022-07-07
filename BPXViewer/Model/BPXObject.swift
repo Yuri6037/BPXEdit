@@ -41,7 +41,7 @@ class BPXObject: ObservableObject {
             let data = try document.container?.getSections()[section].load();
             return data;
         } catch {
-            errorHost.spawn(ErrorInfo(message: String(describing: error), context: "Hex View"));
+            errorHost.spawn(ErrorInfo(message: String(describing: error), context: "Editor"));
             return nil;
         }
     }

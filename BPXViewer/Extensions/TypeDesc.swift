@@ -14,8 +14,10 @@ func parseBitflag(flags: [String: UInt64], field: UInt64) -> String {
             flagStr += " | " + name;
         }
     }
-    //Potentially super slow code but no other options despite my string to obviously be always ASCII characters, swift refuses at all costs to use an int directly! Let it be a good old Theta(n).
-    flagStr = String(flagStr[flagStr.index(flagStr.startIndex, offsetBy: 2)...]);
+    if !flagStr.isEmpty {
+        //Potentially super slow code but no other options despite my string to obviously be always ASCII characters, swift refuses at all costs to use an int directly! Let it be a good old Theta(n).
+        flagStr = String(flagStr[flagStr.index(flagStr.startIndex, offsetBy: 2)...]);
+    }
     return flagStr;
 }
 

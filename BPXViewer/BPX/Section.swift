@@ -11,11 +11,16 @@ fileprivate let BUF_SIZE = 8192;
 
 public class SectionData {
     var inner: bpx_section_t?;
-    let size: Int;
+    var size: Int {
+        if let inner = inner {
+            return bpx_section_size(inner);
+        } else {
+            return 0;
+        }
+    }
 
-    fileprivate init(inner: bpx_section_t?, size: Int) {
+    fileprivate init(inner: bpx_section_t?) {
         self.inner = inner;
-        self.size = size;
     }
 
     public func loadInMemory() -> [uint8] {
@@ -46,6 +51,23 @@ public class SectionData {
         return byte[0];
     }
 
+    public func write(_ buffer: [uint8]) -> Int {
+        buffer.withUnsafeBufferPointer { ptr in
+            bpx_section_write(inner, ptr.baseAddress, buffer.count)
+        }
+    }
+
+    public func writeAppend(_ buffer: [uint8]) -> Int {
+        buffer.withUnsafeBufferPointer { ptr in
+            bpx_section_write_append(inner, ptr.baseAddress, buffer.count)
+        }
+    }
+
+    public func remove(count: Int) {
+        bpx_section_shift(inner, -Int64(count));
+        bpx_section_truncate(inner, count, nil);
+    }
+
     deinit {
         bpx_section_close(&inner);
     }
@@ -70,7 +92,7 @@ public class Section : Identifiable {
         if err != BPX_ERR_NONE {
             throw OpenError.fromc(code: err)!;
         }
-        return SectionData(inner: data, size: Int(header.size));
+        return SectionData(inner: data);
     }
 
     public func load() throws -> SectionData {
@@ -79,6 +101,6 @@ public class Section : Identifiable {
         if err != BPX_ERR_NONE {
             throw CoreError.fromc(code: err)!;
         }
-        return SectionData(inner: data, size: Int(header.size));
+        return SectionData(inner: data);
     }
 }

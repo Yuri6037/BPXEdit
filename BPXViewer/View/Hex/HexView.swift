@@ -188,6 +188,7 @@ protocol HexViewDelegate: AnyObject {
         if data == buffer {
             return;
         }
+        prevBytesPerLine = 0; //That forces re-rendering.
         data = buffer;
         render();
     }

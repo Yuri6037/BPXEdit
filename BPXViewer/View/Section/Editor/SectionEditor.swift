@@ -10,15 +10,16 @@ import SwiftUI
 struct SectionEditor: View {
     @EnvironmentObject var object: BPXObject;
     @EnvironmentObject var errorHost: ErrorHost;
-    @State var data: [uint8] = [];
-    @State var append = true;
+    @StateObject var edit = EditSection();
+    @State var showByteInsert = false;
+    @StateObject var byte = ByteInput();
     let section: Int;
 
     var body: some View {
-        HexViewer(data: $data)
+        HexViewer(data: $edit.data, selectionChanged: { selection in edit.selection = selection })
             .toolbar {
                 ToolbarItem(placement: .automatic) {
-                    Toggle(isOn: $append) {
+                    Toggle(isOn: $edit.append) {
                         Text("Append new data")
                     }
                 }
@@ -28,7 +29,7 @@ struct SectionEditor: View {
                 ToolbarItem(placement: .automatic) {
                     HStack {
                         ToolButton(icon: "plus", text: "Insert byte") {
-                        
+                            showByteInsert = true;
                         }
                         ToolButton(icon: "doc.badge.plus", text: "Insert raw binary") {
                         
@@ -46,12 +47,28 @@ struct SectionEditor: View {
                 }
                 ToolbarItem(placement: .automatic) {
                     ToolButton(icon: "trash", text: "Remove selection") {
-                        
+                        edit.removeBytes()
                     }
                 }
             }
+            .sheet(isPresented: $showByteInsert) {
+                TextField("Value: ", text: $byte.value).padding()
+                HStack{
+                    Button("Cancel") { showByteInsert = false }.keyboardShortcut(.cancelAction)
+                    Spacer()
+                    Button("Insert") {
+                        showByteInsert = false;
+                        edit.insertByte(byte: byte.byte);
+                    }
+                    .keyboardShortcut(.defaultAction)
+                }
+                .padding()
+            }
+            .onDisappear {
+                edit.section = nil;
+            }
             .onAppear {
-                data = object.loadRaw(errorHost: errorHost, section: section) ?? [];
+                edit.initialize(section: object.loadSection(errorHost: errorHost, section: section));
             }
     }
 }

@@ -33,6 +33,19 @@ class BPXObject: ObservableObject {
         sections = document.container?.getSections() ?? [];
     }
 
+    func loadSection(errorHost: ErrorHost, section: Int) -> SectionData? {
+        if section == -1 {
+            return nil;
+        }
+        do {
+            let data = try document.container?.getSections()[section].load();
+            return data;
+        } catch {
+            errorHost.spawn(ErrorInfo(message: String(describing: error), context: "Hex View"));
+            return nil;
+        }
+    }
+
     func loadRaw(errorHost: ErrorHost, section: Int) -> [uint8]? {
         if section == -1 {
             var useless = document.container?.getMainHeader().type_ext;

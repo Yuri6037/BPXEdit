@@ -13,10 +13,37 @@ struct SectionEditor: View {
     @StateObject var edit = EditSection();
     @State var showByteInsert = false;
     @StateObject var byte = ByteInput();
+    @State var window: NSWindow?;
     let section: Int;
+
+    func openBinaryFile() {
+        let dialog = NSOpenPanel();
+        dialog.title = "Choose a binary file to insert.";
+        dialog.showsResizeIndicator = true;
+        dialog.showsHiddenFiles = false;
+        dialog.canChooseDirectories = false;
+        dialog.canCreateDirectories = false;
+        dialog.allowsMultipleSelection = false;
+        dialog.beginSheetModal(for: window!) { response in
+            if response == NSApplication.ModalResponse.OK {
+                do {
+                    let data = try Data(contentsOf: dialog.url!);
+                    edit.insertBytes(data: data);
+                } catch {
+                    errorHost.spawn(ErrorInfo(message: String(describing: error), context: "Editor"));
+                }
+            }
+        }
+    }
 
     var body: some View {
         HexViewer(data: $edit.data, selectionChanged: { selection in edit.selection = selection })
+            .overlay {
+                WindowReader { window in
+                    self.window = window;
+                }
+                .frame(width: 0, height: 0)
+            }
             .toolbar {
                 ToolbarItem(placement: .automatic) {
                     Toggle(isOn: $edit.append) {
@@ -32,10 +59,9 @@ struct SectionEditor: View {
                             showByteInsert = true;
                         }
                         ToolButton(icon: "doc.badge.plus", text: "Insert raw binary") {
-                        
+                            openBinaryFile();
                         }
                         ToolButton(icon: "text.badge.plus", text: "Insert text") {
-                        
                         }
                         ToolButton(icon: "rectangle.stack.badge.plus", text: "Insert BPXSD Object") {
                         

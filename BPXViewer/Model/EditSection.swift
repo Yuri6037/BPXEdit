@@ -25,6 +25,19 @@ class EditSection: ObservableObject {
         data.removeSubrange(selection.start..<selection.end);
     }
 
+    func insertBytes(data: Data) {
+        if append {
+            section?.seek(pos: UInt64(selection.start + 1));
+            let _ = section?.writeAppend(Array(data));
+            self.data.insert(contentsOf: data, at: selection.start + 1);
+        } else {
+            section?.seek(pos: UInt64(selection.start));
+            let _ = section?.write(Array(data));
+            self.data.removeSubrange(selection.start..<min(selection.start + data.count, self.data.count))
+            self.data.insert(contentsOf: data, at: selection.start);
+        }
+    }
+
     func insertByte(byte: uint8) {
         if append {
             section?.seek(pos: UInt64(selection.start + 1));

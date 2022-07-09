@@ -14,6 +14,8 @@ struct SectionEditor: View {
     @State var showByteInsert = false;
     @StateObject var byte = ByteInput();
     @State var window: NSWindow?;
+    @State var showTextInsert = false;
+    @State var text = "";
     let section: Int;
 
     func openBinaryFile() {
@@ -62,6 +64,7 @@ struct SectionEditor: View {
                             openBinaryFile();
                         }
                         ToolButton(icon: "text.badge.plus", text: "Insert text") {
+                            showTextInsert = true;
                         }
                         ToolButton(icon: "rectangle.stack.badge.plus", text: "Insert BPXSD Object") {
                         
@@ -78,13 +81,26 @@ struct SectionEditor: View {
                 }
             }
             .sheet(isPresented: $showByteInsert) {
-                TextField("Value: ", text: $byte.value).padding()
+                TextField("Value", text: $byte.value).padding()
                 HStack{
                     Button("Cancel") { showByteInsert = false }.keyboardShortcut(.cancelAction)
                     Spacer()
                     Button("Insert") {
                         showByteInsert = false;
                         edit.insertByte(byte: byte.byte);
+                    }
+                    .keyboardShortcut(.defaultAction)
+                }
+                .padding()
+            }
+            .sheet(isPresented: $showTextInsert) {
+                TextField("Text", text: $text).padding()
+                HStack {
+                    Button("Cancel") { showTextInsert = false }.keyboardShortcut(.cancelAction)
+                    Spacer()
+                    Button("Insert") {
+                        showTextInsert = false;
+                        edit.insertBytes(data: Data(text.utf8));
                     }
                     .keyboardShortcut(.defaultAction)
                 }

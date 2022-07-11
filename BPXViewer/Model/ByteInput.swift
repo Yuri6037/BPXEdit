@@ -14,7 +14,7 @@ class ByteInput : ObservableObject {
 
     @Published var value = "" {
         didSet {
-            let filtered = value.filter { v in v.isNumber };
+            let filtered = value.filter { v in v.isNumeric };
             let numeric = Int(filtered)!;
             let newNumeric: Int;
             if numeric > 255 {

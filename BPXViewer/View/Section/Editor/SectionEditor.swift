@@ -15,6 +15,7 @@ struct SectionEditor: View {
     @StateObject var byte = ByteInput();
     @State var window: NSWindow?;
     @State var showTextInsert = false;
+    @State var showBpxsdInsert = false;
     @State var text = "";
     let section: Int;
 
@@ -67,7 +68,7 @@ struct SectionEditor: View {
                             showTextInsert = true;
                         }
                         ToolButton(icon: "rectangle.stack.badge.plus", text: "Insert BPXSD Object") {
-                        
+                            showBpxsdInsert = true;
                         }
                     }
                 }
@@ -101,6 +102,22 @@ struct SectionEditor: View {
                     Button("Insert") {
                         showTextInsert = false;
                         edit.insertBytes(data: Data(text.utf8));
+                    }
+                    .keyboardShortcut(.defaultAction)
+                }
+                .padding()
+            }
+            .sheet(isPresented: $showBpxsdInsert) {
+                ScrollView {
+                    SdEditor(value: SdValue(children: []))
+                }
+                .frame(maxHeight: 256)
+                .padding()
+                HStack {
+                    Button("Cancel") { showBpxsdInsert = false }.keyboardShortcut(.cancelAction)
+                    Spacer()
+                    Button("Insert") {
+                        showBpxsdInsert = false;
                     }
                     .keyboardShortcut(.defaultAction)
                 }

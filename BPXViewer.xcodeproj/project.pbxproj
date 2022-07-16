@@ -32,6 +32,8 @@
 		DA4903772843E911006C9169 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4903762843E911006C9169 /* Strings.swift */; };
 		DA560CF52848BD790057AB1A /* PointerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA560CF42848BD790057AB1A /* PointerView.swift */; };
 		DA560CF72848ECCF0057AB1A /* Pointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA560CF62848ECCF0057AB1A /* Pointer.swift */; };
+		DA569279288093AE00398821 /* NumberInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA569278288093AE00398821 /* NumberInput.swift */; };
+		DA59D09F28797BB000E15B2A /* SdEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA59D09E28797BB000E15B2A /* SdEditor.swift */; };
 		DA689BF62844C46B00A2EF1B /* StringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA689BF52844C46B00A2EF1B /* StringView.swift */; };
 		DA689BF82844ED8900A2EF1B /* StructuredData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA689BF72844ED8900A2EF1B /* StructuredData.swift */; };
 		DA6EF43F28609383008796A8 /* SectionEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6EF43E28609383008796A8 /* SectionEditor.swift */; };
@@ -58,6 +60,11 @@
 		DAC010EE2875F655006FEAEE /* ByteInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC010ED2875F655006FEAEE /* ByteInput.swift */; };
 		DACF4B1F28423ABA008AA6A3 /* SectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACF4B1E28423ABA008AA6A3 /* SectionState.swift */; };
 		DADF6379284AADC60028D6A4 /* BundleManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADF6378284AADC60028D6A4 /* BundleManagerView.swift */; };
+		DAE3192C287AFEAC009252DE /* SdValueField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE3192B287AFEAC009252DE /* SdValueField.swift */; };
+		DAE3192E287AFFF5009252DE /* SdValueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE3192D287AFFF5009252DE /* SdValueModel.swift */; };
+		DAEB6F97288192A000306786 /* NumberExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEB6F96288192A000306786 /* NumberExtensions.swift */; };
+		DAEB6F99288192F900306786 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEB6F98288192F900306786 /* StringExtensions.swift */; };
+		DAEB6F9B2881976500306786 /* AnyNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEB6F9A2881976500306786 /* AnyNumber.swift */; };
 		DAFAF49C2853354100BAB154 /* ReInterpretMenuModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFAF49B2853354100BAB154 /* ReInterpretMenuModal.swift */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +97,8 @@
 		DA4903762843E911006C9169 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		DA560CF42848BD790057AB1A /* PointerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointerView.swift; sourceTree = "<group>"; };
 		DA560CF62848ECCF0057AB1A /* Pointer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pointer.swift; sourceTree = "<group>"; };
+		DA569278288093AE00398821 /* NumberInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberInput.swift; sourceTree = "<group>"; };
+		DA59D09E28797BB000E15B2A /* SdEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SdEditor.swift; sourceTree = "<group>"; };
 		DA689BF52844C46B00A2EF1B /* StringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringView.swift; sourceTree = "<group>"; };
 		DA689BF72844ED8900A2EF1B /* StructuredData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructuredData.swift; sourceTree = "<group>"; };
 		DA6EF43E28609383008796A8 /* SectionEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionEditor.swift; sourceTree = "<group>"; };
@@ -118,6 +127,11 @@
 		DAC010ED2875F655006FEAEE /* ByteInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteInput.swift; sourceTree = "<group>"; };
 		DACF4B1E28423ABA008AA6A3 /* SectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionState.swift; sourceTree = "<group>"; };
 		DADF6378284AADC60028D6A4 /* BundleManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleManagerView.swift; sourceTree = "<group>"; };
+		DAE3192B287AFEAC009252DE /* SdValueField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SdValueField.swift; sourceTree = "<group>"; };
+		DAE3192D287AFFF5009252DE /* SdValueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SdValueModel.swift; sourceTree = "<group>"; };
+		DAEB6F96288192A000306786 /* NumberExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberExtensions.swift; sourceTree = "<group>"; };
+		DAEB6F98288192F900306786 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		DAEB6F9A2881976500306786 /* AnyNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyNumber.swift; sourceTree = "<group>"; };
 		DAFAF49B2853354100BAB154 /* ReInterpretMenuModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReInterpretMenuModal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -196,6 +210,7 @@
 				DA737EFE2849FF0C003143B4 /* ErrorHandler.swift */,
 				DADF6378284AADC60028D6A4 /* BundleManagerView.swift */,
 				DA245EA8284BB55C00465539 /* WindowReader.swift */,
+				DA569278288093AE00398821 /* NumberInput.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -215,6 +230,8 @@
 			isa = PBXGroup;
 			children = (
 				DA6EF43E28609383008796A8 /* SectionEditor.swift */,
+				DA59D09E28797BB000E15B2A /* SdEditor.swift */,
+				DAE3192B287AFEAC009252DE /* SdValueField.swift */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -245,8 +262,8 @@
 				DA49036F2843E6B7006C9169 /* Extensions */,
 				DA0DCF8B283D36A400904DA1 /* BPX */,
 				DAA2DEF9284F67E0001F5D68 /* Model */,
+				DAEB6F9C2881977300306786 /* Util */,
 				DA90C916283BB9AD0091DE15 /* BPXViewerApp.swift */,
-				DA2B4A3F284CB72A00EF40D8 /* Hacks.swift */,
 				DA90C91C283BB9AE0091DE15 /* Assets.xcassets */,
 				DA90C921283BB9AE0091DE15 /* Info.plist */,
 				DA90C922283BB9AE0091DE15 /* BPXViewer.entitlements */,
@@ -273,6 +290,7 @@
 				DA20D91C285DF5B80025D3E2 /* BPXObject.swift */,
 				DAC010EB287579D7006FEAEE /* EditSection.swift */,
 				DAC010ED2875F655006FEAEE /* ByteInput.swift */,
+				DAE3192D287AFFF5009252DE /* SdValueModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -300,6 +318,17 @@
 				DA20D91E285E747D0025D3E2 /* SectionContentView.swift */,
 			);
 			path = Section;
+			sourceTree = "<group>";
+		};
+		DAEB6F9C2881977300306786 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				DA2B4A3F284CB72A00EF40D8 /* Hacks.swift */,
+				DAEB6F96288192A000306786 /* NumberExtensions.swift */,
+				DAEB6F98288192F900306786 /* StringExtensions.swift */,
+				DAEB6F9A2881976500306786 /* AnyNumber.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -381,10 +410,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA560CF72848ECCF0057AB1A /* Pointer.swift in Sources */,
+				DA59D09F28797BB000E15B2A /* SdEditor.swift in Sources */,
+				DAE3192E287AFFF5009252DE /* SdValueModel.swift in Sources */,
 				DAC010EE2875F655006FEAEE /* ByteInput.swift in Sources */,
 				DA49036E2843E085006C9169 /* BlockView.swift in Sources */,
 				DA0AF22A2856177500B336EA /* ToolBarView.swift in Sources */,
 				DAA8A66C2865B5CA00FB8812 /* bypass_garbage_signed_bits_count.c in Sources */,
+				DAEB6F9B2881976500306786 /* AnyNumber.swift in Sources */,
 				DAAAC9A0283BD9B000D663E8 /* HexView.swift in Sources */,
 				DA90C917283BB9AD0091DE15 /* BPXViewerApp.swift in Sources */,
 				DA99F389283FA1DF007BFEC3 /* SelectableItem.swift in Sources */,
@@ -392,7 +424,9 @@
 				DAFAF49C2853354100BAB154 /* ReInterpretMenuModal.swift in Sources */,
 				DA0DCF8D283D36B900904DA1 /* Container.swift in Sources */,
 				DADF6379284AADC60028D6A4 /* BundleManagerView.swift in Sources */,
+				DAEB6F97288192A000306786 /* NumberExtensions.swift in Sources */,
 				DA689BF62844C46B00A2EF1B /* StringView.swift in Sources */,
+				DAE3192C287AFEAC009252DE /* SdValueField.swift in Sources */,
 				DA4903712843E6D8006C9169 /* Value.swift in Sources */,
 				DA99F38B283FE64E007BFEC3 /* MainHeaderView.swift in Sources */,
 				DA1FB3E0286514AE00492206 /* HexViewWrapper.swift in Sources */,
@@ -409,6 +443,7 @@
 				DA0DCF94283E4D3300904DA1 /* Section.swift in Sources */,
 				DA689BF82844ED8900A2EF1B /* StructuredData.swift in Sources */,
 				DA1779F82846519E00F3EBC5 /* SdView.swift in Sources */,
+				DAEB6F99288192F900306786 /* StringExtensions.swift in Sources */,
 				DA560CF52848BD790057AB1A /* PointerView.swift in Sources */,
 				DACF4B1F28423ABA008AA6A3 /* SectionState.swift in Sources */,
 				DA6EF43F28609383008796A8 /* SectionEditor.swift in Sources */,
@@ -424,6 +459,7 @@
 				DA028EDB285140C000319D4C /* GlobalState.swift in Sources */,
 				DAA2DEFD284F74FE001F5D68 /* MainView.swift in Sources */,
 				DA90C91B283BB9AD0091DE15 /* ContentView.swift in Sources */,
+				DA569279288093AE00398821 /* NumberInput.swift in Sources */,
 				DAB22D822840D4D7005C8741 /* BundleManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

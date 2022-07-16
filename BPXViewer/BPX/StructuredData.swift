@@ -12,6 +12,12 @@ struct SdValue: Identifiable {
         let hash: UInt64;
         let name: String?;
 
+        init(name: String) {
+            let hash = name.withCString { str in bpx_hash(str) };
+            self.name = name;
+            self.hash = hash;
+        }
+
         init(hash: UInt64, name: String? = nil) {
             self.name = name;
             self.hash = hash;
@@ -21,7 +27,7 @@ struct SdValue: Identifiable {
     let id: UUID = UUID();
     let name: Name?;
     let data: Value.Scalar?;
-    let children: [SdValue]?;
+    var children: [SdValue]?;
     let isArray: Bool;
 
     init(name: Name? = nil, data: Value.Scalar? = nil, children: [SdValue]? = nil, isArray: Bool = false) {

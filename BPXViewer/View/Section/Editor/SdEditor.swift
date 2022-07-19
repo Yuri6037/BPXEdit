@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+struct SdEditorActions {
+    let okName: String;
+    let okAction: (SdValue) -> Void;
+    let cancelAction: () -> Void;
+}
+
 struct SdEditor: View {
     @State var value: SdValue;
     @State var name = "";
@@ -16,12 +22,14 @@ struct SdEditor: View {
     let indentation: CGFloat;
     let step: CGFloat;
     let removeAction: (SdValue) -> Void;
+    let actions: SdEditorActions?;
 
-    init(value: SdValue, indentation: CGFloat = 0, step: CGFloat = 24, removeAction: @escaping (SdValue) -> Void = { v in }) {
+    init(value: SdValue, actions: SdEditorActions? = nil, indentation: CGFloat = 0, step: CGFloat = 24, removeAction: @escaping (SdValue) -> Void = { _ in }) {
         _value = State(initialValue: value);
         self.indentation = indentation;
         self.step = step;
         self.removeAction = removeAction;
+        self.actions = actions;
     }
 
     func removeChild(value: SdValue) {
@@ -40,36 +48,51 @@ struct SdEditor: View {
 
     var body: some View {
         if value.children != nil {
-            VStack(alignment: .leading) {
-                HStack {
-                    Image(systemName: getIconName())
-                    Text(value.description())
-                        .textSelection(.enabled)
-                    Button(action: { removeAction(value) }) {
-                        Image(systemName: "minus")
-                    }
-                    .help("Remove item")
-                }
-                .padding(.leading, indentation)
+            ScrollView {
                 VStack(alignment: .leading) {
-                    ForEach(value.children!) { value in
-                        SdEditor(
-                            value: value,
-                            indentation: indentation + step,
-                            step: step,
-                            removeAction: removeChild
-                        )
+                    HStack {
+                        Image(systemName: getIconName())
+                        Text(value.description())
+                            .textSelection(.enabled)
+                        Button(action: { removeAction(value) }) {
+                            Image(systemName: "minus")
+                        }
+                        .help("Remove item")
                     }
-                    Button(action: { showValueEditor.toggle() }) {
-                        Image(systemName: "square.and.pencil")
+                    .padding(.leading, indentation)
+                    VStack(alignment: .leading) {
+                        ForEach(value.children!) { value in
+                            SdEditor(
+                                value: value,
+                                indentation: indentation + step,
+                                step: step,
+                                removeAction: removeChild
+                            )
+                        }
+                        Button(action: { showValueEditor.toggle() }) {
+                            Image(systemName: "square.and.pencil")
+                        }
+                        .help("Insert item")
+                        .popover(isPresented: $showValueEditor) {
+                            SdValueField(withName: !value.isArray, insertAction: { v in value.children?.append(v) })
+                                .frame(minWidth: 300)
+                                .padding()
+                        }
+                        .padding(.leading, indentation + step)
                     }
-                    .help("Insert item")
-                    .popover(isPresented: $showValueEditor) {
-                        SdValueField(withName: !value.isArray, insertAction: { v in value.children?.append(v) })
-                            .frame(minWidth: 300)
-                            .padding()
+                }
+                .padding()
+                if let actions = actions {
+                    HStack {
+                        Button("Cancel", action: actions.cancelAction)
+                            .keyboardShortcut(.cancelAction)
+                        Spacer()
+                        Button(actions.okName) {
+                            actions.okAction(value);
+                        }
+                        .keyboardShortcut(.defaultAction)
                     }
-                    .padding(.leading, indentation + step)
+                    .padding()
                 }
             }
         } else {

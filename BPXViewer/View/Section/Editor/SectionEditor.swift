@@ -108,20 +108,18 @@ struct SectionEditor: View {
                 .padding()
             }
             .sheet(isPresented: $showBpxsdInsert) {
-                ScrollView {
-                    SdEditor(value: SdValue(children: []))
-                }
-                .frame(maxHeight: 256)
-                .padding()
-                HStack {
-                    Button("Cancel") { showBpxsdInsert = false }.keyboardShortcut(.cancelAction)
-                    Spacer()
-                    Button("Insert") {
-                        showBpxsdInsert = false;
-                    }
-                    .keyboardShortcut(.defaultAction)
-                }
-                .padding()
+                SdEditor(
+                    value: SdValue(children: []),
+                    actions: SdEditorActions(
+                        okName: "Insert",
+                        okAction: { value in
+                            showBpxsdInsert = false;
+                        },
+                        cancelAction: {
+                            showBpxsdInsert = false;
+                        }
+                    )
+                ).frame(maxHeight: 256)
             }
             .onDisappear {
                 edit.section = nil;

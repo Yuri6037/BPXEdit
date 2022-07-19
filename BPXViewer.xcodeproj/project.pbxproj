@@ -60,6 +60,7 @@
 		DAC010EE2875F655006FEAEE /* ByteInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC010ED2875F655006FEAEE /* ByteInput.swift */; };
 		DACF4B1F28423ABA008AA6A3 /* SectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACF4B1E28423ABA008AA6A3 /* SectionState.swift */; };
 		DADF6379284AADC60028D6A4 /* BundleManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADF6378284AADC60028D6A4 /* BundleManagerView.swift */; };
+		DADFBEF72885D2B7007C9B0B /* SdCValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADFBEF62885D2B7007C9B0B /* SdCValue.swift */; };
 		DAE3192C287AFEAC009252DE /* SdValueField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE3192B287AFEAC009252DE /* SdValueField.swift */; };
 		DAE3192E287AFFF5009252DE /* SdValueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE3192D287AFFF5009252DE /* SdValueModel.swift */; };
 		DAEB6F97288192A000306786 /* NumberExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEB6F96288192A000306786 /* NumberExtensions.swift */; };
@@ -127,6 +128,7 @@
 		DAC010ED2875F655006FEAEE /* ByteInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteInput.swift; sourceTree = "<group>"; };
 		DACF4B1E28423ABA008AA6A3 /* SectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionState.swift; sourceTree = "<group>"; };
 		DADF6378284AADC60028D6A4 /* BundleManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleManagerView.swift; sourceTree = "<group>"; };
+		DADFBEF62885D2B7007C9B0B /* SdCValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SdCValue.swift; sourceTree = "<group>"; };
 		DAE3192B287AFEAC009252DE /* SdValueField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SdValueField.swift; sourceTree = "<group>"; };
 		DAE3192D287AFFF5009252DE /* SdValueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SdValueModel.swift; sourceTree = "<group>"; };
 		DAEB6F96288192A000306786 /* NumberExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberExtensions.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				DA0DCF93283E4D3300904DA1 /* Section.swift */,
 				DA4903762843E911006C9169 /* Strings.swift */,
 				DA689BF72844ED8900A2EF1B /* StructuredData.swift */,
+				DADFBEF62885D2B7007C9B0B /* SdCValue.swift */,
 			);
 			path = BPX;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				DA737F03284A43F1003143B4 /* SectionView.swift in Sources */,
 				DA90C919283BB9AD0091DE15 /* BPXDocument.swift in Sources */,
 				DA20D91F285E747D0025D3E2 /* SectionContentView.swift in Sources */,
+				DADFBEF72885D2B7007C9B0B /* SdCValue.swift in Sources */,
 				DA99F38D283FE703007BFEC3 /* SectionHeaderView.swift in Sources */,
 				DA18D41C285FCD250092A224 /* SectionViewer.swift in Sources */,
 				DAA2DEFF284F77F7001F5D68 /* SectionListView.swift in Sources */,

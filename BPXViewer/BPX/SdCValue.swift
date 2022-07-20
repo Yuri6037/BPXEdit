@@ -62,6 +62,10 @@ class SdCValue {
         value = bpx_sd_value_new_object();
     }
 
+    func write(section: SectionData) {
+        bpx_sd_value_encode(section.inner, &value);
+    }
+
     func append(_ item: SdValue) -> Bool {
         let val = SdCValue(from: item);
         if value.type == BPX_SD_VALUE_TYPE_ARRAY {

@@ -19,6 +19,16 @@ struct SectionEditor: View {
     @State var text = "";
     let section: Int;
 
+    func openBpxsdEditor() {
+        edit.section?.seek(pos: UInt64(edit.selection.start));
+        do {
+            edit.lastValue = try edit.section?.loadStructuredData();
+        } catch {
+            edit.lastValue = nil;
+        }
+        showBpxsdInsert = true;
+    }
+
     func openBinaryFile() {
         let dialog = NSOpenPanel();
         dialog.title = "Choose a binary file to insert.";
@@ -68,7 +78,7 @@ struct SectionEditor: View {
                             showTextInsert = true;
                         }
                         ToolButton(icon: "rectangle.stack.badge.plus", text: "Insert BPXSD Object") {
-                            showBpxsdInsert = true;
+                            openBpxsdEditor();
                         }
                     }
                 }
@@ -109,10 +119,11 @@ struct SectionEditor: View {
             }
             .sheet(isPresented: $showBpxsdInsert) {
                 SdEditor(
-                    value: SdValue(children: []),
+                    value: edit.lastValue ?? SdValue(children: []),
                     actions: SdEditorActions(
                         okName: "Insert",
                         okAction: { value in
+                            edit.insertBpxsd(value: value);
                             showBpxsdInsert = false;
                         },
                         cancelAction: {

@@ -12,6 +12,7 @@ class EditSection: ObservableObject {
     @Published var append = false;
     var section: SectionData?;
     var selection: Selection = Selection();
+    var lastValue: SdValue? = nil;
 
     func initialize(section: SectionData?) {
         data = section?.loadInMemory() ?? [];
@@ -35,6 +36,15 @@ class EditSection: ObservableObject {
             let _ = section?.write(Array(data));
             self.data.removeSubrange(selection.start..<min(selection.start + data.count, self.data.count))
             self.data.insert(contentsOf: data, at: selection.start);
+        }
+    }
+
+    func insertBpxsd(value: SdValue) {
+        if let section = section {
+            let root = SdCValue(from: value);
+            section.seek(pos: UInt64(selection.start));
+            root.write(section: section);
+            data = section.loadInMemory();
         }
     }
 

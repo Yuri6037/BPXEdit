@@ -58,7 +58,6 @@
 		DAB22D8728412255005C8741 /* ByteBuf.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB22D8628412255005C8741 /* ByteBuf.swift */; };
 		DAB22D89284172CF005C8741 /* DataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB22D88284172CF005C8741 /* DataView.swift */; };
 		DAC010EC287579D7006FEAEE /* EditSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC010EB287579D7006FEAEE /* EditSection.swift */; };
-		DAC010EE2875F655006FEAEE /* ByteInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC010ED2875F655006FEAEE /* ByteInput.swift */; };
 		DACF4B1F28423ABA008AA6A3 /* SectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACF4B1E28423ABA008AA6A3 /* SectionState.swift */; };
 		DADF6379284AADC60028D6A4 /* BundleManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADF6378284AADC60028D6A4 /* BundleManagerView.swift */; };
 		DADFBEF72885D2B7007C9B0B /* SdCValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADFBEF62885D2B7007C9B0B /* SdCValue.swift */; };
@@ -127,7 +126,6 @@
 		DAB22D8628412255005C8741 /* ByteBuf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteBuf.swift; sourceTree = "<group>"; };
 		DAB22D88284172CF005C8741 /* DataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataView.swift; sourceTree = "<group>"; };
 		DAC010EB287579D7006FEAEE /* EditSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSection.swift; sourceTree = "<group>"; };
-		DAC010ED2875F655006FEAEE /* ByteInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteInput.swift; sourceTree = "<group>"; };
 		DACF4B1E28423ABA008AA6A3 /* SectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionState.swift; sourceTree = "<group>"; };
 		DADF6378284AADC60028D6A4 /* BundleManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleManagerView.swift; sourceTree = "<group>"; };
 		DADFBEF62885D2B7007C9B0B /* SdCValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SdCValue.swift; sourceTree = "<group>"; };
@@ -295,7 +293,6 @@
 				DA028EDA285140C000319D4C /* GlobalState.swift */,
 				DA20D91C285DF5B80025D3E2 /* BPXObject.swift */,
 				DAC010EB287579D7006FEAEE /* EditSection.swift */,
-				DAC010ED2875F655006FEAEE /* ByteInput.swift */,
 				DAE3192D287AFFF5009252DE /* SdValueModel.swift */,
 			);
 			path = Model;
@@ -418,7 +415,6 @@
 				DA560CF72848ECCF0057AB1A /* Pointer.swift in Sources */,
 				DA59D09F28797BB000E15B2A /* SdEditor.swift in Sources */,
 				DAE3192E287AFFF5009252DE /* SdValueModel.swift in Sources */,
-				DAC010EE2875F655006FEAEE /* ByteInput.swift in Sources */,
 				DA49036E2843E085006C9169 /* BlockView.swift in Sources */,
 				DA0AF22A2856177500B336EA /* ToolBarView.swift in Sources */,
 				DAA8A66C2865B5CA00FB8812 /* bypass_garbage_signed_bits_count.c in Sources */,

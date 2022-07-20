@@ -40,7 +40,7 @@
 		DA6EF43F28609383008796A8 /* SectionEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6EF43E28609383008796A8 /* SectionEditor.swift */; };
 		DA737EFF2849FF0C003143B4 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA737EFE2849FF0C003143B4 /* ErrorHandler.swift */; };
 		DA737F03284A43F1003143B4 /* SectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA737F02284A43F1003143B4 /* SectionView.swift */; };
-		DA90C917283BB9AD0091DE15 /* BPXViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90C916283BB9AD0091DE15 /* BPXViewerApp.swift */; };
+		DA90C917283BB9AD0091DE15 /* BPXEditApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90C916283BB9AD0091DE15 /* BPXEditApp.swift */; };
 		DA90C919283BB9AD0091DE15 /* BPXDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90C918283BB9AD0091DE15 /* BPXDocument.swift */; };
 		DA90C91B283BB9AD0091DE15 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90C91A283BB9AD0091DE15 /* ContentView.swift */; };
 		DA90C91D283BB9AE0091DE15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA90C91C283BB9AE0091DE15 /* Assets.xcassets */; };
@@ -107,14 +107,14 @@
 		DA6EF43E28609383008796A8 /* SectionEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionEditor.swift; sourceTree = "<group>"; };
 		DA737EFE2849FF0C003143B4 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		DA737F02284A43F1003143B4 /* SectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionView.swift; sourceTree = "<group>"; };
-		DA90C913283BB9AD0091DE15 /* BPXViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BPXViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA90C916283BB9AD0091DE15 /* BPXViewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPXViewerApp.swift; sourceTree = "<group>"; };
+		DA90C913283BB9AD0091DE15 /* BPXEdit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BPXEdit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA90C916283BB9AD0091DE15 /* BPXEditApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPXEditApp.swift; sourceTree = "<group>"; };
 		DA90C918283BB9AD0091DE15 /* BPXDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPXDocument.swift; sourceTree = "<group>"; };
 		DA90C91A283BB9AD0091DE15 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DA90C91C283BB9AE0091DE15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA90C91F283BB9AE0091DE15 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DA90C921283BB9AE0091DE15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DA90C922283BB9AE0091DE15 /* BPXViewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BPXViewer.entitlements; sourceTree = "<group>"; };
+		DA90C922283BB9AE0091DE15 /* BPXEdit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BPXEdit.entitlements; sourceTree = "<group>"; };
 		DA99F388283FA1DF007BFEC3 /* SelectableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableItem.swift; sourceTree = "<group>"; };
 		DA99F38A283FE64E007BFEC3 /* MainHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHeaderView.swift; sourceTree = "<group>"; };
 		DA99F38C283FE703007BFEC3 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
@@ -247,7 +247,7 @@
 			children = (
 				DA0DCF90283D377C00904DA1 /* Headers */,
 				DA0DCF8A283D33E500904DA1 /* bpx_bridge.h */,
-				DA90C915283BB9AD0091DE15 /* BPXViewer */,
+				DA90C915283BB9AD0091DE15 /* BPXEdit */,
 				DA90C914283BB9AD0091DE15 /* Products */,
 				DA0DCF85283D331600904DA1 /* Frameworks */,
 			);
@@ -256,12 +256,12 @@
 		DA90C914283BB9AD0091DE15 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DA90C913283BB9AD0091DE15 /* BPXViewer.app */,
+				DA90C913283BB9AD0091DE15 /* BPXEdit.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DA90C915283BB9AD0091DE15 /* BPXViewer */ = {
+		DA90C915283BB9AD0091DE15 /* BPXEdit */ = {
 			isa = PBXGroup;
 			children = (
 				DA689BF32844BB4500A2EF1B /* View */,
@@ -269,14 +269,14 @@
 				DA0DCF8B283D36A400904DA1 /* BPX */,
 				DAA2DEF9284F67E0001F5D68 /* Model */,
 				DAEB6F9C2881977300306786 /* Util */,
-				DA90C916283BB9AD0091DE15 /* BPXViewerApp.swift */,
+				DA90C916283BB9AD0091DE15 /* BPXEditApp.swift */,
 				DA90C91C283BB9AE0091DE15 /* Assets.xcassets */,
 				DA90C921283BB9AE0091DE15 /* Info.plist */,
-				DA90C922283BB9AE0091DE15 /* BPXViewer.entitlements */,
+				DA90C922283BB9AE0091DE15 /* BPXEdit.entitlements */,
 				DA90C91E283BB9AE0091DE15 /* Preview Content */,
 				DAA8A66B2865B5CA00FB8812 /* bypass_garbage_signed_bits_count.c */,
 			);
-			path = BPXViewer;
+			path = BPXEdit;
 			sourceTree = "<group>";
 		};
 		DA90C91E283BB9AE0091DE15 /* Preview Content */ = {
@@ -340,9 +340,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DA90C912283BB9AD0091DE15 /* BPXViewer */ = {
+		DA90C912283BB9AD0091DE15 /* BPXEdit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DA90C925283BB9AE0091DE15 /* Build configuration list for PBXNativeTarget "BPXViewer" */;
+			buildConfigurationList = DA90C925283BB9AE0091DE15 /* Build configuration list for PBXNativeTarget "BPXEdit" */;
 			buildPhases = (
 				DA90C90F283BB9AD0091DE15 /* Sources */,
 				DA90C910283BB9AD0091DE15 /* Frameworks */,
@@ -352,12 +352,12 @@
 			);
 			dependencies = (
 			);
-			name = BPXViewer;
+			name = BPXEdit;
 			packageProductDependencies = (
 				DAB22D842840DB7C005C8741 /* TOMLDecoder */,
 			);
 			productName = BPXViewer;
-			productReference = DA90C913283BB9AD0091DE15 /* BPXViewer.app */;
+			productReference = DA90C913283BB9AD0091DE15 /* BPXEdit.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -375,7 +375,7 @@
 					};
 				};
 			};
-			buildConfigurationList = DA90C90E283BB9AD0091DE15 /* Build configuration list for PBXProject "BPXViewer" */;
+			buildConfigurationList = DA90C90E283BB9AD0091DE15 /* Build configuration list for PBXProject "BPXEdit" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -391,7 +391,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DA90C912283BB9AD0091DE15 /* BPXViewer */,
+				DA90C912283BB9AD0091DE15 /* BPXEdit */,
 			);
 		};
 /* End PBXProject section */
@@ -424,7 +424,7 @@
 				DAA8A66C2865B5CA00FB8812 /* bypass_garbage_signed_bits_count.c in Sources */,
 				DAEB6F9B2881976500306786 /* AnyNumber.swift in Sources */,
 				DAAAC9A0283BD9B000D663E8 /* HexView.swift in Sources */,
-				DA90C917283BB9AD0091DE15 /* BPXViewerApp.swift in Sources */,
+				DA90C917283BB9AD0091DE15 /* BPXEditApp.swift in Sources */,
 				DA99F389283FA1DF007BFEC3 /* SelectableItem.swift in Sources */,
 				DAC010EC287579D7006FEAEE /* EditSection.swift in Sources */,
 				DAFAF49C2853354100BAB154 /* ReInterpretMenuModal.swift in Sources */,
@@ -595,22 +595,22 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = BPXViewer/BPXViewer.entitlements;
+				CODE_SIGN_ENTITLEMENTS = BPXEdit/BPXEdit.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"BPXViewer/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"BPXEdit/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BPXViewer/Info.plist;
+				INFOPLIST_FILE = BPXEdit/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gitlab.bp3d.BPXViewer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gitlab.bp3d.BPXEdit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = bpx_bridge.h;
@@ -623,22 +623,22 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = BPXViewer/BPXViewer.entitlements;
+				CODE_SIGN_ENTITLEMENTS = BPXEdit/BPXEdit.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"BPXViewer/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"BPXEdit/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BPXViewer/Info.plist;
+				INFOPLIST_FILE = BPXEdit/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gitlab.bp3d.BPXViewer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gitlab.bp3d.BPXEdit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = bpx_bridge.h;
@@ -649,7 +649,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DA90C90E283BB9AD0091DE15 /* Build configuration list for PBXProject "BPXViewer" */ = {
+		DA90C90E283BB9AD0091DE15 /* Build configuration list for PBXProject "BPXEdit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DA90C923283BB9AE0091DE15 /* Debug */,
@@ -658,7 +658,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DA90C925283BB9AE0091DE15 /* Build configuration list for PBXNativeTarget "BPXViewer" */ = {
+		DA90C925283BB9AE0091DE15 /* Build configuration list for PBXNativeTarget "BPXEdit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DA90C926283BB9AE0091DE15 /* Debug */,

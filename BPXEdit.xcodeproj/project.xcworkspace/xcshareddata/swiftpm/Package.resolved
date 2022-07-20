@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "TOMLDecoder",
+        "repositoryURL": "https://github.com/dduan/TOMLDecoder.git",
+        "state": {
+          "branch": null,
+          "revision": "a70a127cab92ddcb562a548190fa3ad2a2e5f9bc",
+          "version": "0.2.2"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct BPXViewerApp: App {
+struct BPXEditApp: App {
     @StateObject var globalState = GlobalState();
 
     init() {

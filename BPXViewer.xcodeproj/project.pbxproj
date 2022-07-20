@@ -30,6 +30,7 @@
 		DA4903732843E739006C9169 /* TypeDesc.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4903722843E739006C9169 /* TypeDesc.swift */; };
 		DA4903752843E78A006C9169 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4903742843E78A006C9169 /* Loader.swift */; };
 		DA4903772843E911006C9169 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4903762843E911006C9169 /* Strings.swift */; };
+		DA530256288852E40081CD35 /* SdValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA530255288852E40081CD35 /* SdValue.swift */; };
 		DA560CF52848BD790057AB1A /* PointerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA560CF42848BD790057AB1A /* PointerView.swift */; };
 		DA560CF72848ECCF0057AB1A /* Pointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA560CF62848ECCF0057AB1A /* Pointer.swift */; };
 		DA569279288093AE00398821 /* NumberInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA569278288093AE00398821 /* NumberInput.swift */; };
@@ -96,6 +97,7 @@
 		DA4903722843E739006C9169 /* TypeDesc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeDesc.swift; sourceTree = "<group>"; };
 		DA4903742843E78A006C9169 /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		DA4903762843E911006C9169 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		DA530255288852E40081CD35 /* SdValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SdValue.swift; sourceTree = "<group>"; };
 		DA560CF42848BD790057AB1A /* PointerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointerView.swift; sourceTree = "<group>"; };
 		DA560CF62848ECCF0057AB1A /* Pointer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pointer.swift; sourceTree = "<group>"; };
 		DA569278288093AE00398821 /* NumberInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberInput.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				DA4903762843E911006C9169 /* Strings.swift */,
 				DA689BF72844ED8900A2EF1B /* StructuredData.swift */,
 				DADFBEF62885D2B7007C9B0B /* SdCValue.swift */,
+				DA530255288852E40081CD35 /* SdValue.swift */,
 			);
 			path = BPX;
 			sourceTree = "<group>";
@@ -365,7 +368,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1320;
-				LastUpgradeCheck = 1320;
+				LastUpgradeCheck = 1340;
 				TargetAttributes = {
 					DA90C912283BB9AD0091DE15 = {
 						CreatedOnToolsVersion = 13.2;
@@ -464,6 +467,7 @@
 				DAA2DEFD284F74FE001F5D68 /* MainView.swift in Sources */,
 				DA90C91B283BB9AD0091DE15 /* ContentView.swift in Sources */,
 				DA569279288093AE00398821 /* NumberInput.swift in Sources */,
+				DA530256288852E40081CD35 /* SdValue.swift in Sources */,
 				DAB22D822840D4D7005C8741 /* BundleManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -592,6 +596,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BPXViewer/BPXViewer.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -619,6 +624,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BPXViewer/BPXViewer.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;

@@ -14,7 +14,7 @@ struct SdEditorActions {
 }
 
 struct SdEditor: View {
-    @State var value: SdValue;
+    @StateObject var value: SdValue;
     @State var name = "";
     @State var newValue = "";
     @State var dataType: SdDataType = .string;
@@ -25,7 +25,7 @@ struct SdEditor: View {
     let actions: SdEditorActions?;
 
     init(value: SdValue, actions: SdEditorActions? = nil, indentation: CGFloat = 0, step: CGFloat = 24, removeAction: @escaping (SdValue) -> Void = { _ in }) {
-        _value = State(initialValue: value);
+        _value = StateObject(wrappedValue: value);
         self.indentation = indentation;
         self.step = step;
         self.removeAction = removeAction;
@@ -35,64 +35,39 @@ struct SdEditor: View {
     func removeChild(value: SdValue) {
         self.value.children?.removeAll(where: { v in v.id == value.id })
     }
-
-    func getIconName() -> String {
-        if value.isArray {
-            return "list.bullet"
-        } else if (!value.isArray && value.children != nil) {
-            return "tray.2";
-        } else {
-            return "doc.richtext"
-        }
-    }
-
-    var body: some View {
+    
+    @ViewBuilder func renderValue() -> some View {
         if value.children != nil {
-            ScrollView {
-                VStack(alignment: .leading) {
-                    HStack {
-                        Image(systemName: getIconName())
-                        Text(value.description())
-                            .textSelection(.enabled)
-                        Button(action: { removeAction(value) }) {
-                            Image(systemName: "minus")
-                        }
-                        .help("Remove item")
+            VStack(alignment: .leading) {
+                HStack {
+                    Image(systemName: getIconName())
+                    Text(value.description())
+                        .textSelection(.enabled)
+                    Button(action: { removeAction(value) }) {
+                        Image(systemName: "minus")
                     }
-                    .padding(.leading, indentation)
-                    VStack(alignment: .leading) {
-                        ForEach(value.children!) { value in
-                            SdEditor(
-                                value: value,
-                                indentation: indentation + step,
-                                step: step,
-                                removeAction: removeChild
-                            )
-                        }
-                        Button(action: { showValueEditor.toggle() }) {
-                            Image(systemName: "square.and.pencil")
-                        }
-                        .help("Insert item")
-                        .popover(isPresented: $showValueEditor) {
-                            SdValueField(withName: !value.isArray, insertAction: { v in value.children?.append(v) })
-                                .frame(minWidth: 300)
-                                .padding()
-                        }
-                        .padding(.leading, indentation + step)
-                    }
+                    .help("Remove item")
                 }
-                .padding()
-                if let actions = actions {
-                    HStack {
-                        Button("Cancel", action: actions.cancelAction)
-                            .keyboardShortcut(.cancelAction)
-                        Spacer()
-                        Button(actions.okName) {
-                            actions.okAction(value);
-                        }
-                        .keyboardShortcut(.defaultAction)
+                .padding(.leading, indentation)
+                VStack(alignment: .leading) {
+                    ForEach(value.children!) { value in
+                        SdEditor(
+                            value: value,
+                            indentation: indentation + step,
+                            step: step,
+                            removeAction: removeChild
+                        )
                     }
-                    .padding()
+                    Button(action: { showValueEditor.toggle() }) {
+                        Image(systemName: "square.and.pencil")
+                    }
+                    .help("Insert item")
+                    .popover(isPresented: $showValueEditor) {
+                        SdValueField(withName: !value.isArray, insertAction: { v in value.children?.append(v) })
+                            .frame(minWidth: 300)
+                            .padding()
+                    }
+                    .padding(.leading, indentation + step)
                 }
             }
         } else {
@@ -106,6 +81,38 @@ struct SdEditor: View {
                 .help("Remove item")
             }
             .padding(.leading, indentation)
+        }
+
+    }
+
+    func getIconName() -> String {
+        if value.isArray {
+            return "list.bullet"
+        } else if (!value.isArray && value.children != nil) {
+            return "tray.2";
+        } else {
+            return "doc.richtext"
+        }
+    }
+
+    var body: some View {
+        if let actions = actions {
+            ScrollView {
+                renderValue().padding()
+            }
+            .frame(maxHeight: .infinity)
+            HStack {
+                Button("Cancel", action: actions.cancelAction)
+                    .keyboardShortcut(.cancelAction)
+                Spacer()
+                Button(actions.okName) {
+                    actions.okAction(value);
+                }
+                .keyboardShortcut(.defaultAction)
+            }
+            .padding()
+        } else {
+            renderValue()
         }
     }
 }

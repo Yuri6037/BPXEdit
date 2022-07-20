@@ -12,7 +12,8 @@ struct SectionEditor: View {
     @EnvironmentObject var errorHost: ErrorHost;
     @StateObject var edit = EditSection();
     @State var showByteInsert = false;
-    @StateObject var byte = ByteInput();
+    //@StateObject var byte = ByteInput();
+    @State var byte: UInt8 = 0;
     @State var window: NSWindow?;
     @State var showTextInsert = false;
     @State var showBpxsdInsert = false;
@@ -92,13 +93,13 @@ struct SectionEditor: View {
                 }
             }
             .sheet(isPresented: $showByteInsert) {
-                TextField("Value", text: $byte.value).padding()
+                NumberInput(value: $byte, context: ()).padding()
                 HStack{
                     Button("Cancel") { showByteInsert = false }.keyboardShortcut(.cancelAction)
                     Spacer()
                     Button("Insert") {
                         showByteInsert = false;
-                        edit.insertByte(byte: byte.byte);
+                        edit.insertByte(byte: byte);
                     }
                     .keyboardShortcut(.defaultAction)
                 }

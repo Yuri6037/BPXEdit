@@ -31,8 +31,8 @@ extension NumberInternal {
             newNumeric = numeric;
         }
         if numeric != newNumeric {
-            let str = newNumeric.formatted();
-            return str;
+            let str = String(newNumeric);
+            return str.filteredInt;
         } else if value != filtered {
             return filtered;
         }
@@ -113,6 +113,7 @@ protocol Number {
     mutating func increment();
     mutating func decrement();
     static func toNumber(context: Context, string: String) -> Self;
+    static func validate(context: Context, value: String) -> String;
     func toString() -> String;
 }
 
@@ -125,11 +126,14 @@ extension Int8: Number {
         self -= 1;
     }
     
-    static func toNumber(context: (), string: String) -> Int8 {
-        let v = Self.validate(value: string);
-        return Self(v)!;
+    static func validate(context: (), value: String) -> String {
+        Self.validate(value: value)
     }
-    
+
+    static func toNumber(context: (), string: String) -> Int8 {
+        Self(validate(context: (), value: string))!
+    }
+
     func toString() -> String {
         String(self)
     }
@@ -144,11 +148,14 @@ extension UInt8: Number {
         self -= 1;
     }
     
-    static func toNumber(context: (), string: String) -> UInt8 {
-        let v = Self.validate(value: string);
-        return Self(v)!;
+    static func validate(context: (), value: String) -> String {
+        Self.validate(value: value)
     }
-    
+
+    static func toNumber(context: (), string: String) -> UInt8 {
+        Self(validate(context: (), value: string))!
+    }
+
     func toString() -> String {
         String(self)
     }
@@ -163,11 +170,14 @@ extension Int16: Number {
         self -= 1;
     }
     
-    static func toNumber(context: (), string: String) -> Int16 {
-        let v = Self.validate(value: string);
-        return Self(v)!;
+    static func validate(context: (), value: String) -> String {
+        Self.validate(value: value)
     }
-    
+
+    static func toNumber(context: (), string: String) -> Int16 {
+        Self(validate(context: (), value: string))!
+    }
+
     func toString() -> String {
         String(self)
     }
@@ -182,11 +192,14 @@ extension UInt16: Number {
         self -= 1;
     }
     
-    static func toNumber(context: (), string: String) -> UInt16 {
-        let v = Self.validate(value: string);
-        return Self(v)!;
+    static func validate(context: (), value: String) -> String {
+        Self.validate(value: value)
     }
-    
+
+    static func toNumber(context: (), string: String) -> UInt16 {
+        Self(validate(context: (), value: string))!
+    }
+
     func toString() -> String {
         String(self)
     }
@@ -201,11 +214,14 @@ extension Int32: Number {
         self -= 1;
     }
     
-    static func toNumber(context: (), string: String) -> Int32 {
-        let v = Self.validate(value: string);
-        return Self(v)!;
+    static func validate(context: (), value: String) -> String {
+        Self.validate(value: value)
     }
-    
+
+    static func toNumber(context: (), string: String) -> Int32 {
+        Self(validate(context: (), value: string))!
+    }
+
     func toString() -> String {
         String(self)
     }
@@ -220,11 +236,14 @@ extension UInt32: Number {
         self -= 1;
     }
     
-    static func toNumber(context: (), string: String) -> UInt32 {
-        let v = Self.validate(value: string);
-        return Self(v)!;
+    static func validate(context: (), value: String) -> String {
+        Self.validate(value: value)
     }
-    
+
+    static func toNumber(context: (), string: String) -> UInt32 {
+        Self(validate(context: (), value: string))!
+    }
+
     func toString() -> String {
         String(self)
     }
@@ -239,11 +258,14 @@ extension Int64: Number {
         self -= 1;
     }
     
-    static func toNumber(context: (), string: String) -> Int64 {
-        let v = Self.validate(value: string);
-        return Self(v)!;
+    static func validate(context: (), value: String) -> String {
+        Self.validate(value: value)
     }
-    
+
+    static func toNumber(context: (), string: String) -> Int64 {
+        Self(validate(context: (), value: string))!
+    }
+
     func toString() -> String {
         String(self)
     }
@@ -258,11 +280,14 @@ extension UInt64: Number {
         self -= 1;
     }
     
-    static func toNumber(context: (), string: String) -> UInt64 {
-        let v = Self.validate(value: string);
-        return Self(v)!;
+    static func validate(context: (), value: String) -> String {
+        Self.validate(value: value)
     }
-    
+
+    static func toNumber(context: (), string: String) -> UInt64 {
+        Self(validate(context: (), value: string))!
+    }
+
     func toString() -> String {
         String(self)
     }
@@ -277,9 +302,12 @@ extension Float32: Number {
         self -= 1;
     }
 
+    static func validate(context: (), value: String) -> String {
+        Self.validate(value: value)
+    }
+
     static func toNumber(context: (), string: String) -> Float32 {
-        let v = Self.validate(value: string);
-        return Self(v)!;
+        Self(validate(context: (), value: string))!
     }
 
     func toString() -> String {
@@ -296,9 +324,12 @@ extension Float64: Number {
         self -= 1;
     }
 
+    static func validate(context: (), value: String) -> String {
+        Self.validate(value: value)
+    }
+
     static func toNumber(context: (), string: String) -> Float64 {
-        let v = Self.validate(value: string);
-        return Self(v)!;
+        Self(validate(context: (), value: string))!
     }
 
     func toString() -> String {

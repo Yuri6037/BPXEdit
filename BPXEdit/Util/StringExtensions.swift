@@ -18,7 +18,13 @@ extension String {
             canBeNegative = false;
             return v.isNumeric;
         };
-        return filtered.isEmpty ? "0" : filtered
+        if filtered.isEmpty {
+            return "0";
+        } else if filtered == "-" {
+            return "-0";
+        } else {
+            return filtered;
+        }
     }
 
     var filteredFloat: String {
@@ -36,6 +42,28 @@ extension String {
             canBeNegative = false;
             return v.isNumeric;
         };
-        return filtered.isEmpty ? "0" : filtered
+        if filtered.isEmpty {
+            return "0";
+        } else if filtered == "-" {
+            return "-0";
+        } else if filtered.last == "." {
+            return filtered + "0";
+        } else {
+            return filtered;
+        }
+    }
+
+    func equivalent(_ other: String) -> Bool {
+        if other == "-0" && (self == "-" || self == "-0" || self == "0") {
+            return true;
+        }
+        if other.count >= 2 {
+            let whatever = other + "x"; //Needed otherwise Swift crashes; go figure why the fuck Swift is partially 1 indexed!
+            let part1 = whatever.slice(other.count - 2, other.count);
+            if part1 == ".0x" {
+                return self == other.slice(0, other.count - 3);
+            }
+        }
+        return self == other;
     }
 }

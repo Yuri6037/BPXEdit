@@ -16,16 +16,23 @@ struct NumberInput<T: Number>: View {
     // out of sync with the actual value it should show so use a hacky buffer
     // which is set to the updated value when the buffer no longer matches the current value.
     @State var buffer = "";
+    @State var targetBuffer = "";
     private var text: Binding<String> {
         Binding<String>(get: {
-            if value.toString() != buffer {
+            if !value.toString().equivalent(targetBuffer) {
                 DispatchQueue.main.async {
-                    buffer = value.toString();
-                }
+                    targetBuffer = value.toString();
+                };
+            }
+            if targetBuffer != buffer {
+                DispatchQueue.main.async {
+                    buffer = targetBuffer;
+                };
             }
             return buffer;
         }, set: { text in
             value = T.toNumber(context: context, string: text);
+            targetBuffer = T.validate(context: context, value: text);
             buffer = text;
         })
     }

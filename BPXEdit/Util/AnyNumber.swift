@@ -134,6 +134,31 @@ enum AnyNumber: Number {
         }
     }
 
+    static func validate(context: NumberType, value: String) -> String {
+        switch context {
+        case .u8:
+            return UInt8.validate(context: (), value: value);
+        case .u16:
+            return UInt16.validate(context: (), value: value);
+        case .u32:
+            return UInt32.validate(context: (), value: value);
+        case .u64:
+            return UInt64.validate(context: (), value: value);
+        case .i8:
+            return Int8.validate(context: (), value: value);
+        case .i16:
+            return Int16.validate(context: (), value: value);
+        case .i32:
+            return Int32.validate(context: (), value: value);
+        case .i64:
+            return Int64.validate(context: (), value: value);
+        case .f32:
+            return Float32.validate(context: (), value: value);
+        case .f64:
+            return Float64.validate(context: (), value: value);
+        }
+    }
+
     func toString() -> String {
         switch self {
         case .u8(let v):

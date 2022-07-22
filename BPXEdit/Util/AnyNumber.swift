@@ -59,53 +59,53 @@ enum AnyNumber: Number {
 
     typealias Context = NumberType;
 
-    mutating func increment() {
+    func increment() -> AnyNumber {
         switch self {
-        case .u8(var v):
-            v.increment()
-        case .u16(var v):
-            v.increment()
-        case .u32(var v):
-            v.increment()
-        case .u64(var v):
-            v.increment()
-        case .i8(var v):
-            v.increment()
-        case .i16(var v):
-            v.increment()
-        case .i32(var v):
-            v.increment()
-        case .i64(var v):
-            v.increment()
-        case .f32(var v):
-            v.increment()
-        case .f64(var v):
-            v.increment()
+        case .u8(let v):
+            return .u8(v.increment());
+        case .u16(let v):
+            return .u16(v.increment());
+        case .u32(let v):
+            return .u32(v.increment());
+        case .u64(let v):
+            return .u64(v.increment());
+        case .i8(let v):
+            return .i8(v.increment());
+        case .i16(let v):
+            return .i16(v.increment());
+        case .i32(let v):
+            return .i32(v.increment());
+        case .i64(let v):
+            return .i64(v.increment());
+        case .f32(let v):
+            return .f32(v.increment());
+        case .f64(let v):
+            return .f64(v.increment());
         }
     }
     
-    mutating func decrement() {
+    func decrement() -> AnyNumber {
         switch self {
-        case .u8(var v):
-            v.decrement()
-        case .u16(var v):
-            v.decrement()
-        case .u32(var v):
-            v.decrement()
-        case .u64(var v):
-            v.decrement()
-        case .i8(var v):
-            v.decrement()
-        case .i16(var v):
-            v.decrement()
-        case .i32(var v):
-            v.decrement()
-        case .i64(var v):
-            v.decrement()
-        case .f32(var v):
-            v.decrement()
-        case .f64(var v):
-            v.decrement()
+        case .u8(let v):
+            return .u8(v.decrement());
+        case .u16(let v):
+            return .u16(v.decrement());
+        case .u32(let v):
+            return .u32(v.decrement());
+        case .u64(let v):
+            return .u64(v.decrement());
+        case .i8(let v):
+            return .i8(v.decrement());
+        case .i16(let v):
+            return .i16(v.decrement());
+        case .i32(let v):
+            return .i32(v.decrement());
+        case .i64(let v):
+            return .i64(v.decrement());
+        case .f32(let v):
+            return .f32(v.decrement());
+        case .f64(let v):
+            return .f64(v.decrement());
         }
     }
 
@@ -162,25 +162,25 @@ enum AnyNumber: Number {
     func toString() -> String {
         switch self {
         case .u8(let v):
-            return v.formatted();
+            return v.toString();
         case .u16(let v):
-            return v.formatted();
+            return v.toString();
         case .u32(let v):
-            return v.formatted();
+            return v.toString();
         case .u64(let v):
-            return String(v);
+            return v.toString();
         case .i8(let v):
-            return v.formatted();
+            return v.toString();
         case .i16(let v):
-            return v.formatted();
+            return v.toString();
         case .i32(let v):
-            return v.formatted();
+            return v.toString();
         case .i64(let v):
-            return v.formatted();
+            return v.toString();
         case .f32(let v):
-            return v.formatted();
+            return v.toString();
         case .f64(let v):
-            return v.formatted();
+            return v.toString();
         }
     }
 }

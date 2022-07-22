@@ -42,10 +42,10 @@ struct NumberInput<T: Number>: View {
         HStack(spacing: 0) {
             TextField("Value", text: text)
             VStack(spacing: 0) {
-                Button(action: { value.increment() }) {
+                Button(action: { value = value.increment() }) {
                     Image(systemName: "plus")
                 }
-                Button(action: { value.decrement() }) {
+                Button(action: { value = value.decrement() }) {
                     Image(systemName: "minus")
                 }
             }

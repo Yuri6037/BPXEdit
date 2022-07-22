@@ -69,21 +69,21 @@ enum SdDataType: String, Identifiable, CaseIterable {
     func validate(value: String) -> String {
         switch self {
         case .uint8:
-            return UInt8.validate(value: value);
+            return UInt8.validate(context: (), value: value);
         case .int8:
-            return Int8.validate(value: value);
+            return Int8.validate(context: (), value: value);
         case .uint16:
-            return UInt16.validate(value: value);
+            return UInt16.validate(context: (), value: value);
         case .int16:
-            return Int16.validate(value: value);
+            return Int16.validate(context: (), value: value);
         case .uint32:
-            return UInt32.validate(value: value);
+            return UInt32.validate(context: (), value: value);
         case .int32:
-            return Int32.validate(value: value);
+            return Int32.validate(context: (), value: value);
         case .uint64:
-            return UInt64.validate(value: value);
+            return UInt64.validate(context: (), value: value);
         case .int64:
-            return Int64.validate(value: value);
+            return Int64.validate(context: (), value: value);
         case .float:
             return Float32.validate(value: value);
         case .double:

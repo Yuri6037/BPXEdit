@@ -17,6 +17,7 @@ struct SectionEditor: View {
     @State var window: NSWindow?;
     @State var showTextInsert = false;
     @State var showBpxsdInsert = false;
+    @State var showConfirmation = false;
     @State var text = "";
     let section: Int;
 
@@ -88,7 +89,7 @@ struct SectionEditor: View {
                 }
                 ToolbarItem(placement: .automatic) {
                     ToolButton(icon: "trash", text: "Remove selection") {
-                        edit.removeBytes()
+                        showConfirmation = true;
                     }
                 }
             }
@@ -122,7 +123,7 @@ struct SectionEditor: View {
                 SdEditor(
                     value: edit.lastValue ?? SdValue(children: []),
                     actions: SdEditorActions(
-                        okName: "Insert",
+                        okName: "Save",
                         okAction: { value in
                             edit.insertBpxsd(value: value);
                             showBpxsdInsert = false;
@@ -132,6 +133,10 @@ struct SectionEditor: View {
                         }
                     )
                 ).frame(maxHeight: 256)
+            }
+            .confirmationDialog("Are you sure to delete the selection?", isPresented: $showConfirmation) {
+                Button("Yes", role: .destructive, action: { edit.removeBytes() })
+                Button("No", role: .cancel, action: { })
             }
             .onDisappear {
                 edit.section = nil;

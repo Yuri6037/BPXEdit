@@ -11,6 +11,7 @@ struct ToolBarView: View {
     @EnvironmentObject var object: BPXObject;
     @EnvironmentObject var sectionState: SectionState;
     @EnvironmentObject var errorHost: ErrorHost;
+    @State var showConfirmation = false;
     let section: Int;
 
     var body: some View {
@@ -32,8 +33,12 @@ struct ToolBarView: View {
                 icon: "trash",
                 text: "Delete Section",
                 disabled: !object.isValid(section: section),
-                action: { object.remove(section: section) }
+                action: { showConfirmation = true }
             )
+        }
+        .confirmationDialog("Are you sure to delete this section?", isPresented: $showConfirmation) {
+            Button("Yes", role: .destructive, action: { object.remove(section: section) })
+            Button("No", role: .cancel, action: { })
         }
     }
 }

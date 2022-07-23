@@ -40,12 +40,13 @@ public class Container {
     }
 
     public func removeSection(index: Int) {
+        let handle = sections[index].handle;
         sections.remove(at: index)
         for i in index..<sections.count {
             let sec = sections[i]
             sections[i] = Section(handle: sec.handle, index: i, header: sec.header, container: inner);
         }
-        //TODO: Call Rust bpx::core::Container::remove_section
+        bpx_container_remove_section(inner, handle);
     }
 
     public func getMainHeader() -> bpx_main_header_t {

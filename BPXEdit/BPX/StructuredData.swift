@@ -64,23 +64,28 @@ fileprivate func decodeValue(name: SdValue.Name?, value: bpx_sd_value_t) -> SdVa
 }
 
 fileprivate func decodeDebuggableObject(name: SdValue.Name?, arr: bpx_sd_array_t?, obj: bpx_sd_object_t?) -> SdValue {
-    let len = bpx_sd_array_len(arr);
-    var data: [bpx_sd_value_t] = [bpx_sd_value_t](repeating: bpx_sd_value_t(), count: len);
+    var data: [bpx_sd_value_t] = [bpx_sd_value_t](repeating: bpx_sd_value_t(), count: bpx_sd_array_len(arr));
     data.withUnsafeMutableBufferPointer { ptr in
         bpx_sd_array_list(arr, ptr.baseAddress);
     };
-    var varr: [SdValue] = [];
+    var names: [bpx_u64_t: String] = [:];
     for value in data {
         if value.type == BPX_SD_VALUE_TYPE_STRING {
-            let actual = bpx_sd_object_get(obj, value.data.as_string);
-            //TODO: Bug here: no way to hash a string with libbpxc.
-            if let decoded = decodeValue(name: SdValue.Name(hash: 0, name: String(utf8String: value.data.as_string)!), value: actual) {
-                varr.append(decoded);
-            }
+            let hash = bpx_hash(value.data.as_string);
+            let name = String(utf8String: value.data.as_string)!;
+            names[hash] = name;
         }
     }
-    //TODO: Possible bug: values may be ignored if they're not present in the debug array.
-    //  To fix the problem, more support from libbpxc is needed.
+    var varr: [SdValue] = [];
+    var entries: [bpx_sd_object_entry_t] = [bpx_sd_object_entry_t](repeating: bpx_sd_object_entry_t(), count: bpx_sd_object_len(obj));
+    entries.withUnsafeMutableBufferPointer { ptr in
+        bpx_sd_object_list(obj, ptr.baseAddress);
+    };
+    for entry in entries {
+        if let decoded = decodeValue(name: SdValue.Name(hash: entry.hash, name: names[entry.hash]), value: entry.value) {
+            varr.append(decoded);
+        }
+    }
     return SdValue(name: name, children: varr);
 }
 

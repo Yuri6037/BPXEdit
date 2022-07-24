@@ -35,6 +35,14 @@ protocol HexViewDelegate: AnyObject {
     func hexViewDidChangeSelection(_ selection: Selection);
 }
 
+protocol Reader: AnyObject {
+    var size: Int { get };
+    func seek(pos: UInt64);
+    func read(size: Int) -> [uint8];
+}
+
+let PAGE_SIZE = 16384;
+
 @IBDesignable class HexView: NSViewController, NSTextViewDelegate {
     @IBOutlet var address: NSTextView!
     @IBOutlet var hex: NSTextView!
@@ -43,6 +51,8 @@ protocol HexViewDelegate: AnyObject {
     private var charWidth: CGFloat = 0.0;
     private var observer: NSKeyValueObservation?;
     private var data: [uint8]?;
+    private var reader: Reader?;
+    private var page: Int = 0;
     private var hax = false;
     private var prevBytesPerLine: Int = 16;
     weak var delegate: HexViewDelegate?;
@@ -62,6 +72,16 @@ protocol HexViewDelegate: AnyObject {
         };
         bytesPerLine = getMaxBytesPerLine();
         render();
+    }
+
+    private func updateData() {
+        if let reader = reader {
+            let offset = page * PAGE_SIZE;
+            reader.seek(pos: UInt64(offset));
+            data = reader.read(size: PAGE_SIZE);
+            prevBytesPerLine = 0; //That forces re-rendering.
+            render();
+        }
     }
 
     private func render() {
@@ -191,5 +211,21 @@ protocol HexViewDelegate: AnyObject {
         prevBytesPerLine = 0; //That forces re-rendering.
         data = buffer;
         render();
+    }
+
+    public func setPage(_ page: Int) {
+        if page != self.page {
+            self.page = page;
+            updateData();
+        }
+    }
+
+    public func setData(reader: Reader) {
+        if reader === self.reader {
+            return;
+        }
+        self.reader = reader;
+        page = 0;
+        updateData();
     }
 }

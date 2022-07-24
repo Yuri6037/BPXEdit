@@ -24,7 +24,7 @@ enum ViewMode {
 class SectionState: ObservableObject {
     @Published var viewType: ViewType = .closed;
     @Published var stringView: [String] = [];
-    @Published var hexView: [uint8] = [];
+    @Published var hexView: SectionData? = nil;
     @Published var dataView: Value = .scalar(.u8(0)); //Just a default value so that we don't crash DecodedView anymore.
     @Published var structuredDataView: SdValue = SdValue();
     @Published var viewMode: ViewMode = .none;
@@ -49,7 +49,7 @@ class SectionState: ObservableObject {
 
     func reset() {
         self.viewType = .closed;
-        self.hexView = [];
+        self.hexView = nil;
         self.stringView = [];
         self.dataView = .scalar(.u8(0));
         self.structuredDataView = SdValue();
@@ -74,7 +74,7 @@ class SectionState: ObservableObject {
         }
     }
 
-    func showHex(data: [uint8]?) {
+    func showHex(data: SectionData?) {
         if let data = data {
             self.hexView = data;
             self.viewType = .hex;

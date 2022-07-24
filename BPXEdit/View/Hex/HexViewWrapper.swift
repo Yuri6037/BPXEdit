@@ -22,9 +22,11 @@ class Coordinator: NSObject, HexViewDelegate {
     }
 }
 
-struct HexViewWrapper: NSViewControllerRepresentable {
+struct HexViewWrapper<T: Reader>: NSViewControllerRepresentable {
     @Binding var data: [uint8];
+    @Binding var reader: T?;
     @Binding var selection: Selection;
+    @Binding var page: Int;
     
     func makeCoordinator() -> Coordinator {
         Coordinator($selection)
@@ -37,6 +39,11 @@ struct HexViewWrapper: NSViewControllerRepresentable {
     }
 
     func updateNSViewController(_ controller: HexView, context: Context) {
-        controller.setData(buffer: data);
+        if let reader = reader {
+            controller.setData(reader: reader);
+            controller.setPage(page);
+        } else {
+            controller.setData(buffer: data);
+        }
     }
 }

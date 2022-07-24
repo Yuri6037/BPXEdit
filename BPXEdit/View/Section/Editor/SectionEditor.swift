@@ -12,7 +12,6 @@ struct SectionEditor: View {
     @EnvironmentObject var errorHost: ErrorHost;
     @StateObject var edit = EditSection();
     @State var showByteInsert = false;
-    //@StateObject var byte = ByteInput();
     @State var byte: UInt8 = 0;
     @State var window: NSWindow?;
     @State var showTextInsert = false;

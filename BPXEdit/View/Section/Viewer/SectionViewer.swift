@@ -16,7 +16,7 @@ struct SectionViewer: View {
         case .closed:
             Text("Please open a section view.")
         case .hex:
-            HexViewer(data: $sectionState.hexView)
+            HexViewer(reader: $sectionState.hexView)
         case .data:
             DataView(value: $sectionState.dataView, container: $object.document.container)
         case .bpxsd:

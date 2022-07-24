@@ -9,7 +9,7 @@ import Foundation
 
 fileprivate let BUF_SIZE = 8192;
 
-public class SectionData {
+public class SectionData: Reader {
     var inner: bpx_section_t?;
     var size: Int {
         if let inner = inner {
@@ -34,6 +34,14 @@ public class SectionData {
             };
         }
         return block;
+    }
+
+    public func read(size: Int) -> [uint8] {
+        var block = [uint8](repeating: 0, count: size);
+        let len = block.withUnsafeMutableBufferPointer { buffer in
+            bpx_section_read(inner, buffer.baseAddress, size)
+        };
+        return Array(block[0..<len]);
     }
 
     public func seek(pos: UInt64) {

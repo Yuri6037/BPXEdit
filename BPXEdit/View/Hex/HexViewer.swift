@@ -39,14 +39,34 @@ fileprivate struct ParserPicker: View {
     }
 }
 
-struct HexViewer: View {
+class Dummy: Reader {
+    var size: Int {
+        0
+    }
+
+    func seek(pos: UInt64) {
+    }
+
+    func read(size: Int) -> [uint8] {
+        []
+    }
+}
+
+struct HexViewer<T: Reader>: View {
     @Binding var data: [uint8];
+    @Binding var reader: T?;
     @State var selection: Selection = Selection();
     @State var parser: ValueParser = .u8;
+    @State var page = 0;
     let selectionChanged: ((Selection) -> Void)?;
 
-    init(data: Binding<[uint8]>, selectionChanged: ((Selection) -> Void)? = nil) {
+    init(reader: Binding<T?> = .constant(nil), selectionChanged: ((Selection) -> Void)? = nil) {
+        self.init(data: .constant([]), reader: reader, selectionChanged: selectionChanged);
+    }
+
+    init(data: Binding<[uint8]>, reader: Binding<T?> = .constant(nil), selectionChanged: ((Selection) -> Void)? = nil) {
         _data = data;
+        _reader = reader;
         self.selectionChanged = selectionChanged;
     }
 
@@ -92,7 +112,25 @@ struct HexViewer: View {
     var body: some View {
         GeometryReader { geo in
             VStack {
-                HexViewWrapper(data: $data, selection: $selection)
+                if let reader = reader {
+                    HStack {
+                        Button(action: { page -= 1 }) {
+                            Image(systemName: "arrowtriangle.left.fill")
+                        }
+                        .disabled(page == 0)
+                        Text("\(page) / \(reader.size / PAGE_SIZE)")
+                        Button(action: { page += 1 }) {
+                            Image(systemName: "arrowtriangle.right.fill")
+                        }
+                        .disabled(page == reader.size / PAGE_SIZE)
+                    }
+                }
+                HexViewWrapper(
+                    data: $data,
+                    reader: $reader,
+                    selection: $selection,
+                    page: $page
+                )
                 Divider()
                 if selection.length == 0 {
                     Text("Selection is out of range.").bold()
@@ -134,6 +172,12 @@ struct HexViewer: View {
                 }
             }
         }
+    }
+}
+
+extension HexViewer where T == Dummy {
+    init(data: Binding<[uint8]>, selectionChanged: ((Selection) -> Void)? = nil) {
+        self.init(data: data, reader: .constant(nil), selectionChanged: selectionChanged);
     }
 }
 

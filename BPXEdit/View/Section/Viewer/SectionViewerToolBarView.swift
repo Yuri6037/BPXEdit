@@ -14,7 +14,7 @@ struct SectionViewerToolBarView: View {
     let section: Int;
 
     func loadHex() {
-        sectionState.showHex(data: object.loadRaw(errorHost: errorHost, section: section));
+        sectionState.showHex(data: object.loadSection(errorHost: errorHost, section: section));
     }
 
     func loadData() {

@@ -16,7 +16,9 @@ class EditSection: ObservableObject {
     var lastValue: SdValue? = nil;
 
     func initialize(section: SectionData?) {
-        if section?.size ?? 0 / PAGE_SIZE > 0 {
+        //Go figure why is Swift corrupting the value if embedded inside the condition.
+        let brokenswift = section?.size ?? 0;
+        if brokenswift / PAGE_SIZE > 0 {
             usePages = true;
             data = [];
         } else {

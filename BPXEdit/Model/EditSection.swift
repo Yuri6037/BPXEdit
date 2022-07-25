@@ -10,12 +10,19 @@ import Foundation
 class EditSection: ObservableObject {
     @Published var data: [uint8] = [];
     @Published var append = false;
-    var section: SectionData?;
+    @Published var section: SectionData?;
+    var usePages = false;
     var selection: Selection = Selection();
     var lastValue: SdValue? = nil;
 
     func initialize(section: SectionData?) {
-        data = section?.loadInMemory() ?? [];
+        if section?.size ?? 0 / PAGE_SIZE > 0 {
+            usePages = true;
+            data = [];
+        } else {
+            usePages = false;
+            data = section?.loadInMemory() ?? [];
+        }
         self.section = section;
         selection = Selection();
     }
@@ -23,19 +30,25 @@ class EditSection: ObservableObject {
     func removeBytes() {
         section?.seek(pos: UInt64(selection.start + selection.length));
         section?.remove(count: selection.length);
-        data.removeSubrange(selection.start..<selection.end);
+        if !usePages {
+            data.removeSubrange(selection.start..<selection.end);
+        }
     }
 
     func insertBytes(data: Data) {
         if append {
             section?.seek(pos: UInt64(selection.start + 1));
             let _ = section?.writeAppend(Array(data));
-            self.data.insert(contentsOf: data, at: selection.start + 1);
+            if !usePages {
+                self.data.insert(contentsOf: data, at: selection.start + 1);
+            }
         } else {
             section?.seek(pos: UInt64(selection.start));
             let _ = section?.write(Array(data));
-            self.data.removeSubrange(selection.start..<min(selection.start + data.count, self.data.count))
-            self.data.insert(contentsOf: data, at: selection.start);
+            if !usePages {
+                self.data.removeSubrange(selection.start..<min(selection.start + data.count, self.data.count))
+                self.data.insert(contentsOf: data, at: selection.start);
+            }
         }
     }
 
@@ -44,7 +57,9 @@ class EditSection: ObservableObject {
             let root = SdCValue(from: value);
             section.seek(pos: UInt64(selection.start));
             root.write(section: section);
-            data = section.loadInMemory();
+            if !usePages {
+                data = section.loadInMemory();
+            }
         }
     }
 
@@ -52,12 +67,16 @@ class EditSection: ObservableObject {
         if append {
             section?.seek(pos: UInt64(selection.start + 1));
             let _ = section?.writeAppend([byte]);
-            data.insert(byte, at: selection.start + 1);
+            if !usePages {
+                data.insert(byte, at: selection.start + 1);
+            }
         } else {
             section?.seek(pos: UInt64(selection.start));
             let _ = section?.write([byte]);
-            data.remove(at: selection.start);
-            data.insert(byte, at: selection.start);
+            if !usePages {
+                data.remove(at: selection.start);
+                data.insert(byte, at: selection.start);
+            }
         }
     }
 }

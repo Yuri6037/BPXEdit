@@ -21,15 +21,47 @@ enum ViewMode {
     case none
 }
 
+class OnDemandSection: Reader {
+    let section: Section;
+
+    init(_ section: Section) {
+        self.section = section;
+    }
+
+    var size: Int {
+        do {
+            return try section.open().size;
+        } catch {
+            return 0;
+        }
+    }
+
+    func seek(pos: UInt64) {
+        do {
+            try section.open().seek(pos: pos);
+        } catch {
+        }
+    }
+
+    func read(size: Int) -> [uint8] {
+        do {
+            return try section.open().read(size: size);
+        } catch {
+            return [];
+        }
+    }
+}
+
 class SectionState: ObservableObject {
     @Published var viewType: ViewType = .closed;
     @Published var stringView: [String] = [];
-    @Published var hexView: SectionData? = nil;
+    @Published var hexView: OnDemandSection? = nil;
     @Published var dataView: Value = .scalar(.u8(0)); //Just a default value so that we don't crash DecodedView anymore.
     @Published var structuredDataView: SdValue = SdValue();
     @Published var viewMode: ViewMode = .none;
 
     func showStructuredData(value: SdValue?) {
+        self.hexView = nil;
         if let value = value {
             self.structuredDataView = value;
             self.viewType = .bpxsd;
@@ -39,6 +71,7 @@ class SectionState: ObservableObject {
     }
 
     func showStrings(value: [String]?) {
+        self.hexView = nil;
         if let value = value {
             self.stringView = value;
             self.viewType = .strings;
@@ -74,7 +107,8 @@ class SectionState: ObservableObject {
         }
     }
 
-    func showHex(data: SectionData?) {
+    func showHex(data: OnDemandSection?) {
+        self.hexView = nil;
         if let data = data {
             self.hexView = data;
             self.viewType = .hex;
@@ -84,6 +118,7 @@ class SectionState: ObservableObject {
     }
 
     func showData(value: Value?) {
+        self.hexView = nil;
         if let value = value {
             self.dataView = value;
             self.viewType = .data;

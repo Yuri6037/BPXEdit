@@ -49,100 +49,115 @@ struct SectionEditor: View {
             }
         }
     }
+    
+    @ViewBuilder func renderHexViewer() -> some View {
+        if edit.usePages {
+            HexViewer(
+                reader: $edit.section,
+                selectionChanged: { selection in edit.selection = selection }
+            )
+        } else {
+            HexViewer(
+                data: $edit.data,
+                selectionChanged: { selection in edit.selection = selection }
+            )
+        }
+    }
 
     var body: some View {
-        HexViewer(data: $edit.data, selectionChanged: { selection in edit.selection = selection })
-            .overlay {
-                WindowReader { window in
-                    self.window = window;
-                }
-                .frame(width: 0, height: 0)
+        renderHexViewer()
+        .overlay {
+            WindowReader { window in
+                self.window = window;
             }
-            .toolbar {
-                ToolbarItem(placement: .automatic) {
-                    Toggle(isOn: $edit.append) {
-                        Text("Append new data")
-                    }
-                }
-                ToolbarItem(placement: .automatic) {
-                    Spacer()
-                }
-                ToolbarItem(placement: .automatic) {
-                    HStack {
-                        ToolButton(icon: "plus", text: "Insert byte") {
-                            showByteInsert = true;
-                        }
-                        ToolButton(icon: "doc.badge.plus", text: "Insert raw binary") {
-                            openBinaryFile();
-                        }
-                        ToolButton(icon: "text.badge.plus", text: "Insert text") {
-                            showTextInsert = true;
-                        }
-                        ToolButton(icon: "rectangle.stack.badge.plus", text: "Insert BPXSD Object") {
-                            openBpxsdEditor();
-                        }
-                    }
-                }
-                ToolbarItem(placement: .automatic) {
-                    Spacer()
-                }
-                ToolbarItem(placement: .automatic) {
-                    ToolButton(icon: "trash", text: "Remove selection") {
-                        showConfirmation = true;
-                    }
+            .frame(width: 0, height: 0)
+        }
+        .toolbar {
+            ToolbarItem(placement: .automatic) {
+                Toggle(isOn: $edit.append) {
+                    Text("Append new data")
                 }
             }
-            .sheet(isPresented: $showByteInsert) {
-                NumberInput(value: $byte, context: ()).padding()
-                HStack{
-                    Button("Cancel") { showByteInsert = false }.keyboardShortcut(.cancelAction)
-                    Spacer()
-                    Button("Insert") {
-                        showByteInsert = false;
-                        edit.insertByte(byte: byte);
-                    }
-                    .keyboardShortcut(.defaultAction)
-                }
-                .padding()
+            ToolbarItem(placement: .automatic) {
+                Spacer()
             }
-            .sheet(isPresented: $showTextInsert) {
-                TextField("Text", text: $text).padding()
+            ToolbarItem(placement: .automatic) {
                 HStack {
-                    Button("Cancel") { showTextInsert = false }.keyboardShortcut(.cancelAction)
-                    Spacer()
-                    Button("Insert") {
-                        showTextInsert = false;
-                        edit.insertBytes(data: Data(text.utf8));
+                    ToolButton(icon: "plus", text: "Insert byte") {
+                        showByteInsert = true;
                     }
-                    .keyboardShortcut(.defaultAction)
+                    ToolButton(icon: "doc.badge.plus", text: "Insert raw binary") {
+                        openBinaryFile();
+                    }
+                    ToolButton(icon: "text.badge.plus", text: "Insert text") {
+                        showTextInsert = true;
+                    }
+                    ToolButton(icon: "rectangle.stack.badge.plus", text: "Insert BPXSD Object") {
+                        openBpxsdEditor();
+                    }
                 }
-                .padding()
             }
-            .sheet(isPresented: $showBpxsdInsert) {
-                SdEditor(
-                    value: edit.lastValue ?? SdValue(children: []),
-                    actions: SdEditorActions(
-                        okName: "Save",
-                        okAction: { value in
-                            edit.insertBpxsd(value: value);
-                            showBpxsdInsert = false;
-                        },
-                        cancelAction: {
-                            showBpxsdInsert = false;
-                        }
-                    )
-                ).frame(maxHeight: 256)
+            ToolbarItem(placement: .automatic) {
+                Spacer()
             }
-            .confirmationDialog("Are you sure to delete the selection?", isPresented: $showConfirmation) {
-                Button("Yes", role: .destructive, action: { edit.removeBytes() })
-                Button("No", role: .cancel, action: { })
+            ToolbarItem(placement: .automatic) {
+                ToolButton(icon: "trash", text: "Remove selection") {
+                    showConfirmation = true;
+                }
             }
-            .onDisappear {
-                edit.section = nil;
+        }
+        .sheet(isPresented: $showByteInsert) {
+            NumberInput(value: $byte, context: ()).padding()
+            HStack{
+                Button("Cancel") { showByteInsert = false }.keyboardShortcut(.cancelAction)
+                Spacer()
+                Button("Insert") {
+                    showByteInsert = false;
+                    edit.insertByte(byte: byte);
+                }
+                .keyboardShortcut(.defaultAction)
             }
-            .onAppear {
-                edit.initialize(section: object.loadSection(errorHost: errorHost, section: section));
+            .padding()
+        }
+        .sheet(isPresented: $showTextInsert) {
+            TextField("Text", text: $text).padding()
+            HStack {
+                Button("Cancel") { showTextInsert = false }.keyboardShortcut(.cancelAction)
+                Spacer()
+                Button("Insert") {
+                    showTextInsert = false;
+                    edit.insertBytes(data: Data(text.utf8));
+                }
+                .keyboardShortcut(.defaultAction)
             }
+            .padding()
+        }
+        .sheet(isPresented: $showBpxsdInsert) {
+            SdEditor(
+                value: edit.lastValue ?? SdValue(children: []),
+                actions: SdEditorActions(
+                    okName: "Save",
+                    okAction: { value in
+                        edit.insertBpxsd(value: value);
+                        showBpxsdInsert = false;
+                    },
+                    cancelAction: {
+                        showBpxsdInsert = false;
+                    }
+                )
+            )
+            .frame(maxHeight: 256)
+        }
+        .confirmationDialog("Are you sure to delete the selection?", isPresented: $showConfirmation) {
+            Button("Yes", role: .destructive, action: { edit.removeBytes() })
+            Button("No", role: .cancel, action: { })
+        }
+        .onDisappear {
+            edit.section = nil;
+        }
+        .onAppear {
+            edit.initialize(section: object.loadSection(errorHost: errorHost, section: section));
+        }
     }
 }
 

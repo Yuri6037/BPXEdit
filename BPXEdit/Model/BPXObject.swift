@@ -33,6 +33,14 @@ class BPXObject: ObservableObject {
         sections = document.container?.getSections() ?? [];
     }
 
+    func loadOnDemand(errorHost: ErrorHost, section: Int) -> OnDemandSection? {
+        let data = loadSection(errorHost: errorHost, section: section);
+        if data != nil {
+            return OnDemandSection(document.container!.getSections()[section]);
+        }
+        return nil;
+    }
+
     func loadSection(errorHost: ErrorHost, section: Int) -> SectionData? {
         if section == -1 {
             return nil;

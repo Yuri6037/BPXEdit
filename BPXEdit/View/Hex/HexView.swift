@@ -74,7 +74,7 @@ let PAGE_SIZE = 16384;
         render();
     }
 
-    private func updateData() {
+    public func updateData() {
         if let reader = reader {
             let offset = page * PAGE_SIZE;
             reader.seek(pos: UInt64(offset));

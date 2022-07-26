@@ -54,6 +54,7 @@ struct SectionEditor: View {
         if edit.usePages {
             HexViewer(
                 reader: $edit.section,
+                refresh: $edit.refresh,
                 selectionChanged: { selection in edit.selection = selection }
             )
         } else {

@@ -11,6 +11,7 @@ class EditSection: ObservableObject {
     @Published var data: [uint8] = [];
     @Published var append = false;
     @Published var section: SectionData?;
+    @Published var refresh = 0;
     var usePages = false;
     var selection: Selection = Selection();
     var lastValue: SdValue? = nil;
@@ -34,6 +35,8 @@ class EditSection: ObservableObject {
         section?.remove(count: selection.length);
         if !usePages {
             data.removeSubrange(selection.start..<selection.end);
+        } else {
+            refresh += 1;
         }
     }
 
@@ -43,6 +46,8 @@ class EditSection: ObservableObject {
             let _ = section?.writeAppend(Array(data));
             if !usePages {
                 self.data.insert(contentsOf: data, at: selection.start + 1);
+            } else {
+                refresh += 1;
             }
         } else {
             section?.seek(pos: UInt64(selection.start));
@@ -50,6 +55,8 @@ class EditSection: ObservableObject {
             if !usePages {
                 self.data.removeSubrange(selection.start..<min(selection.start + data.count, self.data.count))
                 self.data.insert(contentsOf: data, at: selection.start);
+            } else {
+                refresh += 1;
             }
         }
     }
@@ -61,6 +68,8 @@ class EditSection: ObservableObject {
             root.write(section: section);
             if !usePages {
                 data = section.loadInMemory();
+            } else {
+                refresh += 1;
             }
         }
     }
@@ -71,6 +80,8 @@ class EditSection: ObservableObject {
             let _ = section?.writeAppend([byte]);
             if !usePages {
                 data.insert(byte, at: selection.start + 1);
+            } else {
+                refresh += 1;
             }
         } else {
             section?.seek(pos: UInt64(selection.start));
@@ -78,6 +89,8 @@ class EditSection: ObservableObject {
             if !usePages {
                 data.remove(at: selection.start);
                 data.insert(byte, at: selection.start);
+            } else {
+                refresh += 1;
             }
         }
     }

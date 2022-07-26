@@ -55,18 +55,20 @@ class Dummy: Reader {
 struct HexViewer<T: Reader>: View {
     @Binding var data: [uint8];
     @Binding var reader: T?;
+    @Binding var refresh: Int;
     @State var selection: Selection = Selection();
     @State var parser: ValueParser = .u8;
     @State var page = 0;
     let selectionChanged: ((Selection) -> Void)?;
 
-    init(reader: Binding<T?> = .constant(nil), selectionChanged: ((Selection) -> Void)? = nil) {
-        self.init(data: .constant([]), reader: reader, selectionChanged: selectionChanged);
+    init(reader: Binding<T?> = .constant(nil), refresh: Binding<Int> = .constant(0), selectionChanged: ((Selection) -> Void)? = nil) {
+        self.init(data: .constant([]), reader: reader, refresh: refresh, selectionChanged: selectionChanged);
     }
 
-    init(data: Binding<[uint8]>, reader: Binding<T?> = .constant(nil), selectionChanged: ((Selection) -> Void)? = nil) {
+    init(data: Binding<[uint8]>, reader: Binding<T?> = .constant(nil), refresh: Binding<Int> = .constant(0), selectionChanged: ((Selection) -> Void)? = nil) {
         _data = data;
         _reader = reader;
+        _refresh = refresh;
         self.selectionChanged = selectionChanged;
     }
 
@@ -129,7 +131,8 @@ struct HexViewer<T: Reader>: View {
                     data: $data,
                     reader: $reader,
                     selection: $selection,
-                    page: $page
+                    page: $page,
+                    refresh: $refresh
                 )
                 Divider()
                 if selection.length == 0 {

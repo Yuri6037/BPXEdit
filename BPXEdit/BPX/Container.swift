@@ -53,6 +53,13 @@ public class Container {
         return header;
     }
 
+    public func save() throws {
+        let err = bpx_container_save(inner);
+        if err != BPX_ERR_NONE {
+            throw CoreError.fromc(code: err)!;
+        }
+    }
+
     public func getSectionByType(type: UInt8) -> Section? {
         for section in sections {
             if section.header.ty == type {
